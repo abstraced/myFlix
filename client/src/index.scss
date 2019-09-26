@@ -1,0 +1,37 @@
+
+
+.list-films {
+// background-color: lightgrey;
+  margin:auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.list-films-main {
+  // background-color: lightgrey;
+    margin:auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+  }
+
+
+@media all and (max-width: 500px) {
+  .list-films {
+    grid-template-columns: 1fr;
+  }
+}
+
+.container {
+  margin:auto;
+  display: grid;
+  grid-template-columns: 1fr;
+
+}
+.pict {
+margin: auto;
+
+
+
+}

@@ -1,0 +1,52 @@
+{
+  "name": "movie_api",
+  "version": "1.0.0",
+  "description": "A movie Api",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "bootstrap": "^4.3.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-validator": "^4.3.0",
+    "jquery": "^3.4.1",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "mongoose": "^5.6.8",
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "popper.js": "^1.15.0",
+    "prop-type": "0.0.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-bootstrap": "^1.0.0-beta.12",
+    "react-router-dom": "^5.0.1",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "eslint": "^6.1.0",
+    "nodemon": "^1.19.1",
+    "sass": "^1.22.10"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abstraced/movie_api.git"
+  },
+  "author": "Antoine Luc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abstraced/movie_api/issues"
+  },
+  "homepage": "https://github.com/abstraced/movie_api#readme"
+}

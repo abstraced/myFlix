@@ -1,0 +1,70 @@
+
+* {
+
+}
+
+body {
+  background-color: black;
+  font-family: 'Ubuntu Mono', monospace;
+  color: var(--main-text-color);
+  /* //text-align: center; */
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Abel', sans-serif;
+  color: white;
+}
+
+footer {
+  /* background-color: white; */
+  clear: both;
+  text-align: center;
+}
+
+
+
+
+.api {
+  table-layout:fixed;
+  width: 100%;
+  text-align:center;
+  /* white-space: nowrap; */
+  color:white;
+}
+.users td {
+  /* white-space: nowrap; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+
+/* Column widths are based on these cells */
+ .row-request {
+  width: 10%;
+
+}
+.row-URL {
+  width: 20%;
+}
+.row-method {
+  width: 5%;
+}
+.row-format {
+  width: 20%;
+}
+
+.row-exemple {
+    width: 20%;
+}
+
+.row-response {
+    width: 15%;
+}
+
+
+.column {
+height: 200px;
+
+}

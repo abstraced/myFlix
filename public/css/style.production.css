@@ -1,0 +1,267 @@
+:root {
+  /* Color */
+
+  /* size */
+}
+
+.grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 10px 1fr 10px 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+}
+
+@media all and (max-width: 500px) {
+  .grid {
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media all and (min-width: 500px) and (max-width: 750px) {
+  .grid {
+    -ms-grid-columns: 1fr 10px 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media all and (max-width: 750px) {
+  .grid {
+    grid-gap: 10px;
+  }
+
+  .grid__item:last-child {
+    grid-column: auto / auto;
+    grid-row: auto / auto;
+  }
+}
+
+*. {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #010100;
+  font-family: 'Ubuntu Mono', monospace;
+  color: white;
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Abel', sans-serif;
+  color: white;
+}
+
+h2 {
+  font-family: 'Abel', sans-serif;
+  color: white;
+}
+
+h3 {
+  font-family: 'Abel', sans-serif;
+  color: white;
+}
+
+footer {
+  /* background-color: white; */
+  clear: both;
+  text-align: center;
+}
+
+.footer_icon {
+  background-color: white;
+}
+
+.submit {
+  background-color: #ccc;
+  border-radius: 6px;
+  color: black;
+  font-family: 'Oswald';
+  font-size: 20px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+}
+
+.submit:hover {
+  color: black;
+  border: none;
+  background: blue;
+}
+
+a:hover {
+  /* No underlining when hovering over a link */
+
+  /* order:  visited / hover /active */
+  text-decoration: underline;
+  color: green;
+
+  /* font-size: 40px; */
+}
+
+a:focus {
+  /* No underlining when hovering over a link */
+
+  /* order:  visited / hover /active */
+  text-decoration: underline;
+  color: green;
+
+  /* font-size: 40px; */
+}
+
+a:active {
+  color: blue;
+  opacity: 0.8;
+
+  /* selected link */
+
+  /* color: pink; */
+}
+
+.navigation-list__item {
+  /* text-decoration: none; */
+  font-size: 30px;
+  font-weight: 600;
+  color: black;
+}
+
+.page-header__item {
+  color: black;
+}
+
+.navigation-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: black;
+  font-family: 'Abel', sans-serif;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.profile__portrait {
+  width: 600px;
+  float: left;
+  margin-right: 40px;
+  border-radius: 100px;
+}
+
+.page-header {
+  display: block flex;
+  text-align: center;
+  color: black;
+  background-color: white;
+}
+
+.header_title {
+  font-size: 20px;
+  color: white;
+  background-color: black;
+  padding: 0;
+  margin: 0;
+}
+
+.page-header__item:first-child {
+  -webkit-box-flex: 2;
+  -ms-flex-positive: 2;
+  flex-grow: 2;
+}
+
+.page-header__item:last-child {
+  -webkit-box-flex: 3;
+  -ms-flex-positive: 3;
+  flex-grow: 3;
+  text-align: center;
+  margin: auto;
+  font-size: 40px;
+}
+
+.navigation-list li {
+  display: inline-block;
+  color: black;
+  margin: 0 50px;
+}
+
+.navigation-list__item {
+  text-decoration: none;
+}
+
+.main-navigation {
+  max-height: 100px;
+}
+
+.navigation-list__item:hover {
+  /* text-decoration: none; */
+
+  font-weight: 600;
+  opacity: 0.5;
+  color: black;
+}
+
+.navigation-list__item--active {
+  /* text-decoration: none; */
+  font-size: 40px;
+  font-weight: 1000;
+}
+
+.grid__item {
+  color: black;
+  background-color: lightgrey;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  border-radius: 25px;
+
+  /* flex-grow: 1; */
+}
+
+@-webkit-keyframes color-change {
+  from {
+    fill: black;
+    border: 50px lightgrey solid;
+    background-color: black;
+  }
+
+  to {
+    fill: lightgrey;
+    border: 50px black solid;
+    background-color: lightgrey;
+  }
+}
+
+@keyframes color-change {
+  from {
+    fill: black;
+    border: 50px lightgrey solid;
+    background-color: black;
+  }
+
+  to {
+    fill: lightgrey;
+    border: 50px black solid;
+    background-color: lightgrey;
+  }
+}
+
+.apictureOfBerlin {
+  display: block;
+  padding: 20px;
+  border-radius: 100px;
+  -webkit-animation: 2s color-change infinite alternate linear;
+  margin: auto;
+}
+
+.monNom {
+  font-size: 20px;
+}

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+      <link href="https://fonts.googleapis.com/css?family=Abel%7CUbuntu+Mono&display=swap" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- icone tab-->
+        <link rel="shortcut icon" href="img/favicon-96x96.png">
+
+
+        <!--link to a CDN  and load the css file-->
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+      <link rel="stylesheet" type="text/css" href="css/styles.css">
+      <!-- <link rel="stylesheet" type="text/css" href="css/styles.css"> -->
+
+
+
+
+      <title>My Flix, documentation API</title>
+</head>
+
+
+<body>
+  <header class="page-header">
+
+      <h1 class="page-header__item header_title" > My Flix, documentation API </h1>
+
+  </header>
+  <div>
+
+
+
+
+
+    <p>  <span class="name"> MyFlix </span> is a web application that provides users with access to information about different movies, directors, and genres. Users
+will be able to sign up, update their personal information, and create a list of their favorite
+movies.
+
+  </p>
+
+  <table border="1" class="api" >
+       <tbody><tr class="column-1">
+         <th class=" row-request">Request</th>
+         <th class=" row-URL">URL</th>
+         <th class=" row-method">HTTP Method</th>
+         <th class=" row-format">Request body data format</th>
+         <th class="row-exemple">Exemple of request</th>
+         <th class=" row-response">Response body data  format</th>
+          <th class=" row-auth">Login necessary?</th>
+       </tr>
+       <tr class="column-2 column">
+         <td row->root</td>
+         <td row->/</td>
+         <td row->GET</td>
+         <td row->none</td>
+         <td row-></td>
+         <td row->A text message saying: "Hello to My flix, the app to help you sort your favorite films..."</td>
+         <td row->no</td>
+       </tr>
+       <tr class="column-3 column">
+         <td row->Return a list of ALL movies to the user</td>
+         <td row->/movies</td>
+         <td row->GET</td>
+         <td row->none</td>
+         <td row-></td>
+         <td row->A JSON object holding dataabout all the films</td>
+         <td row->no</td>
+       </tr>
+       <tr class="column-4 column">
+         <td row->Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user</td>
+         <td row->/movies/[title]</td>
+         <td row->GET</td>
+         <td row->none</td>
+         <td row->/movies/PI</td>
+         <td row->A JSON object holding all the data about the film</td>
+         <td row->no</td>
+       </tr>
+       <tr class="column-5 column">
+         <td row->Return data about a genre (description) by name/title (e.g., “Thriller”)</td>
+         <td row->/genres/[name]</td>
+         <td row->GET</td>
+         <td row->none</td>
+         <td row->/genres/thriller</td>
+         <td row->A Json object holding the data about the genre</td>
+         <td row->no</td>
+       </tr>
+       <tr class="column-6 column">
+         <td row->Allow user to add a film to the main list of films</td>
+         <td row->/movies/</td>
+         <td row->POST</td>
+         <td row->  {      "Title": "[name of the film]",
+        "Description": "[description]",
+        "Genre": {
+          "Name": "[genre]",
+            "genre_id": "[ObjectId of the genre]"
+        },
+        "Director": {
+            "Name": "[Name]",
+            "director_Id": "[object id of the director]"
+        },
+
+        "ImagePath": "[link to the picture]",
+        "Featured": "[true or false]"
+
+     }</td>
+         <td row->  {      "Title": "Anchorman 2: The Legend Continues",
+        "Description": "With the 1970s behind them, San Diego's top-rated newsman, Ron Burgundy, returns to take New York City's first twenty-four-hour news channel by storm.",
+        "Genre": {
+          "Name": "Comedy",
+            "genre_id": "5d49485e605ef85a13615aa6"
+        },
+        "Director": {
+            "Name": "Judd Apatow",
+            "director_Id": "5d494c2ffd4d8336d253c08f"
+        },
+
+        "ImagePath": "",
+        "Featured": "true"
+
+     }</td>
+         <td row->A JSON object holding data about the film that was added, including an ID:{
+    "Actors": [],
+    "_id": "5d5568f6d5003c01f67eb31c",
+    "Title": "Anchorman 2: The Legend Continues",
+    "Description": "With the 1970s behind them, San Diego's top-rated newsman, Ron Burgundy, returns to take New York City's first twenty-four-hour news channel by storm.",
+    "Genre": {
+        "Name": "Comedy",
+        "genre_id": "5d49485e605ef85a13615aa6"
+    },
+    "Director": {
+        "Name": "Judd Apatow"
+    },
+    "ImagePath": "",
+    "Featured": "true",
+    "__v": 0
+}</td>
+<td row->no</td>
+       </tr>
+       <tr class="column-7 column">
+         <td row->Return data about a director (bio, birth year, death year) by name</td>
+         <td row->/directors/[name]</td>
+         <td row->GET</td>
+         <td row->none</td>
+         <td row->/directors/steven%20krom</td>
+         <td row->A JSON object holding all the data about the director</td>
+         <td row->no</td>
+       </tr>
+       <tr class="column-8 column">
+         <td row->Allow new users to register</td>
+         <td row->/users</td>
+         <td row->POST</td>
+         <td row->{Username:"[username]", Password:"[password]",Email:"[email]", Birthdate:"[ddmmyyyy]"}exemple:
+{"Username":"John Rambo",
+ "Password":"password",
+ "Email":"yolo@gmail.com",
+ "Birthdate":"11011983"
+}   </td>
+         <td row-></td>
+         <td row-> on success,a JSON object holding all the data the user entered, otherwise an error message</td>
+         <td row->yes</td>
+       </tr>
+       <tr class="column-9 column">
+         <td row->Allow users to update their user info (username, password, email, date of birth)</td>
+         <td row->//users/[Username]</td>
+         <td row->PUT</td>
+         <td row->{Username:"[username]", Password:"[password]",Email:"[email]", Birthdate:"[ddmmyyyy]"}exemple: {"Username":"John Rambo", "Password":"password", "Email":"yolo@gmail.com", "Birthdate":"11011983" }</td>
+         <td row->  {
+
+ "Username" : "Pierre Letto",
+      "Password" : "password",
+      "Email" : "pierre@test.de",
+      "Birthdate" : "11011895"
+
+      }</td>
+         <td row-> Return a JSON object holding all the  new data </td>
+         <td row->yes</td>
+       </tr>
+       <tr class="column-10 column">
+         <td row->Allow users to add a movie to their list of favorites</td>
+         <td row->/[usersID]/favmovies/[film_id]</td>
+         <td row->POST</td>
+         <td row->none</td>
+         <td row-></td>
+         <td row->A text message saying: Film Id [film_ID] was added to the user [username]</td>
+        <td row->yes</td>
+       </tr>
+       <tr class="column-11 column">
+         <td row->Allow users to remove a movie from their list of favorites</td>
+         <td row->/[userID]/favmovies/[filmID]</td>
+         <td row->DELETE</td>
+         <td row->none</td>
+         <td row-></td>
+         <td row-> Return all the json data from the user updated</td>
+            <td row->yes</td>
+       </tr>
+       <tr class="column-12 column">
+         <td row->Allow existing users to deregister</td>
+         <td row->/users/[user ID to be deleted]</td>
+         <td row->DELETE</td>
+         <td row->user id to be deleted</td>
+         <td row-></td>
+         <td row->User [username] was deleted.</td>
+            <td row->yes</td>
+       </tr>
+       <tr class="column-13 column">
+         <td row->Allow user to add a film to the main list of films</td>
+         <td row->/movies</td>
+         <td row->POST</td>
+         <td row->{id:1,name:"PI",genre: "thriller", description: " story of the film ",year:"2000",feature: "TRUE",imageUrl: "www.google.com",director: "Raven Djaa"},</td>
+         <td row-></td>
+         <td row-></td>
+            <td row->no</td>
+       </tr>
+       <tr class="column-14 column">
+         <td row->Return all the users</td>
+         <td row->/users</td>
+         <td row->GET</td>
+         <td row->none</td>
+         <td row-></td>
+         <td row->A JSON object holding dataabout all the users</td>
+            <td row->yes</td>
+       </tr>
+     </tbody></table>
+
+
+
+
+
+
+    <br>
+
+  </div>
+  <footer>
+    <p>Find me on</p>
+    <a href="https://github.com/" >  <img src="/img/github.svg" alt="Github" class="footer_icon"></a>
+
+    <a href="https://www.linkedin.com/">   <img src="/img/linkedin.svg" alt="LinkedIn" class="footer_icon"></a>
+  </footer>
+
+    <script src="js/tota11y.min.js"></script>
+</body>
+
+
+
+</html>
