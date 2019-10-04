@@ -8,7 +8,7 @@ import './nav-view.scss';
 
 
 export function NavView(props) {
-  console.log(props)
+
   const handleRegister = (e) => {
     e.preventDefault();
     props.onRegisterButtonClick();

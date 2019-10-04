@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 import { Link } from "react-router-dom";
+import {SwitchFavorite} from "./switch_favorite/switch_favorite";
+
 
 export class MovieCard extends React.Component {
   render() {
@@ -15,13 +17,12 @@ export class MovieCard extends React.Component {
         <Card.Body>
           <Card.Title>{movie.Title}</Card.Title>
           <Card.Text>{movie.Description}</Card.Text>
+          
           <Link to={`/movies/${movie._id}`}>
             <Button variant="link"> View</Button>
+           
           </Link>
-          <div className="custom-control custom-switch">
-<input type="checkbox" className="custom-control-input" id={`customSwitch${movie.Title}`} ></input>
-             <label className="custom-control-label" for={`customSwitch${movie.Title}`}>Add {movie.Title} as favorite</label>
-             </div>
+          <SwitchFavorite favMovie={movie.Title}></SwitchFavorite >
         </Card.Body>
       </Card>
     );

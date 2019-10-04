@@ -18,30 +18,31 @@ export function DirectorFilm(props) {
 
 
     useEffect(() => {
-        function getDirectorFilm() {
-            axios
-                .get(
-                    `http://localhost:3000/movies/directors/${props.id}`,
-                    {
-                        headers: { Authorization: `Bearer ${localStorage.token}` }
-                    }
-                )
-                // .then(function (response) {
-                //     console.log(response);
-                //   })
-                .then(res => setMovies(res.data))
+    function getDirectorFilm() {
+        axios
+            .get(
+                `http://localhost:3000/movies/directors/${props.id}`,
+                {
+                    headers: { Authorization: `Bearer ${localStorage.token}` }
+                }
+            )
+            // .then(function (response) {
+            //     console.log(response);
+            //   })
+          
+            .then(res => setMovies(res.data))
+            .catch(err => {
+                console.error(err);
+            });
+    }
 
-                .catch(err => {
-                    console.error(err);
-                });
-        }
-
-        getDirectorFilm();
+    
+           getDirectorFilm();
     }, []);
 
 
 
-      const listFilms=  Object.keys(movies).map((movie) => <MovieCard key={movies[movie]._id} movie={movies[movie]}   /> );
+      const listFilms=  Object.keys(movies).map((movie) => <MovieCard key={movies[movie]._id} movie={movies[movie]} favMovie={movies[movie]._id}  /> );
     
 
 // var testparse = JSON.parse(movies);  

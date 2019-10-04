@@ -25,21 +25,6 @@ export function LoginView(props) {
 
  
 
-    // const handleSubmit = (e) => {
-    //   e.preventDefault();
-    //   /* Send a request to the server for authentication */
-    //   axios.post('YOUR_API_URL/login', {
-    //     Username: username,
-    //     Password: password
-    //   })
-    //   .then(response => {
-    //     const data = response.data;
-    //     props.onLoggedIn(data);
-    //   })
-    //   .catch(e => {
-    //     console.log('no such user')
-    //   });
-    // };
 
     return (
       <Form>
@@ -60,29 +45,3 @@ export function LoginView(props) {
   }
 
 
-
-
-//   return (
-
-//     <Form className="container">
-//     <Form.Group controlId="formBasicUsername">
-//     <Form.Label>Username</Form.Label>
-
-//      <Form.Control type="username" placeholder="your username..."  value={username} onChange={e => setUsername(e.target.value)}/>
-
-//      </Form.Group>
-//      <Form.Group controlId="formBasicPassword">
-
-//      <Form.Label>Password</Form.Label>
-
-//       <Form.Control type="password" placeholder="your password..."  value={password} onChange={e => setPassword(e.target.value)}/>
-
-//       </Form.Group>
-
-//     <button type="button" >Submit</button>   
-//     {/* //onClick={handleSubmit} */}
-
-//     </Form>
-
-//   );
-// }
