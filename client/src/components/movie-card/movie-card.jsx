@@ -7,6 +7,7 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import {SwitchFavorite} from "./switch_favorite/switch_favorite";
 
+var API_URL =  'http://myflixdb.herokuapp.com/';
 
 export class MovieCard extends React.Component {
   constructor(props) {
@@ -28,12 +29,10 @@ console.log(props);
     var base64Url = ca.split('.')[1];
     var decodedValue = JSON.parse(window.atob(base64Url));
 
-
-    http://localhost:3000/user/${decodedValue._id}/movies/${this.props.movie._id}` );
     
     axios({
       method: 'post',
-      url: `http://localhost:3000/user/${decodedValue._id}/movies/${this.props.movie._id}`,
+      url: `${API_URL}user/${decodedValue._id}/movies/${this.props.movie._id}`,
       headers: { Authorization: `Bearer ${accessToken}` },
       
   })

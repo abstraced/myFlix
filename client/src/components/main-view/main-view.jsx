@@ -3,14 +3,14 @@
 import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import CardDeck from 'react-bootstrap/CardDeck';
-import CardGroup from 'react-bootstrap/CardGroup';
+
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 
-var API_URL = 'http://localhost:3000/movies';
-//'http://myflixdb.herokuapp.com/movies';
+var API_URL =  'http://myflixdb.herokuapp.com/movies';
+// 'http://localhost:3000/movies';
+
 
 
 import { LoginView } from '../login-view/login-view';

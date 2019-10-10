@@ -9,6 +9,9 @@ import {InfoView} from './info-view/info-view';
 import {UpdateView} from './update-view/update-view';
 
 
+var API_URL =  'http://myflixdb.herokuapp.com/';
+// http://localhost:3000
+
 export function ProfileView(user)  {
 
   const [ refresh, setRefresh ] = useState('');
@@ -23,7 +26,7 @@ export function ProfileView(user)  {
   const removeSubmit = ( e,_id) => {
     axios({
       method: 'delete',
-      url: `http://localhost:3000/user/${user.user._id}/movies/${_id}`,
+      url: `${API_URL}user/${user.user._id}/movies/${_id}`,
       headers: { Authorization: `Bearer ${accessToken}` }
   })
   .then(

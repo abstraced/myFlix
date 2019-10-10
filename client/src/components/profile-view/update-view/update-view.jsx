@@ -2,15 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 
-import { Link } from "react-router-dom";
-import Modal from 'react-bootstrap/Modal';
-import ModalBody from 'react-bootstrap/ModalBody';
-import ModalTitle from 'react-bootstrap/ModalTitle'
-
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
 
+var API_URL =  'http://myflixdb.herokuapp.com/';
 
 
 export function UpdateView(userId) {
@@ -21,14 +17,7 @@ export function UpdateView(userId) {
     const [ email, setEmail ] = useState('');
     const [ birthdate, setBirthdate ] = useState('');
 
-    const [modalMessage,setModalMessage] = useState('');
-    const [show, setShow] = useState(true);
-
-   
-    
-
-
-    
+       
     let accessToken = localStorage.getItem('token');
    
 
@@ -42,7 +31,7 @@ export function UpdateView(userId) {
         
         axios({
             method: 'put',
-            url: `http://localhost:3000/user/username/${userId.userId}`,
+            url: `${API_URL}user/username/${userId.userId}`,
             headers: { Authorization: `Bearer ${accessToken}` },
             data: {
                 Username: username,
@@ -61,7 +50,7 @@ export function UpdateView(userId) {
     //    e.preventDefault();
         axios({
             method: 'put',
-            url: `http://localhost:3000/user/password/${userId.userId}`,
+            url: `${API_URL}user/password/${userId.userId}`,
             headers: { Authorization: `Bearer ${accessToken}` },
             data: {
                 Password: password,
@@ -80,7 +69,7 @@ export function UpdateView(userId) {
         // e.preventDefault();
          axios({
              method: 'put',
-             url: `http://localhost:3000/user/email/${userId.userId}`,
+             url: `${API_URL}user/email/${userId.userId}`,
              headers: { Authorization: `Bearer ${accessToken}` },
              data: {
                  Email: email,
@@ -97,7 +86,7 @@ export function UpdateView(userId) {
         // e.preventDefault();
          axios({
              method: 'put',
-             url: `http://localhost:3000/user/birthdate/${userId.userId}`,
+             url: `${API_URL}user/birthdate/${userId.userId}`,
              headers: { Authorization: `Bearer ${accessToken}` },
              data: {
                  Birthdate: birthdate,
@@ -115,7 +104,7 @@ export function UpdateView(userId) {
         // e.preventDefault();
          axios({
              method: 'delete',
-             url: `http://localhost:3000/user/${userId.userId}`,
+             url: `${API_URL}user/${userId.userId}`,
              headers: { Authorization: `Bearer ${accessToken}` },
              
          })
@@ -139,25 +128,9 @@ export function UpdateView(userId) {
 
     }
 
-    // let test = (e) => {
-    //     // e.preventDefault();
-    // //  console.log(userId);
-    // //  console.log("test");
-    //  userId.onDisconnect();
-    
+   
 
-
-    // }
-
-    let handleDisconnect = (e) => {
-        e.preventDefault();
-        // userId.onDisconnect();
-        console.log(userId.onDisconnect);
-    
-    
-      }
-
-
+   
 
     return (
 <div className="update-user-info">
@@ -197,7 +170,7 @@ export function UpdateView(userId) {
             <Form.Group controlId="formBasicBirthdate">
                 <Form.Label> <h1>Unsuscribe</h1> </Form.Label>
                 {/* <Link to={`.. /`}> */}
-                <Button variant="primary" type="submit"  onClick={handleDisconnect} > Delete your account</Button>
+                <Button variant="primary" type="submit"  onClick={onUnregister} > Delete your account</Button>
                 {/* </Link> */}
             </Form.Group>
 

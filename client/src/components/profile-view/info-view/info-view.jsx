@@ -1,16 +1,9 @@
 import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 
-
-
-
-
-
 export function InfoView (user)  {
 
-
-
-    console.log( user)
+ 
 
 
 return (
