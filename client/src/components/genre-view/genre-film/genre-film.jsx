@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import { MovieCard } from '../../movie-card/movie-card';
 import ListGroup from "react-bootstrap/ListGroup";
 
-var API_URL = 'http://localhost:3000/directors'
+var API_URL = 'http://myflixdb.herokuapp.com/'
 
 
 export function GenreFilm(props) {
@@ -21,7 +21,7 @@ export function GenreFilm(props) {
         function getGenreFilm() {
             axios
                 .get(
-                    `http://localhost:3000/movies/genres/${props.id}`,
+                    `${API_URL}movies/genres/${props.id}`,
                     {
                         headers: { Authorization: `Bearer ${localStorage.token}` }
                     }

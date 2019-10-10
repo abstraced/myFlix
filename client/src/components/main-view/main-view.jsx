@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 
-var API_URL =  'http://myflixdb.herokuapp.com/movies';
+var API_URL =  'http://myflixdb.herokuapp.com/';
 // 'http://localhost:3000/movies';
 
 
@@ -66,7 +66,7 @@ export class MainView extends React.Component {
     var base64Url = ca.split('.')[1];
     var decodedValue = JSON.parse(window.atob(base64Url));
     console.log(decodedValue );
-    axios.get(`http://localhost:3000/movies/${decodedValue._id}`, {
+    axios.get(`${API_URL}movies/${decodedValue._id}`, {
       headers: { Authorization: `Bearer ${accessToken}`}
     })
     .then(response => {
@@ -87,7 +87,7 @@ export class MainView extends React.Component {
   getInfos(token) {
     var base64Url = token.split('.')[1];
     var decodedValue = JSON.parse(window.atob(base64Url));
-    axios.get(`http://localhost:3000/user/${decodedValue._id}`, {
+    axios.get(`${API_URL}user/${decodedValue._id}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
@@ -140,7 +140,7 @@ export class MainView extends React.Component {
 
 
   getMovies(token) {
-    axios.get(API_URL, {
+    axios.get(`${API_URL}movies`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
