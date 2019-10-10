@@ -72,9 +72,9 @@ export function SwitchFavorite (props) {
     return (
 
         <div className="custom-control custom-switch">
-        <input type="checkbox" className="custom-control-input" id={`customSwitch${props.favMovie}`}   ></input>   
+        <input checked={true} type="checkbox" className="custom-control-input" id={`customSwitch${props.favMovie}`}   ></input>   
         
-                     <label className="custom-control-label"  for={`customSwitch${props.favMovie}`} >Add  {props.favMovie} as favorite </label>
+                     <label className="custom-control-label"  htmlFor={`customSwitch${props.favMovie}`} >Add  {props.favMovie} as favorite </label>
                  
               
                      </div>

@@ -39,7 +39,7 @@ export class MainView extends React.Component {
       selectedMovie: null,
       user: null,
       register: false,
-      userInfo: [],
+      // userInfo: [],
     };
   }
 
@@ -56,49 +56,30 @@ export class MainView extends React.Component {
       this.getInfos(accessToken);
     }
 
-    // console.log(this.userInfo);
-
-
-    // axios.get(API_URL)
-    //
-    // .then(response => {
-    //   console.log(response.data);
-    //   // Assign the result to the state
-    //   this.setState({
-    //     movies: response.data
-    //   });
-    // })
-    // .catch(function (error) {
-    //   console.log(error);
-    // });
+    
   }
 
 
-  // getUserInfo () {
-  //   let accessToken = localStorage.getItem('token');
-  //   var ca = accessToken;
-  //   var base64Url = ca.split('.')[1];
-  //   var decodedValue = JSON.parse(window.atob(base64Url));
-  //   console.log(decodedValue );
-  //   axios.get(`http://localhost:3000/movies/${decodedValue._id}`, {
-  //     headers: { Authorization: `Bearer ${accessToken}`}
-  //   })
-  //   .then(response => {
-  //     // Assign the result to the state
-  //         this.setState({
-  //       userInfo: response.data
-  //     });
-  //     // console.log(userInfo);
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
-
-
-
-
-
-  // }
+  getUserInfo () {
+    let accessToken = localStorage.getItem('token');
+    var ca = accessToken;
+    var base64Url = ca.split('.')[1];
+    var decodedValue = JSON.parse(window.atob(base64Url));
+    console.log(decodedValue );
+    axios.get(`http://localhost:3000/movies/${decodedValue._id}`, {
+      headers: { Authorization: `Bearer ${accessToken}`}
+    })
+    .then(response => {
+      // Assign the result to the state
+          this.setState({
+        userInfo: response.data
+      });
+      // console.log(userInfo);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 
 
 
@@ -114,8 +95,7 @@ export class MainView extends React.Component {
         this.setState({
           userInfo: response.data[0]
         });
-        console.log( response.data);
-        console.log( response.data[0]);
+      
         
       })
       .catch(function (error) {
@@ -123,6 +103,7 @@ export class MainView extends React.Component {
       });
   }
 
+ 
 
 
 
@@ -158,34 +139,13 @@ export class MainView extends React.Component {
 
 
 
-  addtofavorite(film_id) {
-    axios.post(`http://localhost:3000/user/${user.id}/favorite/${movie._id}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    })
-      .then(response => {
-        // Assign the result to the state
-        console.log(response.data);
-        this.setState({
-          movies: response.data
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-
-
-
-  }
-
   getMovies(token) {
     axios.get(API_URL, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
         // Assign the result to the state
-        console.log(response.data);
-        this.setState({
+               this.setState({
           movies: response.data
         });
       })
@@ -219,19 +179,34 @@ export class MainView extends React.Component {
     if (register === true) return (<div><NavView user={this.state.register} register={this.state.register} onRegisterButtonClick={() => this.onRegisterButtonClick()} onDisconnect={() => this.onDisconnect()} /> <div className="main-view">  < RegistrationView onLoggedIn={user => this.onLoggedIn(user)} /> </div></div>);
 
 
-    // if (!movies) return <div className="main-view"/>;
+    if (!movies) return <div className="main-view"/>;
 
     return (
       <Router>
+
         <NavView user={this.state.user} register={this.state.register} onRegisterButtonClick={() => this.onRegisterButtonClick()} onDisconnect={() => this.onDisconnect()} />
+        <Route path="/my-profile" render={() => <ProfileView user={this.state.userInfo} onDisconnect={() => this.onDisconnect()} />} />
+       
         <Route exact path="/" render={() => {
           if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-          return movies.map(m => <MovieCard key={m._id} movie={m} />)
-        }
+          return ( 
+          <div className="list-films">
+          {movies.map(m => <MovieCard key={m._id} movie={m} />)}
+          </div>
+          )}
         } />
+
         <Route path="/register" render={() => <RegistrationView />} />
+
+
         <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
-        <Route path="/my-profile" render={() => <ProfileView user={this.state.userInfo} />} />
+       
+       
+       
+       
+       
+       
+       
         <Route path="/directors/:id" render={({ match }) => {
           if (!movies) return <div className="main-view" />;
           return <DirectorView director={movies.find(m => m.director._id === match.params.id).director} />

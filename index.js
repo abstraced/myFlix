@@ -202,28 +202,28 @@ app.post('/movies',passport.authenticate('jwt', { session: false }), function(re
 //   Users.findOne(Username: req.params.username).then(movies => res.json(movies));     
   
 // });
-app.get("/users/:usernameId",passport.authenticate('jwt', { session: false }),function(req, res) {   // 
-if (req.headers && req.headers.authorization) {
-      var authorization = req.headers.authorization.split(' ')[1],
-          decoded;
-      try {
-          decoded = jwt.verify(authorization, secret.secretToken);
-      } catch (e) {
-          return res.status(401).send('unauthorized');
-      }
-      var userId = decoded.id;
-      // Fetch the user by id 
-      Users.findOne({_id: userId}).then(function(user){
-          // Do something with the user
-          return res.send(200);
-      });
-  }
-  return res.send(500);
+// app.get("/users/:usernameId",passport.authenticate('jwt', { session: false }),function(req, res) {   // 
+// if (req.headers && req.headers.authorization) {
+//       var authorization = req.headers.authorization.split(' ')[1],
+//           decoded;
+//       try {
+//           decoded = jwt.verify(authorization, secret.secretToken);
+//       } catch (e) {
+//           return res.status(401).send('unauthorized');
+//       }
+//       var userId = decoded.id;
+//       // Fetch the user by id 
+//       Users.findOne({_id: userId}).then(function(user){
+//           // Do something with the user
+//           return res.send(200);
+//       });
+//   }
+//   return res.send(500);
 
 
-  // Users.find({Username:req.params.username}).populate('FavoriteFilms').then(movies => res.json(movies));
-  // // .populate('Genre')
-});
+//   // Users.find({Username:req.params.username}).populate('FavoriteFilms').then(movies => res.json(movies));
+//   // // .populate('Genre')
+// });
 
 
 // Display user info
@@ -250,7 +250,7 @@ app.post('/users', function(req, res) {
  req.checkBody('Username', 'Username is required').notEmpty();
  req.checkBody('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric()
  req.checkBody('Password', 'Password is required').notEmpty();
- req.checkBody('Email', 'Email is required').notEmpty();
+//  req.checkBody('Email', 'Email is required').notEmpty();
  req.checkBody('Email', 'Email does not appear to be valid').isEmail();
  req.checkBody('Birthdate', 'Is not a valid date. The format is YYYY-MM-DD').isISO8601();
 
@@ -468,13 +468,13 @@ app.put("/user/birthdate/:_id",passport.authenticate('jwt', { session: false }),
 });
 
 // Delete a user by username
-app.delete('/user/:Username',passport.authenticate('jwt', { session: false }), function(req, res) {
-  Users.findOneAndRemove({ Username: req.params.Username })
+app.delete('/user/:_id',passport.authenticate('jwt', { session: false }), function(req, res) {
+  Users.findOneAndRemove({ _id: req.params._id })
   .then(function(user) {
     if (!user) {
-      res.status(400).send(req.params.Username + " was not found");
+      res.status(400).send(req.params._id + " was not found");
     } else {
-      res.status(200).send(req.params.Username + " was deleted.");
+      res.status(200).send(req.params._id + " was deleted.");
     }
   })
   .catch(function(err) {
@@ -505,7 +505,7 @@ app.get("/users",passport.authenticate('jwt', { session: false }), function(req,
 /// USERS FAVORITE FILM
 
 /// Allow users to add a movie to their list of favorites
-app.post('/user/:user_id/favorite/:MovieID',passport.authenticate('jwt', { session: false }), function(req, res) {
+app.post('/user/:user_id/movies/:MovieID',passport.authenticate('jwt', { session: false }), function(req, res) {
   Users.findOneAndUpdate({ _id : req.params.user_id }, {
     $push : { FavoriteFilms : req.params.MovieID }
   },
@@ -520,7 +520,7 @@ app.post('/user/:user_id/favorite/:MovieID',passport.authenticate('jwt', { sessi
   })
 });
 // Allow users to remove a movie from their list of favorites
-app.delete('/user/:user_id/Movies/:MovieID',passport.authenticate('jwt', { session: false }), function(req, res) {
+app.delete('/user/:user_id/movies/:MovieID',passport.authenticate('jwt', { session: false }), function(req, res) {
   Users.findOneAndUpdate({ _id : req.params.user_id }, {
     $pull : { FavoriteFilms: req.params.MovieID
     }
