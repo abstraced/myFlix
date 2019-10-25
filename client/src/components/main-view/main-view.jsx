@@ -174,7 +174,7 @@ export class MainView extends React.Component {
     if (!movies) return <div className="main-view"/>;
 
     return (
-      <Router>
+      <Router basename="/client">
 
         <NavView user={this.state.user} register={this.state.register} onRegisterButtonClick={() => this.onRegisterButtonClick()} onDisconnect={() => this.onDisconnect()} />
        

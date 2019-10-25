@@ -1,6 +1,7 @@
 
 
 const express = require("express"),
+
 bodyParser = require("body-parser"),
 uuid = require("uuid"),
 morgan = require('morgan'),
@@ -10,6 +11,7 @@ cors = require('cors'),
 validator = require('express-validator'),
 Models = require('./models.js');
 
+const path = require("path");
 
 mongoose.set('useFindAndModify', false);
 
@@ -61,14 +63,17 @@ app.use(morgan('common'));
 // link to public static file ( documentation.html)
 app.use(express.static('public'));
 
+app.use('/client', express.static(path.join(__dirname, 'dist')));
+
 // default homepage
 app.get('/', function(req, res) {
   res.send('Hello to My flix, the app to help you sort your favorite films...')
 });
 
 
-
-
+app.get("/client/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
 
 
 

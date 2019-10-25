@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 
 
-import { MovieCard } from '../../movie-card/movie-card';
+import  MovieCard  from '../../movie-card/movie-card';
 import ListGroup from "react-bootstrap/ListGroup";
 
 var API_URL = 'http://myflixdb.herokuapp.com/'
@@ -41,7 +41,19 @@ export function GenreFilm(props) {
 
 
 
-      const listFilms=  Object.keys(movies).map((movie) => <MovieCard key={movies[movie]._id} movie={movies[movie]}   /> );
+      const listFilms=  Object.keys(movies).map((movie) => <MovieCard key={movies[movie]._id}
+       movie={movies[movie]}
+       movie_id={movies[movie]._id} 
+       checked={props.user.FavoriteFilms.find(
+    (movie)=> { 
+       if (movie._id=== props.movie_id) {
+      // setIsFavorite(true);
+      return ("checked")
+
+       }
+  
+  
+  })}   /> );
     
 
 // var testparse = JSON.parse(movies);  
