@@ -109,7 +109,7 @@ export function UpdateView(userId) {
              
          })
          .then (( )=> {
-            onDisconnect();
+            this.props.onDisconnect();
 
             
          })
@@ -120,15 +120,7 @@ export function UpdateView(userId) {
  
      };
 
-    const onUnregister =() => {
-    deleteAccount();
-    onDisconnect();
-
-
-
-    }
-
-   
+    
 
    
 
@@ -170,7 +162,7 @@ export function UpdateView(userId) {
             <Form.Group controlId="formBasicBirthdate">
                 <Form.Label> <h1>Unsuscribe</h1> </Form.Label>
                 {/* <Link to={`.. /`}> */}
-                <Button variant="primary" type="submit"  onClick={onUnregister} > Delete your account</Button>
+                <Button variant="primary" type="submit"  href="/" onClick={deleteAccount} > Delete your account</Button>
                 {/* </Link> */}
             </Form.Group>
 

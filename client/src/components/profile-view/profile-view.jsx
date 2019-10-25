@@ -1,88 +1,80 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import Form from 'react-bootstrap/Form';
-import axios from 'axios';
+import React  from 'react';
+import { connect } from 'react-redux';
 
 
 import {FavoriteFilm} from './favorite-film/favorite-film';
 import {InfoView} from './info-view/info-view';
 import {UpdateView} from './update-view/update-view';
 
+import './profile-view.scss';
 
-var API_URL =  'http://myflixdb.herokuapp.com/';
-// http://localhost:3000
 
-export function ProfileView(user)  {
 
-  const [ refresh, setRefresh ] = useState('');
+const mapStateToProps = state => {
+  
+  return { user: state.userInfos };
+};
+
+function ProfileView (props) {
+  const { movies } = props;
+
+
 
   let accessToken = localStorage.getItem('token');
-   
-
-
  
-  console.log( user);
 
-  const removeSubmit = ( e,_id) => {
-    axios({
-      method: 'delete',
-      url: `${API_URL}user/${user.user._id}/movies/${_id}`,
-      headers: { Authorization: `Bearer ${accessToken}` }
-  })
-  .then(
-    window.location.reload(false)
-  )
+
   
-           .catch(e => {
-              console.log('no such user')
-            });
-  
-
+    // Loading pattern 
+      if (props.user=== undefined){
     
-    };
-
-
-
     
-
-//    Loading pattern 
-  if (user.user=== undefined){
-
-
-    return (
-     <div>  Loading....</div>
-
-    )
-  }
-
-
-
-  else {
-
-    console.log(user.user.FavoriteFilms)
-    return (
-
-
-        <div>   
-        <div> 
-        <InfoView   user={user.user}/>
-        <UpdateView  userId={user.user._id} onDisconnect={() => this.onDisconnect()} />
-        </div>
-
-
-        <h1>  {user.user.Username}  's favorite films </h1>
-            <FavoriteFilm movies={user.user.FavoriteFilms}   remove={removeSubmit} />
-        </div>
-        
-        
-        
+        return (
+         <div>  Loading....</div>
+    
         )
-        
-
+      }
+    
+    
+    
+      else {
+    
+     
+        return (
+    
+    
+            <div className="profile">   
+            <div> 
+            <InfoView   user={props.user}/>
+            <UpdateView  userId={props.user._id} onDisconnect={() => this.onDisconnect()} />
+            </div>
+    
+    
+            <h1>  {props.user.Username}  's favorite films </h1>
+                <FavoriteFilm movies={props.user.FavoriteFilms}    />
+            </div>
+            
+            
+            
+            )
+            
+    
+    
+    
+    
+    
+    
+    
+    }
+    
 
 
 }
 
 
 
-}
+
+
+export default connect(mapStateToProps)(ProfileView);
+
+

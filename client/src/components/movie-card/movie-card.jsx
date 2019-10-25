@@ -2,48 +2,40 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import axios from 'axios';
 
+
+
+
+import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
-import {SwitchFavorite} from "./switch_favorite/switch_favorite";
+import SwitchFavorite from "./switch_favorite/switch_favorite";
 
-var API_URL =  'http://myflixdb.herokuapp.com/';
 
-export class MovieCard extends React.Component {
-  constructor(props) {
+
+const mapStateToProps = state => {
+  
+  return { user: state.userInfos,
+          movies: state.movies   
+   };
+};
+
+
+
+ class MovieCard extends React.Component {
+constructor(props) {
 super(props);
 
-this.addFilm =this.addFilm.bind(this);
-console.log(props);
+
+
   }
 
   componentDidMount() {
   
    
   }
+  
 
-  addFilm () {
-    let accessToken = localStorage.getItem('token');
-    
-    var ca = accessToken;
-    var base64Url = ca.split('.')[1];
-    var decodedValue = JSON.parse(window.atob(base64Url));
-
-    
-    axios({
-      method: 'post',
-      url: `${API_URL}user/${decodedValue._id}/movies/${this.props.movie._id}`,
-      headers: { Authorization: `Bearer ${accessToken}` },
-      
-  })
-           .catch(e => {
-              console.log('no such user')
-            });
-
-
-
-
-  }
+  
 
 
 
@@ -51,26 +43,11 @@ console.log(props);
     const { movie } = this.props;
 
      
-  let testButton   = <div>  </div>
+ 
   
   
     
-    if (this.props.user === 'yes'){
-    
-      testButton= <Button value={movie._id} onClick={(e)=>{ this.props.remov(e,movie._id)}} > Remove film from Favorites</Button>
-
-
-
-    }
-   else {
-
-    testButton= <Button onClick={this.addFilm}>    Add film to favorite </Button>
-
-
-
-
-   }
-    
+   
 
 
 
@@ -86,8 +63,8 @@ console.log(props);
             <Button variant="link"> View</Button>
            
           </Link>
-          {testButton}
-          {/* <SwitchFavorite favMovie={movie.Title} ></SwitchFavorite > */}
+         
+           <SwitchFavorite movie_id={movie._id} ></SwitchFavorite >
         </Card.Body>
       </Card>
     );
@@ -113,3 +90,5 @@ MovieCard.propTypes = {
     }).isRequired
   }).isRequired
 };
+
+export default connect(mapStateToProps)(MovieCard);

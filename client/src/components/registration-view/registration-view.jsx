@@ -4,11 +4,13 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
 
+var API_URL =  'http://myflixdb.herokuapp.com/';
+
 export function RegistrationView(props)  {
   
 const sendRegistration = (e) => {
 
-  axios.post('http://localhost:3000/users', {
+  axios.post(`${API_URL}users`, {
     Username: username,
     Password: password,
     Email: email,

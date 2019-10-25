@@ -1,37 +1,74 @@
 import React, { useState, useEffect } from "react";
-import { MovieCard } from '../../movie-card/movie-card';
+import  MovieCard  from '../../movie-card/movie-card';
 
 
 
-export function FavoriteFilm (movies) {
+export function FavoriteFilm (props) {
    
 
+    
+     
+
+
+    
+  if ( !props.movies) {
+   return (
+   <div> Loading .....</div>
+
+   )
+
+
+  }
+   
+  const listFilms=  Object.keys(props.movies).map((movie) =>{
+    //
         
-    const listFilms=  Object.keys(movies.movies).map((movie) => (
-    <div>
+        return (         
+   
+        <div>
     <MovieCard 
-    user='yes'
-    remov={movies.remove}
-    key={movies.movies[movie]} 
-    movie={movies.movies[movie]} 
-    favMovie={movies.movies[movie]  }  /> 
+    // user='yes'
+    remov={props.movies.remove}
+    key={props.movies[movie]} 
+    movie={props.movies[movie]} 
+    favMovie={props.movies[movie]  }  /> 
     </div>
 
 
-    )
-    );
-
-    
-
-   
+    )});
 
 return (
     <div className="list-films"> 
 
+     
       {listFilms}
-      
      </div>
   
       )
 
 }
+
+
+
+ 
+    // const listFilms=  Object.keys(props.movies).map((movie) =>{
+    //     console.log( "test");
+    //     console.log( movie); 
+        
+    //     return (
+
+    //         <div> frfrfrf</div>
+    
+   
+    // //     <div>
+    // // <MovieCard 
+    // // user='yes'
+    // // remov={movies.remove}
+    // // key={movies[movie]} 
+    // // movie={movies[movie]} 
+    // // favMovie={movies[movie]  }  /> 
+    // // </div>
+
+
+    // )
+    

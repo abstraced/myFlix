@@ -3,6 +3,12 @@
 import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { connect } from 'react-redux';
+
+
+import { setMovies } from '../../actions/actions';
+import { setUserInfos } from '../../actions/actions';
+
 
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -12,15 +18,16 @@ var API_URL =  'http://myflixdb.herokuapp.com/';
 // 'http://localhost:3000/movies';
 
 
+import MoviesList from '../movies-list/movies-list';
+
 
 import { LoginView } from '../login-view/login-view';
-import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { NavView } from '../nav-view/nav-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
-import { ProfileView } from '../profile-view/profile-view';
+import  ProfileView  from '../profile-view/profile-view';
 
 
 
@@ -28,22 +35,19 @@ import { ProfileView } from '../profile-view/profile-view';
 
 export class MainView extends React.Component {
   constructor() {
-    // Call the superclass constructor
-    // so React can initialize it
+   
     super();
     this.onBackButtonClick = this.onBackButtonClick.bind(this);
     this.onDisconnect = this.onDisconnect.bind(this);
     // Initialize the state to an empty object so we can destructure it later
     this.state = {
-      movies: [],
       selectedMovie: null,
       user: null,
       register: false,
-      // userInfo: [],
+     
     };
   }
 
-  // One of the "hooks" available in a React Component
   componentDidMount() {
 
 
@@ -60,26 +64,6 @@ export class MainView extends React.Component {
   }
 
 
-  getUserInfo () {
-    let accessToken = localStorage.getItem('token');
-    var ca = accessToken;
-    var base64Url = ca.split('.')[1];
-    var decodedValue = JSON.parse(window.atob(base64Url));
-    console.log(decodedValue );
-    axios.get(`${API_URL}movies/${decodedValue._id}`, {
-      headers: { Authorization: `Bearer ${accessToken}`}
-    })
-    .then(response => {
-      // Assign the result to the state
-          this.setState({
-        userInfo: response.data
-      });
-      // console.log(userInfo);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
 
 
 
@@ -92,9 +76,8 @@ export class MainView extends React.Component {
     })
       .then(response => {
         // Assign the result to the state
-        this.setState({
-          userInfo: response.data[0]
-        });
+        this.props.setUserInfos(response.data[0]);
+      
       
         
       })
@@ -115,7 +98,7 @@ export class MainView extends React.Component {
 
 
   onLoggedIn(authData) {
-    //  console.log(authData);
+    
     this.setState({
       user: authData.user.Username
     });
@@ -126,33 +109,35 @@ export class MainView extends React.Component {
   }
 
 
+  
+
   onDisconnect() {
     this.setState({
       user: null,
-      movies: []
+      movies: [],
+      userInfo: null
     });
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+   
 
 
   }
-
-
 
   getMovies(token) {
     axios.get(`${API_URL}movies`, {
-      headers: { Authorization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}`}
     })
-      .then(response => {
-        // Assign the result to the state
-               this.setState({
-          movies: response.data
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    .then(response => {
+    
+      this.props.setMovies(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
+
+  
 
 
 
@@ -173,8 +158,15 @@ export class MainView extends React.Component {
 
 
   render() {
+    
 
-    const { movies, user, register } = this.state;
+
+   
+    let { movies } = this.props;
+   
+    
+
+    const {  user, register } = this.state;
 
     if (register === true) return (<div><NavView user={this.state.register} register={this.state.register} onRegisterButtonClick={() => this.onRegisterButtonClick()} onDisconnect={() => this.onDisconnect()} /> <div className="main-view">  < RegistrationView onLoggedIn={user => this.onLoggedIn(user)} /> </div></div>);
 
@@ -185,25 +177,19 @@ export class MainView extends React.Component {
       <Router>
 
         <NavView user={this.state.user} register={this.state.register} onRegisterButtonClick={() => this.onRegisterButtonClick()} onDisconnect={() => this.onDisconnect()} />
-        <Route path="/my-profile" render={() => <ProfileView user={this.state.userInfo} onDisconnect={() => this.onDisconnect()} />} />
        
         <Route exact path="/" render={() => {
           if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
-          return ( 
-          <div className="list-films">
-          {movies.map(m => <MovieCard key={m._id} movie={m} />)}
-          </div>
-          )}
-        } />
+          return <MoviesList movies={movies}/>;
+         }} />
 
         <Route path="/register" render={() => <RegistrationView />} />
 
+        <Route path="/my-profile" render={() => <ProfileView  />} />
 
         <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
        
-       
-       
-       
+             
        
        
        
@@ -221,3 +207,11 @@ export class MainView extends React.Component {
     );
   }
 }
+  // 
+     let mapStateToProps = state => {
+    return { movies: state.movies }
+}
+
+
+export default connect(mapStateToProps, { setMovies,setUserInfos } )(MainView);
+

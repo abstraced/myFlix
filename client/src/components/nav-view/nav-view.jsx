@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import { Link } from 'react-router-bootstrap';
-import { Link } from "react-router-dom";
+import Nav from 'react-bootstrap/Nav'
 
 import './nav-view.scss';
 // import { Link } from "react-router-dom";
@@ -16,7 +16,7 @@ export function NavView(props) {
   };
 
   const handleDisconnect = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     props.onDisconnect();
 
 
@@ -25,42 +25,31 @@ export function NavView(props) {
   
 
   return (
-
-
-    <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
-    <div className="container">
-
-    
-    <a className="navbar-brand" href="/">MyFlix</a>
-    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
-    <span className="navbar-toggler-icon"></span>
-    </button>
-
-    <div className="collapse navbar-collapse" id="mobile-nav">
-
-
-    <ul className="navbar-nav ml-auto">
-    <li className="nav-item">
-    <a className="nav-link" href="/my-profile" >My Profile</a>
-  </li>
-  {(props.user) ? (<li className="nav-item" >
-  <Link to={`/`}>
-       <a className="nav-link" componentclass={Link} 
-       href="http://localhost:1234/" 
-       to="http://localhost:1234/" 
-       onClick={handleDisconnect}>Disconnect</a> 
-       </Link>
-      </li>):(<li className="nav-item">
-    <a className="nav-link" href="" onClick={handleRegister}>Sign Up</a>
-  </li>)}
-     
+  <div>
+  {(props.user) ? (
+  <Nav justify variant="tabs" defaultActiveKey="/">
+  <Nav.Item>
+    <Nav.Link href="/">MyFlix</Nav.Link>
+  </Nav.Item>
+  <Nav.Item>
+  <Nav.Link href="/my-profile" eventKey="link-1">My Profile</Nav.Link>
+</Nav.Item>
+<Nav.Item>
+  <Nav.Link href="/"  eventKey="link-2"  onClick={handleDisconnect}> Disconnect</Nav.Link>
+</Nav.Item>
+</Nav> ) 
+:( <Nav justify variant="tabs" defaultActiveKey="/home">
+<Nav.Item>
+  <Nav.Link href="/">MyFlix</Nav.Link>
+</Nav.Item> <Nav.Item>
+  <Nav.Link onClick={handleRegister} eventKey="link-1">Sign up</Nav.Link>
+ </Nav.Item>
+ 
+ </Nav>)}
   
-       
-   
-    </ul>
-    </div>
-    </div>
-    </nav>
+ </div>
+
   );
 
 }
+
