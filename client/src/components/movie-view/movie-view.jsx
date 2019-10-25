@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 
 import { Link } from "react-router-dom";
 import './movie-view.scss';
+import SwitchFavorite from "../movie-card/switch_favorite/switch_favorite";
 
 import { DirectorFilm } from '../director-view/director-film/director-film';
 
@@ -29,7 +30,12 @@ export class MovieView extends React.Component {
 
     return (
 
+      <div className="box">
+      <img className="pict" src={movie.ImagePath} />
     <Container>
+       
+        
+        
 
         <Col className="movie-text text-center border rounded-sm">
         <Row className= "movie-title">
@@ -49,16 +55,16 @@ export class MovieView extends React.Component {
         </Row>
         <Row>
         <Col>
-
+        <SwitchFavorite movie_id={movie._id} ></SwitchFavorite >
         <Link to={`/directors/${movie.director._id}`}>
-<Button variant="link">Director</Button>
+<Button variant="link"> More about {movie.director.Name}</Button>
 </Link>
 
 <Link to={`/genres/${movie.genre._id}`}>
-<Button variant="link">Genre</Button>
+<Button variant="link">More about {movie.genre.Name} films </Button>
 </Link>
         <Link to={'/'}>
-        <Button onClick={this.props.onClick}> Go back to movies' list </Button>
+        <Button > Go back to movies' list </Button>
         </Link>
         </Col>
 
@@ -67,10 +73,11 @@ export class MovieView extends React.Component {
         </Col>
 
         <Col>
-          <img className="pict" src={movie.ImagePath} /></Col>
+         </Col>
 
 
       </Container>
+      </div>
 
     );
   }
@@ -81,7 +88,7 @@ MovieView.propTypes = {
     Title: PropTypes.string.isrequired,
     Description: PropTypes.string.isRequired,
     ImagePath: PropTypes.string.isRequired,
-    Featured: PropTypes.bool.isRequired,
+   
     genre: PropTypes.shape({
       Name: PropTypes.string.isrequired,
       Description: PropTypes.string.isrequired
@@ -94,5 +101,5 @@ MovieView.propTypes = {
 
     }).isRequired
   }).isRequired,
-  onClick: PropTypes.func.isRequired
+  
 };

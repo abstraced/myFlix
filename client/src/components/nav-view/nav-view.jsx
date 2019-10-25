@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import { Link } from 'react-router-bootstrap';
+
 import Nav from 'react-bootstrap/Nav'
 
 import './nav-view.scss';
-// import { Link } from "react-router-dom";
+
 
 
 export function NavView(props) {
@@ -25,7 +25,7 @@ export function NavView(props) {
   
 
   return (
-  <div>
+  <div className="navi">
   {(props.user) ? (
   <Nav justify variant="tabs" defaultActiveKey="/">
   <Nav.Item>

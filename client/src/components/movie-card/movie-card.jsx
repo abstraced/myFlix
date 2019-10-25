@@ -76,8 +76,7 @@ MovieCard.propTypes = {
   Title: PropTypes.string.isrequired,
    Description: PropTypes.string.isRequired,
    ImagePath: PropTypes.string.isRequired,
-   Featured: PropTypes.bool.isRequired,
-   genre: PropTypes.shape({
+      genre: PropTypes.shape({
       Name: PropTypes.string.isrequired,
       Description: PropTypes.string.isrequired
     }).isRequired,

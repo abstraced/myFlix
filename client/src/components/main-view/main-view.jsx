@@ -6,6 +6,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { connect } from 'react-redux';
 
 
+import PropTypes from 'prop-types';
+
+
 import { setMovies } from '../../actions/actions';
 import { setUserInfos } from '../../actions/actions';
 
@@ -211,6 +214,18 @@ export class MainView extends React.Component {
      let mapStateToProps = state => {
     return { movies: state.movies }
 }
+
+
+/// Proptype
+MainView.propTypes = {
+  director: PropTypes.shape ({
+    Name: PropTypes.string,
+    Bio: PropTypes.string
+  }).isRequired
+}
+
+
+
 
 
 export default connect(mapStateToProps, { setMovies,setUserInfos } )(MainView);
