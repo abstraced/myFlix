@@ -32,7 +32,7 @@ export function NavView(props) {
     <Nav.Link href="/client">MyFlix</Nav.Link>
   </Nav.Item>
   <Nav.Item>
-  <Nav.Link href="client/my-profile" eventKey="link-1">My Profile</Nav.Link>
+  <Nav.Link href="/my-profile" eventKey="link-1">My Profile</Nav.Link>
 </Nav.Item>
 <Nav.Item>
   <Nav.Link href="/client"  eventKey="link-2"  onClick={handleDisconnect}> Disconnect</Nav.Link>
@@ -40,7 +40,7 @@ export function NavView(props) {
 </Nav> ) 
 :( <Nav justify variant="tabs" defaultActiveKey="/home">
 <Nav.Item>
-  <Nav.Link href="/">MyFlix</Nav.Link>
+  <Nav.Link href="/client">MyFlix</Nav.Link>
 </Nav.Item> <Nav.Item>
   <Nav.Link onClick={handleRegister} eventKey="link-1">Sign up</Nav.Link>
  </Nav.Item>
