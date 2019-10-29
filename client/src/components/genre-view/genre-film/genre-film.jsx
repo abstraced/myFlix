@@ -43,17 +43,7 @@ export function GenreFilm(props) {
 
       const listFilms=  Object.keys(movies).map((movie) => <MovieCard key={movies[movie]._id}
        movie={movies[movie]}
-       movie_id={movies[movie]._id} 
-       checked={props.user.FavoriteFilms.find(
-    (movie)=> { 
-       if (movie._id=== props.movie_id) {
-      // setIsFavorite(true);
-      return ("checked")
-
-       }
-  
-  
-  })}   /> );
+       movie_id={movies[movie]._id}  /> );
     
 
 // var testparse = JSON.parse(movies);  
