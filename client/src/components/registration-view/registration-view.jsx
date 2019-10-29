@@ -18,7 +18,7 @@ const sendRegistration = (e) => {
   })
   .then(response => {
     const data = response.data;
-    console.log(data);
+   
     window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
   })
   .catch(e => {
