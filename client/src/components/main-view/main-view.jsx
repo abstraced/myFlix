@@ -201,7 +201,7 @@ export class MainView extends React.Component {
           return <DirectorView director={movies.find(m => m.director._id === match.params.id).director} />
         }
         } />
-        <Route path="/genres/:name" render={({ match }) => {
+        <Route path="/genres/:id" render={({ match }) => {
           if (!movies) return <div className="main-view" />;
           return <GenreView genre={movies.find(m => m.genre._id === match.params.id).genre} />
         }
