@@ -65,15 +65,19 @@ app.use(express.static('public'));
 
 app.use('/client', express.static(path.join(__dirname, 'dist')));
 
+
+app.get("/client/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
+
+
 // default homepage
 app.get('/', function(req, res) {
   res.send('Hello to My flix, the app to help you sort your favorite films...')
 });
 
 
-app.get("/client/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
-});
+
 
 
 
