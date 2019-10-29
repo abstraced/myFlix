@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 require('./passport');
 
 // CORS
-var allowedOrigins = ['http://localhost:1234','*'];
+var allowedOrigins = ['*'];
 
 app.use(cors({
   origin: function(origin, callback){
