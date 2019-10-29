@@ -52,7 +52,7 @@ export function GenreFilm(props) {
 
     return (
   <div className="list-films"> 
-  {/* <h1> List of Films by {movies..Title} </h1>    */}
+
     {listFilms}
    </div>
 
