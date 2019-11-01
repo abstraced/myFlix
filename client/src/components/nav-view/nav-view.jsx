@@ -35,9 +35,9 @@ export function NavView(props) {
   <Link to={'/'}><Button variant="outline-dark">MyFlix</Button></Link>
   </Nav.Item>
   <Nav.Item>
-  <Nav.Link >
- <Link to={'/my-profile'}><Button variant="outline-primary dark">My profile</Button></Link>
- </Nav.Link>
+
+ <Link to={'/my-profile'}><Button variant="outline-dark">My profile</Button></Link>
+
 </Nav.Item>
 <Nav.Item>
   <Nav.Link href="/"  eventKey="link-2"  onClick={handleDisconnect}> Disconnect</Nav.Link>
@@ -47,8 +47,7 @@ export function NavView(props) {
 <Nav.Item>
   <Nav.Link href="/">MyFlix</Nav.Link>
 </Nav.Item> <Nav.Item>
-  <Nav.Link onClick={handleRegister} eventKey="link-1">
-    Sign up</Nav.Link>
+  <Nav.Link onClick={handleRegister} eventKey="link-1">Sign up</Nav.Link>
  </Nav.Item>
  
  </Nav>)}
