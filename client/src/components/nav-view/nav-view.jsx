@@ -48,8 +48,8 @@ export function NavView(props) {
   <Nav.Link href="/">MyFlix</Nav.Link>
 </Nav.Item> <Nav.Item>
   <Nav.Link eventKey="link-1">
-    <Link to={'/'}>
-    <Button  onClick={handleRegister}  variant="outline-primary dark">Sign Up</Button></Link>
+  
+    <Button  onClick={handleRegister}  variant="outline-primary dark">Sign Up</Button>
     Sign up</Nav.Link>
  </Nav.Item>
  
