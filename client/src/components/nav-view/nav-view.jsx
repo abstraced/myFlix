@@ -35,7 +35,7 @@ export function NavView(props) {
     <Nav.Link href="/">MyFlix</Nav.Link>
   </Nav.Item>
   <Nav.Item>
-  <Nav.Link  tag={Link} to="/my-profile" eventKey="link-1">My Profile</Nav.Link>
+  <Nav.Link  href="client/my-profile" eventKey="link-1">My Profile</Nav.Link>
 </Nav.Item>
 <Nav.Item>
   <Nav.Link href="/"  eventKey="link-2"  onClick={handleDisconnect}> Disconnect</Nav.Link>
