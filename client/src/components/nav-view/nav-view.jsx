@@ -7,10 +7,6 @@ import Nav from 'react-bootstrap/Nav'
 import './nav-view.scss';
 
 
-import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
-
-
 
 export function NavView(props) {
 
@@ -36,8 +32,7 @@ export function NavView(props) {
     <Nav.Link href="/">MyFlix</Nav.Link>
   </Nav.Item>
   <Nav.Item>
-    
-  <Link to={'/my-profile'}><Button variant="outline-dark">My profile</Button></Link>
+  <Nav.Link href="/my-profile" eventKey="link-1">My Profile</Nav.Link>
 </Nav.Item>
 <Nav.Item>
   <Nav.Link href="/"  eventKey="link-2"  onClick={handleDisconnect}> Disconnect</Nav.Link>
