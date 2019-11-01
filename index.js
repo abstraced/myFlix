@@ -63,7 +63,7 @@ app.use(morgan('common'));
 // link to public static file ( documentation.html)
 app.use(express.static('public'));
 
-app.use('/client/*', express.static(path.join(__dirname, 'client/dist')));
+app.use('/client/', express.static(path.join(__dirname, 'client/dist')));
 
 
 // app.get("/client/*", (req, res) => {
