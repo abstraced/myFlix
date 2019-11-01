@@ -7,6 +7,10 @@ import Nav from 'react-bootstrap/Nav'
 import './nav-view.scss';
 
 
+import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+
+
 
 export function NavView(props) {
 
