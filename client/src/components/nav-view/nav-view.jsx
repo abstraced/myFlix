@@ -32,11 +32,12 @@ export function NavView(props) {
   {(props.user) ? (
   <Nav justify variant="tabs" defaultActiveKey="/">
   <Nav.Item>
-    <Nav.Link href="/">MyFlix</Nav.Link>
+  <Link to={'/'}><Button variant="outline-dark">MyFlix</Button></Link>
   </Nav.Item>
   <Nav.Item>
- <Link to={'/my-profile'}><Button variant="outline-dark">Profile</Button></Link>
-  <Nav.Link href="/my-profile" eventKey="link-1">My Profile</Nav.Link>
+  <Nav.Link >
+ <Link to={'/my-profile'}> My profile</Link>
+ </Nav.Link>
 </Nav.Item>
 <Nav.Item>
   <Nav.Link href="/"  eventKey="link-2"  onClick={handleDisconnect}> Disconnect</Nav.Link>
