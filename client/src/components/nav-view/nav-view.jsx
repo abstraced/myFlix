@@ -36,7 +36,7 @@ export function NavView(props) {
   </Nav.Item>
   <Nav.Item>
   <Nav.Link >
- <Link to={'/my-profile'}><Button variant="outline-dark">My profile</Button></Link>
+ <Link to={'/my-profile'}><Button variant="outline-primary dark">My profile</Button></Link>
  </Nav.Link>
 </Nav.Item>
 <Nav.Item>
