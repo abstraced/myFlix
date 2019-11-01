@@ -47,7 +47,10 @@ export function NavView(props) {
 <Nav.Item>
   <Nav.Link href="/">MyFlix</Nav.Link>
 </Nav.Item> <Nav.Item>
-  <Nav.Link onClick={handleRegister} eventKey="link-1">Sign up</Nav.Link>
+  <Nav.Link eventKey="link-1">
+    <Link to={'/'}>
+    <Button  onClick={handleRegister}  variant="outline-primary dark">Sign Up</Button></Link>
+    Sign up</Nav.Link>
  </Nav.Item>
  
  </Nav>)}
