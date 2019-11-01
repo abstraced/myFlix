@@ -41908,7 +41908,7 @@ function NavView(props) {
   }, _react.default.createElement(_Nav.default.Item, null, _react.default.createElement(_Nav.default.Link, {
     href: "/client"
   }, "MyFlix")), _react.default.createElement(_Nav.default.Item, null, _react.default.createElement(_Nav.default.Link, {
-    href: "/my-profile",
+    href: "client/my-profile",
     eventKey: "link-1"
   }, "My Profile")), _react.default.createElement(_Nav.default.Item, null, _react.default.createElement(_Nav.default.Link, {
     href: "/client",
