@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 require('./passport');
 
 // CORS
-var allowedOrigins = ['http://myflixdb.herokuapp.com'];
+var allowedOrigins = ['http://myflixdb.herokuapp.com','*'];
 
 app.use(cors({
   origin: function(origin, callback){
