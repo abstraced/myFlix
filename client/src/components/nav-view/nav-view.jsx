@@ -34,13 +34,11 @@ export function NavView(props) {
   <Nav.Item>
   <Link to={'/'}><Button variant="outline-dark">MyFlix</Button></Link>
   </Nav.Item>
-  <Link to={'/my-profile'}>
   <Nav.Item>
-  <Nav.Link >
-  My profile
- </Nav.Link>
+ 
+ <Link to={'/my-profile'}> My profile</Link>
+ 
 </Nav.Item>
-</Link>
 <Nav.Item>
   <Nav.Link href="/"  eventKey="link-2"  onClick={handleDisconnect}> Disconnect</Nav.Link>
 </Nav.Item>
