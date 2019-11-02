@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
+import { NavLink } from 'react-router-dom';
+
 import Nav from 'react-bootstrap/Nav';
 import {Link} from 'react-router-dom';
 
@@ -24,35 +27,34 @@ export function NavView(props) {
 
 
   }
-  
-  
+
+
 
   return (
   <div className="navi">
   {(props.user) ? (
   <Nav justify variant="tabs" defaultActiveKey="/">
   <Nav.Item>
-    <Nav.Link href="/">MyFlix</Nav.Link>
+    <NavLink to="/">MyFlix</NavLink>
   </Nav.Item>
   <Nav.Item>
-  <Nav.Link  href="client/my-profile" eventKey="link-1">My Profile</Nav.Link>
+  <NavLink  to="/my-profile" eventKey="link-1">My Profile</NavLink>
 </Nav.Item>
 <Nav.Item>
-  <Nav.Link href="/"  eventKey="link-2"  onClick={handleDisconnect}> Disconnect</Nav.Link>
+  <NavLink to="/"  eventKey="link-2"  onClick={handleDisconnect}> Disconnect</NavLink>
 </Nav.Item>
-</Nav> ) 
+</Nav> )
 :( <Nav justify variant="tabs" defaultActiveKey="/home">
 <Nav.Item>
-  <Nav.Link href="/">MyFlix</Nav.Link>
+  <NavLink to="/">MyFlix</NavLink>
 </Nav.Item> <Nav.Item>
-  <Nav.Link onClick={handleRegister} eventKey="link-1">Sign up</Nav.Link>
+  <NavLink to="/register" onClick={handleRegister} eventKey="link-1">Sign up</NavLink>
  </Nav.Item>
- 
+
  </Nav>)}
-  
+
  </div>
 
   );
 
 }
-
