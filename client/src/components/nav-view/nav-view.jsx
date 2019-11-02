@@ -21,7 +21,7 @@ export function NavView(props) {
     props.onRegisterButtonClick();
   };
 
-  const handleDisconnect = (e) => {
+  const handleDisconnect = () => {
     // e.preventDefault();
     props.onDisconnect();
 
@@ -38,17 +38,20 @@ export function NavView(props) {
     <NavLink to="/">MyFlix</NavLink>
   </Nav.Item>
   <Nav.Item>
-  <NavLink  to="/my-profile" eventKey="link-1">My Profile</NavLink>
+  <NavLink  to="/my-profile">My Profile </NavLink>
 </Nav.Item>
 <Nav.Item>
-  <NavLink to="/"  eventKey="link-2"  onClick={handleDisconnect}> Disconnect</NavLink>
+  <NavLink to="/"    onClick={handleDisconnect}> Disconnect</NavLink>
 </Nav.Item>
 </Nav> )
-:( <Nav justify variant="tabs" defaultActiveKey="/home">
+:(
+   <Nav justify variant="tabs" defaultActiveKey="/">
 <Nav.Item>
   <NavLink to="/">MyFlix</NavLink>
-</Nav.Item> <Nav.Item>
-  <NavLink to="/register" onClick={handleRegister} eventKey="link-1">Sign up</NavLink>
+</Nav.Item>
+
+ <Nav.Item>
+  <NavLink to="/register"  >Sign up</NavLink>
  </Nav.Item>
 
  </Nav>)}
