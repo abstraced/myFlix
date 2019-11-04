@@ -12,13 +12,13 @@ var API_URL =  'http://myflixdb.herokuapp.com/';
 
 
 const mapStateToProps = state => {
-  
+
   return { user: state.userInfos,
-          movies: state.movies   
+          movies: state.movies
    };
 };
 
- 
+
 
 
 
@@ -26,48 +26,51 @@ const mapStateToProps = state => {
  function SwitchFavorite (props) {
 
 
-  
+
   const [ isFavorite, setIsFavorite ] = useState(false);
- 
+
 
 
   useEffect(() => {
-   if (props.user.FavoriteFilms ) { 
-        if  ( props.user.FavoriteFilms.some(movie => movie._id === props.movie_id) ) { 
+   if (props.user.FavoriteFilms ) {
+        if  ( props.user.FavoriteFilms.some(movie => movie._id === props.movie_id) ) {
         setIsFavorite(true);
-       
+
       }
-          
+
    }
   },[props]);
 
 
-  function removeFilm () { 
+  function removeFilm () {
     let accessToken = localStorage.getItem('token');
-    
+
     var ca = accessToken;
     var base64Url = ca.split('.')[1];
     var decodedValue = JSON.parse(window.atob(base64Url));
-  
 
 
-  
-    
+
+
+
     axios({
       method: 'delete',
       url: `${API_URL}user/${decodedValue._id}/movies/${props.movie_id}`,
       headers: { Authorization: `Bearer ${accessToken}` },
-      
+
   })
   .then(response => {
     // Assign the result to the state
-    this.props.setUserInfos(response.data[0]);
-  
-  
-    
+    props.setUserInfos(response.data);
+      // this.props.setUserInfos(null);
+      // console.log( "");
+
+
+
   })
-           .catch(e => {
-              console.log('no such user')
+ .catch(e => {
+              // console.log('no such user');
+              console.log(e);
             });
 
 
@@ -88,27 +91,27 @@ const mapStateToProps = state => {
 
   function addFilm () {
     let accessToken = localStorage.getItem('token');
-    
+
     var ca = accessToken;
     var base64Url = ca.split('.')[1];
     var decodedValue = JSON.parse(window.atob(base64Url));
-  
 
 
-  
-    
+
+
+
     axios({
       method: 'post',
       url: `${API_URL}user/${decodedValue._id}/movies/${props.movie_id}`,
       headers: { Authorization: `Bearer ${accessToken}` },
-      
+
   })
   .then(response => {
-    // Assign the result to the state
-    this.props.setUserInfos(response.data[0]);
-  
-  
-    
+     props.setUserInfos(response.data);
+
+
+
+
   })
            .catch(e => {
               console.log('no such user')
@@ -126,7 +129,7 @@ const mapStateToProps = state => {
    setIsFavorite(!isFavorite);
    isFavorite ? (removeFilm ()) :
    (addFilm ());
-   
+
 
 
   };
@@ -150,6 +153,3 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps,{setUserInfos})(SwitchFavorite);
-
-
-
