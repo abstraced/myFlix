@@ -28,7 +28,7 @@ export function FavoriteFilm (props) {
         <div>
     <MovieCard 
     // user='yes'
-    remov={props.movies.remove}
+    remove={props.movies.remove}
     key={props.movies[movie]} 
     movie={props.movies[movie]} 
     favMovie={props.movies[movie]  }  /> 

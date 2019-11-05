@@ -31,9 +31,11 @@ const mapStateToProps = state => {
 
 
 
+
+  /// wait for props
   useEffect(() => {
    if (props.user.FavoriteFilms ) {
-        if  ( props.user.FavoriteFilms.some(movie => movie._id === props.movie_id) ) {
+        if  ( props.user.FavoriteFilms.some(movie => movie._id === props.movie._id) ) {
         setIsFavorite(true);
 
       }
@@ -42,6 +44,8 @@ const mapStateToProps = state => {
   },[props]);
 
 
+
+  ///remove favorite film
   function removeFilm () {
     let accessToken = localStorage.getItem('token');
 
@@ -55,40 +59,62 @@ const mapStateToProps = state => {
 
     axios({
       method: 'delete',
-      url: `${API_URL}user/${decodedValue._id}/movies/${props.movie_id}`,
+      url: `${API_URL}user/${decodedValue._id}/movies/${props.movie._id}`,
       headers: { Authorization: `Bearer ${accessToken}` },
 
   })
+
+  //remove the film from redux
   .then(response => {
     // Assign the result to the state
-    props.setUserInfos(response.data);
-      // this.props.setUserInfos(null);
-      // console.log( "");
+    let updatedUser =   {
+          Username:  props.user.Username,
+          FavoriteFilms: props.user.FavoriteFilms,
+          Email: props.user.Email,
+          Birthdate: props.user.Birthdate
+            };
+    
+
+          let newArray=  updatedUser.FavoriteFilms.filter( (movie) => {
+            return (   movie._id !== props.movie._id);
 
 
-
+          }  
+            
+            
+            
+         
+          )
+    
+          console.log(newArray);
+          console.log( updatedUser.FavoriteFilms);
+    
+    
+    props.setUserInfos({Username : updatedUser.Username,
+      FavoriteFilms: newArray,
+      Email:  updatedUser.Email,
+      Birthdate: updatedUser.Birthdate
+      
+    
+    
+    } );
+  
+  
+    
   })
- .catch(e => {
+
+
+
+   .catch(e => {
               // console.log('no such user');
               console.log(e);
             });
-
-
-
-
-
-
-
-
-
-
-
   }
 
 
 
 
-
+  ///add favorite film
   function addFilm () {
     let accessToken = localStorage.getItem('token');
 
@@ -102,20 +128,43 @@ const mapStateToProps = state => {
 
     axios({
       method: 'post',
-      url: `${API_URL}user/${decodedValue._id}/movies/${props.movie_id}`,
+      url: `${API_URL}user/${decodedValue._id}/movies/${props.movie._id}`,
       headers: { Authorization: `Bearer ${accessToken}` },
 
   })
+    //add the film to redux store
   .then(response => {
-     props.setUserInfos(response.data);
+   
+    let updatedUser =   {
+          Username:  props.user.Username,
+          FavoriteFilms: props.user.FavoriteFilms,
+          Email: props.user.Email,
+          Birthdate: props.user.Birthdate
+            };
+    
 
+            updatedUser.FavoriteFilms.push(props.movie     
+          )
+    
+    
+    
+    props.setUserInfos({Username : updatedUser.Username,
+      FavoriteFilms: updatedUser.FavoriteFilms,
+      Email:  updatedUser.Email,
+      Birthdate: updatedUser.Birthdate
 
-
-
+     
+    
+    
+    
+    });
+  
+  
+    
   })
-           .catch(e => {
-              console.log('no such user')
-            });
+  .catch(function (error) {
+    console.log(error);
+  });
 
 
 
@@ -138,8 +187,8 @@ const mapStateToProps = state => {
     return (
 
         <div className="custom-control custom-switch" >
-        <input  checked={isFavorite}  onClick={toggleFav}   type="checkbox" className="custom-control-input" id={`customSwitch${props.movie_id}`}   ></input>
-       <label className="custom-control-label"  htmlFor={`customSwitch${props.movie_id}`} >Add  {props.favMovie} as favorite </label>
+        <input  checked={isFavorite}  onClick={toggleFav}   type="checkbox" className="custom-control-input" id={`customSwitch${props.movie._id}`}   ></input>
+       <label className="custom-control-label"  htmlFor={`customSwitch${props.movie._id}`} >Add  {props.favMovie} as favorite </label>
            </div>
 
     )

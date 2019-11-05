@@ -1,13 +1,50 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
 
+
+
+import { NavLink } from 'react-router-dom';
+
+
+
+/// date picker
+import DatePicker from "react-datepicker";
+ 
+import "react-datepicker/dist/react-datepicker.css";
+
+
+
 var API_URL =  'http://myflixdb.herokuapp.com/';
+
+
+
+
+
+
 
 export function RegistrationView(props)  {
   
+
+/// SET state hook
+
+  const [ username, setUsername ] = useState('');
+  const [ password, setPassword ] = useState('');
+  const [ email, setEmail ] = useState('');
+  const [ birthdate, setBirthdate ] = useState(new Date());
+
+  //datepicker
+  const [ startDate, setStartDate ] = useState(new Date());
+
+
+
+
+
+
+
+  /// function submit
+
 const sendRegistration = (e) => {
 
   axios.post(`${API_URL}users`, {
@@ -28,19 +65,20 @@ const sendRegistration = (e) => {
 
 
 
-  const [ username, setUsername ] = useState('');
-  const [ password, setPassword ] = useState('');
-  const [ email, setEmail ] = useState('');
-  const [ birthdate, setBirthdate ] = useState('');
 
-  
-
-  return (
 
 
 
 
 
+  
+
+  return (
+   
+   <div>
+
+
+   
 
     <form className="container">
     <Form.Group controlId="formBasicUsername">
@@ -60,19 +98,27 @@ const sendRegistration = (e) => {
        </Form.Group>
 
        <Form.Group controlId="formBasicBirthdate">
+
+      
        <Form.Label>Birthdate</Form.Label>
-        <Form.Control type="date" placeholder="your birthdate..."  value={birthdate} onChange={e => setBirthdate(e.target.value)}/>
+       <DatePicker
+        selected={birthdate}
+        onChange={e => setBirthdate(e.target.value)}
+      />
         </Form.Group>
 
+        
 
-
-    <button type="button" onClick={sendRegistration}>Submit</button>
+        <NavLink to="/">
+    <button type="button" onClick={sendRegistration}>Submit</button></NavLink>
     </form>
+
+    
+
+
+    </div>
   );
 }
 
 
 
-RegistrationView.propTypes ={
-onLoggedIn: PropTypes.func.isRequired
-}

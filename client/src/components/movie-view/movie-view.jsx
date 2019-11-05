@@ -55,7 +55,7 @@ export class MovieView extends React.Component {
         </Row>
         <Row>
         <Col>
-        <SwitchFavorite movie_id={movie._id} ></SwitchFavorite >
+        <SwitchFavorite movie={movie} ></SwitchFavorite >
         <Link to={`/directors/${movie.director._id}`}>
 <Button variant="link"> More about {movie.director.Name}</Button>
 </Link>
