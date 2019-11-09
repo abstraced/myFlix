@@ -38,7 +38,7 @@ import  ProfileView  from '../profile-view/profile-view';
 
 export class MainView extends React.Component {
   constructor() {
-   
+
     super();
     this.onBackButtonClick = this.onBackButtonClick.bind(this);
     this.onDisconnect = this.onDisconnect.bind(this);
@@ -47,7 +47,7 @@ export class MainView extends React.Component {
       selectedMovie: null,
       user: null,
       register: false,
-     
+
     };
   }
 
@@ -63,14 +63,13 @@ export class MainView extends React.Component {
       this.getInfos(accessToken);
     }
 
-    
+
   }
 
 
 
 
 
-/// AXIOS REQUEST FROM MONGO DB
 
   getInfos(token) {
     var base64Url = token.split('.')[1];
@@ -81,38 +80,20 @@ export class MainView extends React.Component {
       .then(response => {
         // Assign the result to the state
         this.props.setUserInfos(response.data[0]);
-      
-      
-        
+
+
+
       })
       .catch(function (error) {
         console.log(error);
       });
   }
 
+<<<<<<< HEAD
 
-
-  getMovies(token) {
-    axios.get(`${API_URL}movies`, {
-      headers: { Authorization: `Bearer ${token}`}
-    })
-    .then(response => {
-    
-      this.props.setMovies(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
-
+=======
  
-  
-  refreshUser () {
-
-
-  }
-
-
+>>>>>>> parent of ef63870... update bug
 
 
 
@@ -124,7 +105,7 @@ export class MainView extends React.Component {
 
 
   onLoggedIn(authData) {
-    
+
     this.setState({
       user: authData.user.Username
     });
@@ -132,31 +113,41 @@ export class MainView extends React.Component {
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
-    this.getInfos(authData.token);
   }
 
 
-  
 
-  onDisconnect ()  {
+<<<<<<< HEAD
+
+=======
+>>>>>>> parent of ef63870... update bug
+  onDisconnect() {
     this.setState({
       user: null,
       movies: [],
       userInfo: null
     });
-    this.props.setUserInfos({});
-    this.props.setMovies([]);
-    // this.props.setMovies(null);
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-   
 
 
+
+<<<<<<< HEAD
+=======
+  getMovies(token) {
+    axios.get(`${API_URL}movies`, {
+      headers: { Authorization: `Bearer ${token}`}
+    })
+    .then(response => {
+    
+      this.props.setMovies(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+>>>>>>> parent of ef63870... update bug
   }
 
-  
-
-  
 
 
 
@@ -177,13 +168,13 @@ export class MainView extends React.Component {
 
 
   render() {
-    
 
 
-   
+
+
     let { movies } = this.props;
-   
-    
+
+
 
     const {  user, register } = this.state;
 
@@ -196,7 +187,7 @@ export class MainView extends React.Component {
       <Router basename="/client">
 
         <NavView user={this.state.user} register={this.state.register} onRegisterButtonClick={() => this.onRegisterButtonClick()} onDisconnect={() => this.onDisconnect()} />
-       
+
         <Route exact path="/" render={() => {
           if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
           return <MoviesList movies={movies}/>;
@@ -207,10 +198,10 @@ export class MainView extends React.Component {
         <Route path="/my-profile" render={() => <ProfileView  />} />
 
         <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
-       
-             
-       
-       
+
+
+
+
         <Route path="/directors/:id" render={({ match }) => {
           if (!movies) return <div className="main-view" />;
           return <DirectorView director=
@@ -227,7 +218,7 @@ export class MainView extends React.Component {
     );
   }
 }
-  // 
+  //
      let mapStateToProps = state => {
     return { movies: state.movies }
 }
@@ -246,4 +237,3 @@ MainView.propTypes = {
 
 
 export default connect(mapStateToProps, { setMovies,setUserInfos } )(MainView);
-

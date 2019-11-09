@@ -16,7 +16,12 @@ const mapStateToProps = state => {
 };
 
 function ProfileView (props) {
-  
+  const { movies } = props;
+
+
+
+  let accessToken = localStorage.getItem('token');
+
 
 
 

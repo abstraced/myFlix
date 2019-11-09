@@ -64,7 +64,7 @@ super(props);
            
           </Link>
          
-           <SwitchFavorite movie={movie} ></SwitchFavorite >
+           <SwitchFavorite movie_id={movie._id} ></SwitchFavorite >
         </Card.Body>
       </Card>
     );

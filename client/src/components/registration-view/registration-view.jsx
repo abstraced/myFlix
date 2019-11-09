@@ -1,41 +1,24 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
 
-
-
-import { NavLink } from 'react-router-dom';
-
-
-
-/// date picker
-import DatePicker from "react-datepicker";
- 
-import "react-datepicker/dist/react-datepicker.css";
-
-
-
 var API_URL =  'http://myflixdb.herokuapp.com/';
 
-
-
-
-
-
-
 export function RegistrationView(props)  {
-  
+<<<<<<< HEAD
+
 
 /// SET state hook
 
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
   const [ email, setEmail ] = useState('');
-  const [ birthdate, setBirthdate ] = useState('');
+  const [ birthdate, setBirthdate ] = useState(new Date());
 
   //datepicker
-  // const [ startDate, setStartDate ] = useState(new Date());
+  const [ startDate, setStartDate ] = useState(new Date());
 
 
 
@@ -45,6 +28,9 @@ export function RegistrationView(props)  {
 
   /// function submit
 
+=======
+  
+>>>>>>> parent of ef63870... update bug
 const sendRegistration = (e) => {
 
   axios.post(`${API_URL}users`, {
@@ -55,7 +41,7 @@ const sendRegistration = (e) => {
   })
   .then(response => {
     const data = response.data;
-   
+
     window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
   })
   .catch(e => {
@@ -65,20 +51,24 @@ const sendRegistration = (e) => {
 
 
 
-
-
-
-
-
+  const [ username, setUsername ] = useState('');
+  const [ password, setPassword ] = useState('');
+  const [ email, setEmail ] = useState('');
+  const [ birthdate, setBirthdate ] = useState('');
 
   
 
   return (
-   
-   <div>
+
+  return (
 
 
-   
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> parent of ef63870... update bug
+
 
     <form className="container">
     <Form.Group controlId="formBasicUsername">
@@ -98,26 +88,43 @@ const sendRegistration = (e) => {
        </Form.Group>
 
        <Form.Group controlId="formBasicBirthdate">
-       <Form.Label>Email
-       <DatePicker placeholder="Enter new birthdate"
-        selected={birthdate}
-        onChange={e => setBirthdate(e)}
-      />
-      </Form.Label>
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> parent of ef63870... update bug
+       <Form.Label>Birthdate</Form.Label>
+        <Form.Control type="date" placeholder="your birthdate..."  value={birthdate} onChange={e => setBirthdate(e.target.value)}/>
         </Form.Group>
 
-        
+<<<<<<< HEAD
 
-        <NavLink to="/">
-    <button type="button" onClick={sendRegistration}>Submit</button></NavLink>
+
+
+    <button type="button" onClick={sendRegistration}>Submit</button>
     </form>
 
-    
+=======
+>>>>>>> parent of ef63870... update bug
 
+=======
+       <Form.Label>Birthdate</Form.Label>
+        <Form.Control type="date" placeholder="your birthdate..."  value={birthdate} onChange={e => setBirthdate(e.target.value)}/>
+        </Form.Group>
 
-    </div>
+>>>>>>> parent of ef63870... update bug
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> parent of ef63870... update bug
+    <button type="button" onClick={sendRegistration}>Submit</button>
+    </form>
   );
 }
 
 
 
+RegistrationView.propTypes ={
+onLoggedIn: PropTypes.func.isRequired
+}

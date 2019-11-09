@@ -53522,12 +53522,10 @@ function RegistrationView(props) {
     onChange: function onChange(e) {
       return setBirthdate(e);
     }
-  }))), _react.default.createElement(_reactRouterDom.NavLink, {
-    to: "/"
-  }, _react.default.createElement("button", {
+  }))), _react.default.createElement("button", {
     type: "button",
     onClick: sendRegistration
-  }, "Submit"))));
+  }, "Submit")));
 }
 },{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/Form.js","axios":"../node_modules/axios/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-datepicker":"../node_modules/react-datepicker/dist/react-datepicker.min.js","react-datepicker/dist/react-datepicker.css":"../node_modules/react-datepicker/dist/react-datepicker.css"}],"../node_modules/prop-types-extra/lib/utils/createChainableTypeChecker.js":[function(require,module,exports) {
 'use strict';
@@ -55357,9 +55355,9 @@ function (_React$Component) {
         user: null,
         movies: [],
         userInfo: null
-      });
-      this.props.setUserInfos({});
-      this.props.setMovies([]); // this.props.setMovies(null);
+      }); // this.props.setUserInfos({});
+      // this.props.setMovies([]);
+      // this.props.setMovies(null);
 
       localStorage.removeItem('token');
       localStorage.removeItem('user');
