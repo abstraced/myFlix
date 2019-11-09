@@ -92,6 +92,23 @@ export class MainView extends React.Component {
  
 
 
+  
+  getMovies(token) {
+    axios.get(`${API_URL}movies`, {
+      headers: { Authorization: `Bearer ${token}`}
+    })
+    .then(response => {
+    
+      this.props.setMovies(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+  
+
+
 
   onMovieClick(movie) {
     this.setState({
@@ -120,12 +137,9 @@ export class MainView extends React.Component {
       movies: [],
       userInfo: null
     });
-<<<<<<< HEAD
     // this.props.setUserInfos({});
     // this.props.setMovies([]);
     // this.props.setMovies(null);
-=======
->>>>>>> parent of ef63870... update bug
     localStorage.removeItem('token');
     localStorage.removeItem('user');
    
@@ -133,20 +147,6 @@ export class MainView extends React.Component {
 
   }
 
-  getMovies(token) {
-    axios.get(`${API_URL}movies`, {
-      headers: { Authorization: `Bearer ${token}`}
-    })
-    .then(response => {
-    
-      this.props.setMovies(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
-
-  
 
 
 
