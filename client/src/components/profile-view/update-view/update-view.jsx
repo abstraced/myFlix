@@ -11,24 +11,24 @@ var API_URL =  'http://myflixdb.herokuapp.com/';
 
 export function UpdateView(userId) {
 
-    
+
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ email, setEmail ] = useState('');
     const [ birthdate, setBirthdate ] = useState('');
 
-       
+
     let accessToken = localStorage.getItem('token');
-   
 
 
-    
+
+
 
 
 
     const handleSubmitUsername = () => {
       //e.preventDefault();
-        
+
         axios({
             method: 'put',
             url: `${API_URL}user/username/${userId.userId}`,
@@ -37,7 +37,7 @@ export function UpdateView(userId) {
                 Username: username,
             }
         })
-           
+
                  .catch(e => {
             console.log('no such user')
           });
@@ -46,7 +46,7 @@ export function UpdateView(userId) {
     };
 
     const handleSubmitPassword = (e) => {
-        
+
     //    e.preventDefault();
         axios({
             method: 'put',
@@ -56,12 +56,12 @@ export function UpdateView(userId) {
                 Password: password,
             }
         })
-        
-           
+
+
                  .catch(e => {
                     console.log('no such user')
                   });
-        
+
 
     };
 
@@ -78,16 +78,12 @@ export function UpdateView(userId) {
                   .catch(e => {
                      console.log('no such user')
                    });
-         
- 
+
+
      };
 
      const handleSubmitBirthdate = (e) => {
-<<<<<<< HEAD
         e.preventDefault();
-=======
-        // e.preventDefault();
->>>>>>> parent of ef63870... update bug
          axios({
              method: 'put',
              url: `${API_URL}user/birthdate/${userId.userId}`,
@@ -99,8 +95,8 @@ export function UpdateView(userId) {
                   .catch(e => {
                      console.log('no such user')
                    });
-         
- 
+
+
      };
 
 
@@ -110,50 +106,50 @@ export function UpdateView(userId) {
              method: 'delete',
              url: `${API_URL}user/${userId.userId}`,
              headers: { Authorization: `Bearer ${accessToken}` },
-             
+
          })
          .then (( )=> {
             this.props.onDisconnect();
 
-            
+
          })
                   .catch(e => {
                      console.log('no such user')
                    });
-         
- 
+
+
      };
 
-    
 
-   
+
+
 
     return (
 <div className="update-user-info">
-    <h1>  Update user informations</h1>  
+    <h1>  Update user informations</h1>
 
 
         <Form>
             <Form.Group controlId="formBasicUsername">
-           
+
                 <Form.Control type="text" value={username} placeholder="Enter new username" onChange={e => setUsername(e.target.value)} />
-            
-            <Button variant="primary" type="submit" onClick={handleSubmitUsername()} >
+
+            <Button variant="primary" type="submit" onClick={handleSubmitUsername} >
 
                 Change username
 </Button>
 </Form.Group>
             <Form.Group controlId="formBasicPassword">
-               
+
                 <Form.Control type="text"   placeholder="Enter new password"  value={password}   onChange={e => setPassword(e.target.value)} />
-                <Button variant="primary" type="submit" onClick={handleSubmitPassword()}> Change password</Button>
+                <Button variant="primary" type="submit" onClick={handleSubmitPassword}> Change password</Button>
             </Form.Group>
 
 
             <Form.Group controlId="formBasicEmail">
-               
+
                 <Form.Control type="text" placeholder="Enter new email"  value={email} onChange={e => setEmail(e.target.value)} />
-                <Button variant="primary" type="submit" onClick={handleSubmitEmail()}> Change Email</Button>
+                <Button variant="primary" type="submit" onClick={handleSubmitEmail}> Change Email</Button>
             </Form.Group>
 
 
@@ -164,13 +160,13 @@ export function UpdateView(userId) {
         selected={birthdate}
         onChange={e => setBirthdate(e)}
       />
-                {/* <Form.Control type="text" className='input-group date' 
-                value={birthdate} placeholder="Enter new birthdate"  
-                onChange={e => setBirthdate(e.target.value)} />  */}
+                <Form.Control type="text" className='input-group date'
+                value={birthdate} placeholder="Enter new birthdate"
+                onChange={e => setBirthdate(e.target.value)} />
                 <Button variant="primary" type="submit" onClick={handleSubmitBirthdate}> Change birthdate</Button>
 =======
-               
-                <Form.Control type="text" className='input-group date' value={birthdate} placeholder="Enter new birthdate"  onChange={e => setBirthdate(e.target.value)} /> 
+
+                <Form.Control type="text" className='input-group date' value={birthdate} placeholder="Enter new birthdate"  onChange={e => setBirthdate(e.target.value)} />
                 <Button variant="primary" type="submit" onClick={handleSubmitBirthdate()}> Change birthdate</Button>
 >>>>>>> parent of ef63870... update bug
             </Form.Group>
@@ -189,15 +185,10 @@ export function UpdateView(userId) {
         </Form>
 
 
-       
+
         </div>
 
     )
 
 
 }
-
-
-
-
-

@@ -38,7 +38,7 @@ import  ProfileView  from '../profile-view/profile-view';
 
 export class MainView extends React.Component {
   constructor() {
-   
+
     super();
     this.onBackButtonClick = this.onBackButtonClick.bind(this);
     this.onDisconnect = this.onDisconnect.bind(this);
@@ -47,7 +47,7 @@ export class MainView extends React.Component {
       selectedMovie: null,
       user: null,
       register: false,
-     
+
     };
   }
 
@@ -63,7 +63,7 @@ export class MainView extends React.Component {
       this.getInfos(accessToken);
     }
 
-    
+
   }
 
 
@@ -80,16 +80,16 @@ export class MainView extends React.Component {
       .then(response => {
         // Assign the result to the state
         this.props.setUserInfos(response.data[0]);
-      
-      
-        
+
+
+
       })
       .catch(function (error) {
         console.log(error);
       });
   }
 
- 
+
 
 
 
@@ -101,7 +101,7 @@ export class MainView extends React.Component {
 
 
   onLoggedIn(authData) {
-    
+
     this.setState({
       user: authData.user.Username
     });
@@ -112,7 +112,7 @@ export class MainView extends React.Component {
   }
 
 
-  
+
 
   onDisconnect() {
     this.setState({
@@ -120,12 +120,11 @@ export class MainView extends React.Component {
       movies: [],
       userInfo: null
     });
-    // this.props.setUserInfos({});
-    // this.props.setMovies([]);
+    this.props.setUserInfos({});
     // this.props.setMovies(null);
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-   
+
 
 
   }
@@ -150,13 +149,13 @@ export class MainView extends React.Component {
 
 
   render() {
-    
 
 
-   
+
+
     let { movies } = this.props;
-   
-    
+
+
 
     const {  user, register } = this.state;
 
@@ -169,7 +168,7 @@ export class MainView extends React.Component {
       <Router basename="/client">
 
         <NavView user={this.state.user} register={this.state.register} onRegisterButtonClick={() => this.onRegisterButtonClick()} onDisconnect={() => this.onDisconnect()} />
-       
+
         <Route exact path="/" render={() => {
           if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
           return <MoviesList movies={movies}/>;
@@ -180,10 +179,10 @@ export class MainView extends React.Component {
         <Route path="/my-profile" render={() => <ProfileView  />} />
 
         <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
-       
-             
-       
-       
+
+
+
+
         <Route path="/directors/:id" render={({ match }) => {
           if (!movies) return <div className="main-view" />;
           return <DirectorView director=
@@ -200,7 +199,7 @@ export class MainView extends React.Component {
     );
   }
 }
-  // 
+  //
      let mapStateToProps = state => {
     return { movies: state.movies }
 }
@@ -219,4 +218,3 @@ MainView.propTypes = {
 
 
 export default connect(mapStateToProps, { setMovies,setUserInfos } )(MainView);
-

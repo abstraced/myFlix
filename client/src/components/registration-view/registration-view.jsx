@@ -7,18 +7,17 @@ import axios from 'axios';
 var API_URL =  'http://myflixdb.herokuapp.com/';
 
 export function RegistrationView(props)  {
-  
-<<<<<<< HEAD
+
 
 /// SET state hook
 
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
   const [ email, setEmail ] = useState('');
-  const [ birthdate, setBirthdate ] = useState('');
+  const [ birthdate, setBirthdate ] = useState(new Date());
 
   //datepicker
-  // const [ startDate, setStartDate ] = useState(new Date());
+  const [ startDate, setStartDate ] = useState(new Date());
 
 
 
@@ -28,8 +27,6 @@ export function RegistrationView(props)  {
 
   /// function submit
 
-=======
->>>>>>> parent of ef63870... update bug
 const sendRegistration = (e) => {
 
   axios.post(`${API_URL}users`, {
@@ -40,7 +37,7 @@ const sendRegistration = (e) => {
   })
   .then(response => {
     const data = response.data;
-   
+
     window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
   })
   .catch(e => {
@@ -55,7 +52,7 @@ const sendRegistration = (e) => {
   const [ email, setEmail ] = useState('');
   const [ birthdate, setBirthdate ] = useState('');
 
-  
+
 
   return (
 
@@ -82,22 +79,22 @@ const sendRegistration = (e) => {
        </Form.Group>
 
        <Form.Group controlId="formBasicBirthdate">
-<<<<<<< HEAD
-       <Form.Label>Email
-       <DatePicker placeholder="Enter new birthdate"
+
+
+       <Form.Label>Birthdate</Form.Label>
+       <DatePicker
         selected={birthdate}
-        onChange={e => setBirthdate(e)}
+        onChange={e => setBirthdate(e.target.value)}
       />
-      </Form.Label>
         </Form.Group>
 
-        
 
-        
+
+
     <button type="button" onClick={sendRegistration}>Submit</button>
     </form>
 
-    
+
 =======
        <Form.Label>Birthdate</Form.Label>
         <Form.Control type="date" placeholder="your birthdate..."  value={birthdate} onChange={e => setBirthdate(e.target.value)}/>
