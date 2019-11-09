@@ -16,7 +16,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 
 
-var API_URL =  'http://myflixdb.herokuapp.com/';
+var API_URL =  'https://www.myflixdb.herokuapp.com/';
 
 
 
