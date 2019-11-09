@@ -144,8 +144,8 @@ export class MainView extends React.Component {
       movies: [],
       userInfo: null
     });
-    this.props.setUserInfos({});
-    this.props.setMovies([]);
+    // this.props.setUserInfos({});
+    // this.props.setMovies([]);
     // this.props.setMovies(null);
     localStorage.removeItem('token');
     localStorage.removeItem('user');
