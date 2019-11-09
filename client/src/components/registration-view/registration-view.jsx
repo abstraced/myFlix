@@ -7,6 +7,7 @@ import axios from 'axios';
 var API_URL =  'http://myflixdb.herokuapp.com/';
 
 export function RegistrationView(props)  {
+<<<<<<< HEAD
 
 
 /// SET state hook
@@ -27,6 +28,9 @@ export function RegistrationView(props)  {
 
   /// function submit
 
+=======
+  
+>>>>>>> parent of ef63870... update bug
 const sendRegistration = (e) => {
 
   axios.post(`${API_URL}users`, {
@@ -52,13 +56,18 @@ const sendRegistration = (e) => {
   const [ email, setEmail ] = useState('');
   const [ birthdate, setBirthdate ] = useState('');
 
+  
 
+  return (
 
   return (
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of ef63870... update bug
 
 
     <form className="container">
@@ -79,21 +88,24 @@ const sendRegistration = (e) => {
        </Form.Group>
 
        <Form.Group controlId="formBasicBirthdate">
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> parent of ef63870... update bug
        <Form.Label>Birthdate</Form.Label>
-       <DatePicker
-        selected={birthdate}
-        onChange={e => setBirthdate(e.target.value)}
-      />
+        <Form.Control type="date" placeholder="your birthdate..."  value={birthdate} onChange={e => setBirthdate(e.target.value)}/>
         </Form.Group>
 
+<<<<<<< HEAD
 
 
 
     <button type="button" onClick={sendRegistration}>Submit</button>
     </form>
 
+=======
+>>>>>>> parent of ef63870... update bug
 
 =======
        <Form.Label>Birthdate</Form.Label>
@@ -102,7 +114,10 @@ const sendRegistration = (e) => {
 
 >>>>>>> parent of ef63870... update bug
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of ef63870... update bug
     <button type="button" onClick={sendRegistration}>Submit</button>
     </form>
   );

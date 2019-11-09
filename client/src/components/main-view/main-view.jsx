@@ -89,7 +89,11 @@ export class MainView extends React.Component {
       });
   }
 
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> parent of ef63870... update bug
 
 
 
@@ -113,20 +117,35 @@ export class MainView extends React.Component {
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of ef63870... update bug
   onDisconnect() {
     this.setState({
       user: null,
       movies: [],
       userInfo: null
     });
-    this.props.setUserInfos({});
-    // this.props.setMovies(null);
     localStorage.removeItem('token');
     localStorage.removeItem('user');
 
 
 
+<<<<<<< HEAD
+=======
+  getMovies(token) {
+    axios.get(`${API_URL}movies`, {
+      headers: { Authorization: `Bearer ${token}`}
+    })
+    .then(response => {
+    
+      this.props.setMovies(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+>>>>>>> parent of ef63870... update bug
   }
 
 

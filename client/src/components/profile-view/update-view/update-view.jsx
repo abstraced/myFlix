@@ -82,7 +82,7 @@ export function UpdateView(userId) {
 
      };
 
-     const handleSubmitBirthdate = () => {
+     const handleSubmitBirthdate = (e) => {
         // e.preventDefault();
          axios({
              method: 'put',
@@ -133,8 +133,13 @@ export function UpdateView(userId) {
             <Form.Group controlId="formBasicUsername">
 
                 <Form.Control type="text" value={username} placeholder="Enter new username" onChange={e => setUsername(e.target.value)} />
+<<<<<<< HEAD
 
             <Button variant="primary" type="submit" onClick={handleSubmitUsername} >
+=======
+            
+            <Button variant="primary" type="submit" onClick={handleSubmitUsername()} >
+>>>>>>> parent of ef63870... update bug
 
                 Change username
 </Button>
@@ -142,19 +147,20 @@ export function UpdateView(userId) {
             <Form.Group controlId="formBasicPassword">
 
                 <Form.Control type="text"   placeholder="Enter new password"  value={password}   onChange={e => setPassword(e.target.value)} />
-                <Button variant="primary" type="submit" onClick={handleSubmitPassword}> Change password</Button>
+                <Button variant="primary" type="submit" onClick={handleSubmitPassword()}> Change password</Button>
             </Form.Group>
 
 
             <Form.Group controlId="formBasicEmail">
 
                 <Form.Control type="text" placeholder="Enter new email"  value={email} onChange={e => setEmail(e.target.value)} />
-                <Button variant="primary" type="submit" onClick={handleSubmitEmail}> Change Email</Button>
+                <Button variant="primary" type="submit" onClick={handleSubmitEmail()}> Change Email</Button>
             </Form.Group>
 
 
 
             <Form.Group controlId="formBasicBirthdate">
+<<<<<<< HEAD
             <DatePicker
         selected={birthdate}
         onChange={e => setBirthdate(e)}
@@ -166,6 +172,11 @@ export function UpdateView(userId) {
 =======
 
                 <Form.Control type="text" className='input-group date' value={birthdate} placeholder="Enter new birthdate"  onChange={e => setBirthdate(e.target.value)} />
+                <Button variant="primary" type="submit" onClick={handleSubmitBirthdate()}> Change birthdate</Button>
+>>>>>>> parent of ef63870... update bug
+=======
+               
+                <Form.Control type="text" className='input-group date' value={birthdate} placeholder="Enter new birthdate"  onChange={e => setBirthdate(e.target.value)} /> 
                 <Button variant="primary" type="submit" onClick={handleSubmitBirthdate()}> Change birthdate</Button>
 >>>>>>> parent of ef63870... update bug
             </Form.Group>
