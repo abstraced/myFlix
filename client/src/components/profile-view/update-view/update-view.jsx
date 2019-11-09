@@ -82,8 +82,8 @@ export function UpdateView(userId) {
 
      };
 
-     const handleSubmitBirthdate = (e) => {
-        e.preventDefault();
+     const handleSubmitBirthdate = () => {
+        // e.preventDefault();
          axios({
              method: 'put',
              url: `${API_URL}user/birthdate/${userId.userId}`,
@@ -155,8 +155,7 @@ export function UpdateView(userId) {
 
 
             <Form.Group controlId="formBasicBirthdate">
-<<<<<<< HEAD
-            <DatePicker placeholder="Enter new birthdate"
+            <DatePicker
         selected={birthdate}
         onChange={e => setBirthdate(e)}
       />
