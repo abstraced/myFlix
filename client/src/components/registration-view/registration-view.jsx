@@ -32,10 +32,10 @@ export function RegistrationView(props)  {
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
   const [ email, setEmail ] = useState('');
-  const [ birthdate, setBirthdate ] = useState(new Date());
+  const [ birthdate, setBirthdate ] = useState('');
 
   //datepicker
-  const [ startDate, setStartDate ] = useState(new Date());
+  // const [ startDate, setStartDate ] = useState(new Date());
 
 
 
@@ -98,13 +98,12 @@ const sendRegistration = (e) => {
        </Form.Group>
 
        <Form.Group controlId="formBasicBirthdate">
-
-      
-       <Form.Label>Birthdate</Form.Label>
-       <DatePicker
+       <Form.Label>Email
+       <DatePicker placeholder="Enter new birthdate"
         selected={birthdate}
-        onChange={e => setBirthdate(e.target.value)}
+        onChange={e => setBirthdate(e)}
       />
+      </Form.Label>
         </Form.Group>
 
         
