@@ -107,7 +107,7 @@ const mapStateToProps = state => {
 
   })
   .then(response => {
-    //  props.setUserInfos(response.data);
+     props.setUserInfos(response.data);
 
 
 
