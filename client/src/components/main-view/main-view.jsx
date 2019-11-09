@@ -17,7 +17,7 @@ import { setUserInfos } from '../../actions/actions';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 
-var API_URL =  'http://myflixdb.herokuapp.com/';
+var API_URL =  'https://myflixdb.herokuapp.com/';
 // 'http://localhost:3000/movies';
 
 
