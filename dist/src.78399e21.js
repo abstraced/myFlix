@@ -41614,7 +41614,7 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var API_URL = 'http://myflixdb.herokuapp.com/';
+var API_URL = 'https://myflixdb.herokuapp.com/';
 
 function LoginView(props) {
   var _useState = (0, _react.useState)(''),
@@ -53444,7 +53444,7 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var API_URL = 'http://myflixdb.herokuapp.com/';
+var API_URL = 'https://myflixdb.herokuapp.com/';
 
 function RegistrationView(props) {
   /// SET state hook
