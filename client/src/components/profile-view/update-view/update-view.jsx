@@ -43,7 +43,7 @@ export function UpdateView(userId) {
 
 
     const handleSubmitUsername = () => {
-      //e.preventDefault();
+   
         
         axios({
             method: 'put',
@@ -61,9 +61,9 @@ export function UpdateView(userId) {
 
     };
 
-    const handleSubmitPassword = (e) => {
+    const handleSubmitPassword = () => {
         
-    //    e.preventDefault();
+    
         axios({
             method: 'put',
             url: `${API_URL}user/password/${userId.userId}`,
@@ -81,8 +81,8 @@ export function UpdateView(userId) {
 
     };
 
-    const handleSubmitEmail = (e) => {
-        // e.preventDefault();
+    const handleSubmitEmail = () => {
+      
          axios({
              method: 'put',
              url: `${API_URL}user/email/${userId.userId}`,
@@ -98,8 +98,8 @@ export function UpdateView(userId) {
  
      };
 
-     const handleSubmitBirthdate = (e) => {
-        e.preventDefault();
+     const handleSubmitBirthdate = () => {
+      
          axios({
              method: 'put',
              url: `${API_URL}user/birthdate/${userId.userId}`,
@@ -180,7 +180,7 @@ export function UpdateView(userId) {
                 {/* <Form.Control type="text" className='input-group date' 
                 value={birthdate} placeholder="Enter new birthdate"  
                 onChange={e => setBirthdate(e.target.value)} />  */}
-                <Button variant="primary" type="submit" onClick={handleSubmitBirthdate}> Change birthdate</Button>
+                <Button variant="primary" type="submit" onClick={handleSubmitBirthdate()}> Change birthdate</Button>
             </Form.Group>
             <Form.Group controlId="formBasicBirthdate">
 

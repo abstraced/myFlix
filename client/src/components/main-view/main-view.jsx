@@ -107,12 +107,7 @@ export class MainView extends React.Component {
 
  
   
-  refreshUser () {
-
-
-  }
-
-
+  
 
 
 
@@ -130,6 +125,7 @@ export class MainView extends React.Component {
     });
 
     localStorage.setItem('token', authData.token);
+    localStorage.setItem('ttesr', "ouiii");
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
     this.getInfos(authData.token);
@@ -147,8 +143,8 @@ export class MainView extends React.Component {
     this.props.setUserInfos({});
     this.props.setMovies([]);
     // this.props.setMovies(null);
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    // localStorage.removeItem('token');
+    // localStorage.removeItem('user');
    
 
 

@@ -447,9 +447,11 @@ app.put("/user/email/:_id",passport.authenticate('jwt', { session: false }), fun
   })
 });
 
+
+
 // update birthdate
 app.put("/user/birthdate/:_id",passport.authenticate('jwt', { session: false }), function(req, res) {
-  req.checkBody('Email', 'Email is required').notEmpty();
+  req.checkBody('Birthdate', 'Cannot be empty').notEmpty();
   // check the validation object for errors
   var errors = req.validationErrors();
 
@@ -476,6 +478,9 @@ app.put("/user/birthdate/:_id",passport.authenticate('jwt', { session: false }),
     }
   })
 });
+
+
+
 
 // Delete a user by username
 app.delete('/user/:_id',passport.authenticate('jwt', { session: false }), function(req, res) {
