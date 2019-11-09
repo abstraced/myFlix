@@ -70,7 +70,6 @@ export class MainView extends React.Component {
 
 
 
-/// AXIOS REQUEST FROM MONGO DB
 
   getInfos(token) {
     var base64Url = token.split('.')[1];
@@ -90,29 +89,7 @@ export class MainView extends React.Component {
       });
   }
 
-
-
-  getMovies(token) {
-    axios.get(`${API_URL}movies`, {
-      headers: { Authorization: `Bearer ${token}`}
-    })
-    .then(response => {
-    
-      this.props.setMovies(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
-
  
-  
-  refreshUser () {
-
-
-  }
-
-
 
 
 
@@ -132,21 +109,23 @@ export class MainView extends React.Component {
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
-    this.getInfos(authData.token);
   }
 
 
   
 
-  onDisconnect ()  {
+  onDisconnect() {
     this.setState({
       user: null,
       movies: [],
       userInfo: null
     });
+<<<<<<< HEAD
     // this.props.setUserInfos({});
     // this.props.setMovies([]);
     // this.props.setMovies(null);
+=======
+>>>>>>> parent of ef63870... update bug
     localStorage.removeItem('token');
     localStorage.removeItem('user');
    
@@ -154,7 +133,18 @@ export class MainView extends React.Component {
 
   }
 
-  
+  getMovies(token) {
+    axios.get(`${API_URL}movies`, {
+      headers: { Authorization: `Bearer ${token}`}
+    })
+    .then(response => {
+    
+      this.props.setMovies(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 
   
 

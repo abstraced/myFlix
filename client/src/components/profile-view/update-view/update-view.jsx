@@ -2,27 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 
-
-//date picker
-import DatePicker from "react-datepicker";
- 
-import "react-datepicker/dist/react-datepicker.css";
-
-
-
-
-
-
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
 
-
-
 var API_URL =  'http://myflixdb.herokuapp.com/';
-
-
-
 
 
 export function UpdateView(userId) {
@@ -99,7 +83,11 @@ export function UpdateView(userId) {
      };
 
      const handleSubmitBirthdate = (e) => {
+<<<<<<< HEAD
         e.preventDefault();
+=======
+        // e.preventDefault();
+>>>>>>> parent of ef63870... update bug
          axios({
              method: 'put',
              url: `${API_URL}user/birthdate/${userId.userId}`,
@@ -169,10 +157,9 @@ export function UpdateView(userId) {
             </Form.Group>
 
 
-    
-
 
             <Form.Group controlId="formBasicBirthdate">
+<<<<<<< HEAD
             <DatePicker placeholder="Enter new birthdate"
         selected={birthdate}
         onChange={e => setBirthdate(e)}
@@ -181,13 +168,13 @@ export function UpdateView(userId) {
                 value={birthdate} placeholder="Enter new birthdate"  
                 onChange={e => setBirthdate(e.target.value)} />  */}
                 <Button variant="primary" type="submit" onClick={handleSubmitBirthdate}> Change birthdate</Button>
+=======
+               
+                <Form.Control type="text" className='input-group date' value={birthdate} placeholder="Enter new birthdate"  onChange={e => setBirthdate(e.target.value)} /> 
+                <Button variant="primary" type="submit" onClick={handleSubmitBirthdate()}> Change birthdate</Button>
+>>>>>>> parent of ef63870... update bug
             </Form.Group>
             <Form.Group controlId="formBasicBirthdate">
-
-
-
-
-               
                 <Form.Label> <h1>Unsuscribe</h1> </Form.Label>
                 {/* <Link to={`.. /`}> */}
                 <Button variant="primary" type="submit"  href="/" onClick={deleteAccount} > Delete your account</Button>
