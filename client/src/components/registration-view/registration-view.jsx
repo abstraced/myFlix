@@ -108,8 +108,8 @@ const sendRegistration = (e) => {
 
         
 
-        <NavLink to="/client">
-    <button type="button" onClick={sendRegistration}>Submit</button></NavLink>
+        
+    <button type="button" onClick={sendRegistration}>Submit</button>
     </form>
 
     
