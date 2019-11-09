@@ -180,9 +180,9 @@ export function UpdateView(userId) {
                 {/* <Form.Control type="text" className='input-group date' 
                 value={birthdate} placeholder="Enter new birthdate"  
                 onChange={e => setBirthdate(e.target.value)} />  */}
-                <Button variant="primary" type="submit" onClick={handleSubmitBirthdate()}> Change birthdate</Button>
+                <Button variant="primary" type="submit" onClick={handleSubmitBirthdate}> Change birthdate</Button>
             </Form.Group>
-            <Form.Group controlId="formBasicBirthdate">
+            
 
 
 
@@ -192,8 +192,7 @@ export function UpdateView(userId) {
                 {/* <Link to={`.. /`}> */}
                 <Button variant="primary" type="submit"  href="/" onClick={deleteAccount} > Delete your account</Button>
                 {/* </Link> */}
-            </Form.Group>
-
+           
             {/* onClick={deleteAccount} */}
 
 
