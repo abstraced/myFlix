@@ -53523,7 +53523,7 @@ function RegistrationView(props) {
       return setBirthdate(e);
     }
   }))), _react.default.createElement(_reactRouterDom.NavLink, {
-    to: "/"
+    to: "/client"
   }, _react.default.createElement("button", {
     type: "button",
     onClick: sendRegistration
