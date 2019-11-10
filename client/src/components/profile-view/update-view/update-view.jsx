@@ -8,7 +8,10 @@ import DatePicker from "react-datepicker";
  
 import "react-datepicker/dist/react-datepicker.css";
 
+// REDUX
+import { connect } from 'react-redux';
 
+import { setUserInfos } from '../../../actions/actions';
 
 
 
@@ -23,9 +26,14 @@ var API_URL =  'http://myflixdb.herokuapp.com/';
 
 
 
+const mapStateToProps = state => {
 
+    return { user: state.userInfos,
+            movies: state.movies
+     };
+  };
 
-export function UpdateView(userId) {
+function UpdateView(props) {
 
     
     const [ username, setUsername ] = useState('');
@@ -39,7 +47,22 @@ export function UpdateView(userId) {
 
 
     
-
+   const updateUserInfos = () => {
+       
+        axios.get(`${API_URL}user/${props.userId}`, {
+          headers: { Authorization: `Bearer ${accessToken}` }
+        })
+          .then(response => {
+            // Assign the result to the state
+            props.setUserInfos(response.data[0]);
+          
+          
+            
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
 
 //// This one IS THEfunctioning one  > MONGODB UPDATED, no function fired on render need to update redux now
     const handleSubmitUsername = (e) => {
@@ -47,50 +70,62 @@ export function UpdateView(userId) {
             e.preventDefault();
         axios({
             method: 'put',
-            url: `${API_URL}user/username/${userId.userId}`,
+            url: `${API_URL}user/username/${props.userId}`,
             headers: { Authorization: `Bearer ${accessToken}` },
             data: {
                 Username: username,
             }
         })
-           
-                 .catch(e => {
+        .then( ()  =>  {
+         updateUserInfos();
+    
+        }
+        )
+        .catch(e => {
             console.log('no such user')
           });
 
 
     };
 
-    const handleSubmitPassword = () => {
-        
+    const handleSubmitPassword = (e) => {
+        e.preventDefault(); 
     
         axios({
             method: 'put',
-            url: `${API_URL}user/password/${userId.userId}`,
+            url: `${API_URL}user/password/${props.userId}`,
             headers: { Authorization: `Bearer ${accessToken}` },
             data: {
                 Password: password,
             }
         })
-        
-           
-                 .catch(e => {
+        .then( ()  =>  {
+            updateUserInfos();
+       
+           }
+           )   
+           .catch(e => {
                     console.log('no such user')
                   });
         
 
     };
 
-    const handleSubmitEmail = () => {
-      
+    const handleSubmitEmail = (e) => {
+        e.preventDefault(); 
          axios({
              method: 'put',
-             url: `${API_URL}user/email/${userId.userId}`,
+             url: `${API_URL}user/email/${props.userId}`,
              headers: { Authorization: `Bearer ${accessToken}` },
              data: {
                  Email: email,
              }
          })
+         .then( ()  =>  {
+            updateUserInfos();
+       
+           }
+           )
                   .catch(e => {
                      console.log('no such user')
                    });
@@ -102,12 +137,17 @@ export function UpdateView(userId) {
       
          axios({
              method: 'put',
-             url: `${API_URL}user/birthdate/${userId.userId}`,
+             url: `${API_URL}user/birthdate/${props.userId}`,
              headers: { Authorization: `Bearer ${accessToken}` },
              data: {
                  Birthdate: birthdate,
              }
          })
+         .then( ()  =>  {
+            updateUserInfos();
+       
+           }
+           )
                   .catch(e => {
                      console.log('no such user')
                    });
@@ -120,7 +160,7 @@ export function UpdateView(userId) {
         // e.preventDefault();
          axios({
              method: 'delete',
-             url: `${API_URL}user/${userId.userId}`,
+             url: `${API_URL}user/${props.userId}`,
              headers: { Authorization: `Bearer ${accessToken}` },
              
          })
@@ -151,21 +191,23 @@ export function UpdateView(userId) {
                 <Form.Control type="text" value={username} placeholder="Enter new username" onChange={e => setUsername(e.target.value)} />
             
             <Button variant="primary" type="submit" onClick={(e)=> {handleSubmitUsername(e)}} >
-
+            
+       
                 Change username
 </Button>
+
 </Form.Group>
             <Form.Group controlId="formBasicPassword">
                
                 <Form.Control type="text"   placeholder="Enter new password"  value={password}   onChange={e => setPassword(e.target.value)} />
-                <Button variant="primary" type="submit" onClick={handleSubmitPassword()}> Change password</Button>
+                <Button variant="primary" type="submit" onClick={(e)=> handleSubmitPassword(e)}> Change password</Button>
             </Form.Group>
 
 
             <Form.Group controlId="formBasicEmail">
                
                 <Form.Control type="text" placeholder="Enter new email"  value={email} onChange={e => setEmail(e.target.value)} />
-                <Button variant="primary" type="submit" onClick={handleSubmitEmail()}> Change Email</Button>
+                <Button variant="primary" type="submit" onClick={(e)=> handleSubmitEmail(e)}> Change Email</Button>
             </Form.Group>
 
 
@@ -180,7 +222,7 @@ export function UpdateView(userId) {
                 {/* <Form.Control type="text" className='input-group date' 
                 value={birthdate} placeholder="Enter new birthdate"  
                 onChange={e => setBirthdate(e.target.value)} />  */}
-                <Button variant="primary" type="submit" onClick={handleSubmitBirthdate}> Change birthdate</Button>
+                <Button variant="primary" type="submit" onClick={(e)=> handleSubmitBirthdate(e)}> Change birthdate</Button>
             </Form.Group>
             
 
@@ -210,6 +252,8 @@ export function UpdateView(userId) {
 }
 
 
+
+export default connect(mapStateToProps,{setUserInfos})(UpdateView);
 
 
 

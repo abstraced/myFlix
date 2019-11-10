@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import {FavoriteFilm} from './favorite-film/favorite-film';
 import {InfoView} from './info-view/info-view';
-import {UpdateView} from './update-view/update-view';
+import UpdateView from './update-view/update-view';
 
 import './profile-view.scss';
 

@@ -3,14 +3,18 @@
 import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+// REDUX
 import { connect } from 'react-redux';
 
-
-import PropTypes from 'prop-types';
-
+import { setUserInfos } from '../../actions/actions';
 
 import { setMovies } from '../../actions/actions';
-import { setUserInfos } from '../../actions/actions';
+
+
+
+// Proptype
+import PropTypes from 'prop-types';
 
 
 
@@ -143,8 +147,8 @@ export class MainView extends React.Component {
     this.props.setUserInfos({});
     this.props.setMovies([]);
     // this.props.setMovies(null);
-    // localStorage.removeItem('token');
-    // localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
    
 
 
