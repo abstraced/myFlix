@@ -41,10 +41,10 @@ export function UpdateView(userId) {
     
 
 
-
-    const handleSubmitUsername = () => {
+//// This one IS THEfunctioning one  > MONGODB UPDATED, no function fired on render need to update redux now
+    const handleSubmitUsername = (e) => {
    
-        
+            e.preventDefault();
         axios({
             method: 'put',
             url: `${API_URL}user/username/${userId.userId}`,
@@ -150,7 +150,7 @@ export function UpdateView(userId) {
            
                 <Form.Control type="text" value={username} placeholder="Enter new username" onChange={e => setUsername(e.target.value)} />
             
-            <Button variant="primary" type="submit" onClick={handleSubmitUsername()} >
+            <Button variant="primary" type="submit" onClick={(e)=> {handleSubmitUsername(e)}} >
 
                 Change username
 </Button>
