@@ -98,7 +98,7 @@ const sendRegistration = (e) => {
        </Form.Group>
 
        <Form.Group controlId="formBasicBirthdate">
-       <Form.Label>Email
+       <Form.Label>Birthdate
        <DatePicker placeholder="Enter new birthdate"
         selected={birthdate}
         onChange={e => setBirthdate(e)}
