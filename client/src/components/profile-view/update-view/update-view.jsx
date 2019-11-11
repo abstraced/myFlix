@@ -133,8 +133,8 @@ function UpdateView(props) {
  
      };
 
-     const handleSubmitBirthdate = () => {
-      
+     const handleSubmitBirthdate = (e) => {
+        e.preventDefault(); 
          axios({
              method: 'put',
              url: `${API_URL}user/birthdate/${props.userId}`,
@@ -157,7 +157,7 @@ function UpdateView(props) {
 
 
      const deleteAccount = (e) => {
-        // e.preventDefault();
+        e.preventDefault();
          axios({
              method: 'delete',
              url: `${API_URL}user/${props.userId}`,
@@ -199,7 +199,7 @@ function UpdateView(props) {
 </Form.Group>
             <Form.Group controlId="formBasicPassword">
                
-                <Form.Control type="text"   placeholder="Enter new password"  value={password}   onChange={e => setPassword(e.target.value)} />
+                <Form.Control type="password"   placeholder="Enter new password"  value={password}   onChange={e => setPassword(e.target.value)} />
                 <Button variant="primary" type="submit" onClick={(e)=> handleSubmitPassword(e)}> Change password</Button>
             </Form.Group>
 
@@ -214,14 +214,9 @@ function UpdateView(props) {
     
 
 
-            <Form.Group controlId="formBasicBirthdate">
-            <DatePicker placeholder="Enter new birthdate"
-        selected={birthdate}
-        onChange={e => setBirthdate(e)}
-      />
-                {/* <Form.Control type="text" className='input-group date' 
-                value={birthdate} placeholder="Enter new birthdate"  
-                onChange={e => setBirthdate(e.target.value)} />  */}
+            <Form.Group controlId="formBasicBirthdate" >
+            <Form.Control type="date" placeholder="Enter birthdatze"  value={birthdate} onChange={e => setBirthdate(e.target.value)} />
+            
                 <Button variant="primary" type="submit" onClick={(e)=> handleSubmitBirthdate(e)}> Change birthdate</Button>
             </Form.Group>
             
@@ -232,7 +227,7 @@ function UpdateView(props) {
                
                 <Form.Label> <h1>Unsuscribe</h1> </Form.Label>
                 {/* <Link to={`.. /`}> */}
-                <Button variant="primary" type="submit"  href="/" onClick={deleteAccount} > Delete your account</Button>
+                <Button variant="primary" type="submit"  href="/" onClick={(e) => deleteAccount (e)} > Delete your account</Button>
                 {/* </Link> */}
            
             {/* onClick={deleteAccount} */}

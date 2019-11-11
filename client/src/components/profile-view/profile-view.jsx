@@ -16,8 +16,8 @@ const mapStateToProps = state => {
 };
 
 function ProfileView (props) {
-  
 
+      
 
 
     // Loading pattern
