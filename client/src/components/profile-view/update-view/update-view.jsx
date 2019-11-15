@@ -2,18 +2,16 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
-//date picker
-import DatePicker from "react-datepicker";
- 
-import "react-datepicker/dist/react-datepicker.css";
+
+import { NavLink } from 'react-router-dom';
 
 // REDUX
 import { connect } from 'react-redux';
-
 import { setUserInfos } from '../../../actions/actions';
-
-
 
 
 import Button from 'react-bootstrap/Button';
@@ -156,16 +154,16 @@ function UpdateView(props) {
      };
 
 
-     const deleteAccount = (e) => {
-        e.preventDefault();
+     const deleteAccountfromMongo = () => {
+        // e.preventDefault();
          axios({
              method: 'delete',
              url: `${API_URL}user/${props.userId}`,
              headers: { Authorization: `Bearer ${accessToken}` },
              
          })
-         .then (( )=> {
-            this.props.onDisconnect();
+         .then (()=> {
+            props.onDisconnect();
 
             
          })
@@ -176,66 +174,77 @@ function UpdateView(props) {
  
      };
 
+        
+     const onDeleteAccount = () => {
+        deleteAccountfromMongo();
+     props.onDisconnect();
+
+
+     } 
     
 
    
 
     return (
 <div className="update-user-info">
-    <h1>  Update user informations</h1>  
+    <h3>  Update user informations</h3>  
 
 
-        <Form>
-            <Form.Group controlId="formBasicUsername">
-           
-                <Form.Control type="text" value={username} placeholder="Enter new username" onChange={e => setUsername(e.target.value)} />
-            
-            <Button variant="primary" type="submit" onClick={(e)=> {handleSubmitUsername(e)}} >
-            
-       
-                Change username
-</Button>
+        <Container>
+            <Row>
+            <Col>
+            <Form.Control type="text" value={username} placeholder="Enter new username" onChange={e => setUsername(e.target.value)} />
+            </Col>
+            <Col>
+            <Button variant="primary" type="submit" onClick={(e)=> {handleSubmitUsername(e)}}  block> 
+            Change username
+            </Button>
+ 
+ </Col> </Row>
+ <Row>
+            <Col>
+            <Form.Control type="password"   placeholder="Enter new password"  value={password}   onChange={e => setPassword(e.target.value)}  />
+            </Col>
+            <Col>
+            <Button variant="primary" type="submit" onClick={(e)=> handleSubmitPassword(e)} block> Change password
+            </Button>
+ 
+ </Col> </Row>
+ <Row>
+            <Col>
+            <Form.Control type="text" placeholder="Enter new email"  value={email} onChange={e => setEmail(e.target.value)} />
+            </Col>
+            <Col>
+            <Button variant="primary" type="submit" onClick={(e)=> handleSubmitEmail(e)} block> Change Email
+            </Button>
+ 
+ </Col> </Row>
 
-</Form.Group>
-            <Form.Group controlId="formBasicPassword">
-               
-                <Form.Control type="password"   placeholder="Enter new password"  value={password}   onChange={e => setPassword(e.target.value)} />
-                <Button variant="primary" type="submit" onClick={(e)=> handleSubmitPassword(e)}> Change password</Button>
-            </Form.Group>
-
-
-            <Form.Group controlId="formBasicEmail">
-               
-                <Form.Control type="text" placeholder="Enter new email"  value={email} onChange={e => setEmail(e.target.value)} />
-                <Button variant="primary" type="submit" onClick={(e)=> handleSubmitEmail(e)}> Change Email</Button>
-            </Form.Group>
-
+ <Row>
+            <Col>
+            <Form.Control type="date" placeholder="Enter birthdate"  value={birthdate} onChange={e => setBirthdate(e.target.value)} />
+            </Col>
+            <Col>
+            <Button variant="primary" type="submit" onClick={(e)=> handleSubmitBirthdate(e)} block> Change birthdate
+            </Button>
+ 
+ </Col> </Row>
+    <Row></Row>
+    <Row>
 
     
-
-
-            <Form.Group controlId="formBasicBirthdate" >
-            <Form.Control type="date" placeholder="Enter birthdatze"  value={birthdate} onChange={e => setBirthdate(e.target.value)} />
-            
-                <Button variant="primary" type="submit" onClick={(e)=> handleSubmitBirthdate(e)}> Change birthdate</Button>
-            </Form.Group>
-            
-
-
-
-
+                
+       <Col>  <NavLink to="/">   <Button variant="primary" type="submit"   onClick={() => onDeleteAccount ()} block > Delete your account </Button> </NavLink>  </Col> 
+                  
+    </Row>
                
-                <Form.Label> <h1>Unsuscribe</h1> </Form.Label>
-                {/* <Link to={`.. /`}> */}
-                <Button variant="primary" type="submit"  href="/" onClick={(e) => deleteAccount (e)} > Delete your account</Button>
-                {/* </Link> */}
+               
            
-            {/* onClick={deleteAccount} */}
+            
 
 
 
-
-        </Form>
+        </Container>
 
 
        

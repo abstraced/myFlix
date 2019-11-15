@@ -204,7 +204,7 @@ export class MainView extends React.Component {
 
         <Route path="/register" render={() => <RegistrationView />} />
 
-        <Route path="/my-profile" render={() => <ProfileView  />} />
+        <Route path="/my-profile" render={() => <ProfileView  onDisconnect={() => this.onDisconnect()} />} />
 
         <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
        

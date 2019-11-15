@@ -97,14 +97,13 @@ const sendRegistration = (e) => {
         <Form.Control type="email" placeholder="your email address..."  value={email} onChange={e => setEmail(e.target.value)}/>
        </Form.Group>
 
-       <Form.Group controlId="formBasicBirthdate">
-       <Form.Label>Birthdate
-       <DatePicker placeholder="Enter new birthdate"
-        selected={birthdate}
-        onChange={e => setBirthdate(e)}
-      />
-      </Form.Label>
-        </Form.Group>
+       <Form.Group controlId="formBasicBirthdate" >
+            <Form.Control type="date" placeholder="Enter birthdate"  value={birthdate} onChange={e => setBirthdate(e.target.value)} />
+            
+               
+            </Form.Group>
+
+      
 
         
 

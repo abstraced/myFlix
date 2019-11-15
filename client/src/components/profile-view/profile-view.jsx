@@ -1,10 +1,18 @@
-import React  from 'react';
+
+
+
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 
 import {FavoriteFilm} from './favorite-film/favorite-film';
 import {InfoView} from './info-view/info-view';
 import UpdateView from './update-view/update-view';
+
+
+
+import Button from 'react-bootstrap/Button';
+
 
 import './profile-view.scss';
 
@@ -16,6 +24,9 @@ const mapStateToProps = state => {
 };
 
 function ProfileView (props) {
+
+
+  const [ isEditing, setIsEditing ] = useState(false);
 
       
 
@@ -33,7 +44,20 @@ function ProfileView (props) {
 
 
       else {
+        
+        if ( isEditing === true)  {      
 
+          return (
+            <div className="profile">
+            <InfoView   user={props.user}/>
+            <Button onClick={e=> setIsEditing(false)}> Finish updating Infos    </Button>
+            <UpdateView  userId={props.user._id} onDisconnect={() => props.onDisconnect()} />
+            <Button onClick={()=>props.onDisconnect()}>  Disconnect</Button>
+           
+            </div>
+          )
+                 }
+      else {
 
         return (
 
@@ -41,12 +65,16 @@ function ProfileView (props) {
             <div className="profile">
             <div>
             <InfoView   user={props.user}/>
-            <UpdateView  userId={props.user._id} onDisconnect={() => this.onDisconnect()} />
+            <Button onClick={e=> setIsEditing(true)}> Update Infos    </Button>
+            
             </div>
+          
 
 
             <h1>  {props.user.Username}  's favorite films </h1>
                 <FavoriteFilm movies={props.user.FavoriteFilms}    />
+
+           
             </div>
 
 
@@ -55,7 +83,7 @@ function ProfileView (props) {
 
 
 
-
+          }
 
 
 
