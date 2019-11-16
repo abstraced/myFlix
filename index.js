@@ -82,174 +82,7 @@ app.get('/', function(req, res) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-/// MOVIE RELATED
-
-
-// return a list of all Movies
-app.get("/movies",passport.authenticate('jwt', { session: false }),function(req, res) {   // 
-
-   Movies.find().populate('genre').populate('director').then(movies => res.json(movies));
-   // .populate('Genre')
-});
-
-
-//   Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user
-app.get("/movies/:movie", function (req,res) {   //,passport.authenticate('jwt'{ session: false }),
-  Movies.find( { "Title" : req.params.movie}).populate('genre').populate('director').exec ( function(err, movies) {
-    return res.end(JSON.stringify(movies))
-  } );
-});
-
-
-
-/// Get all the film from a specific genre
-app.get("/movies/genres/:genre",function (req,res) {
-  Movies.find( { "genre" : req.params.genre}, function(err, movies) {
-    return res.end(JSON.stringify(movies));
-  } );
-});
-
-
-
-
-
-
-//Return data about a genre (description) by name/title (e.g., “Thriller”)
-app.get("/genres/:genre",function (req,res) {
-  // ,passport.authenticate('jwt', { session: false })
-  Genres.find( { "Name" : req.params.genre}, function(err, movies) {
-
-    return res.end(JSON.stringify(movies));
-  } );
- });
-
-
-// get all the film from a director
-app.get("/movies/directors/:director",function (req,res) {   //,passport.authenticate('jwt', { session: false })
-  Movies.find( { "director" : req.params.director}, function(err, movies) {
-    return res.end(JSON.stringify(movies));
-  } );
-});
-
-
-
-
-//Allow user to add a film to the main list of films
-app.post('/movies',passport.authenticate('jwt', { session: false }), function(req, res) {
-  req.checkBody('Title', 'A title is required').notEmpty();
-  req.checkBody('Description', 'A description is required').notEmpty();
-  req.checkBody('Director:Name', 'Description contains non alphanumeric characters - not allowed.').isAlphanumeric();
- req.checkBody('Genre: name', 'Description contains non alphanumeric characters - not allowed.').isAlphanumeric();
-
-
-
-
-
-
-
-
-  // check the validation object for errors
-  var errors = req.validationErrors();
-
-  if (errors) {
-    return res.status(422).json({ errors: errors });
-  }
-
-  Movies.findOne({ Title : req.body.Title })
-  .then(function(movie) {
-    if (movie) {
-      return res.status(400).send(req.body.Title + " already exists");
-    } else {
-      Movies.create({
-        Title: req.body.Title,
-        Description: req.body.Description,
-        Genre: {
-          Name: req.body.Genre.Name,
-          genre_id: req.body.Genre.genre_id
-        },
-        Director: {
-          Name: req.body.Director.Name,
-          director_id: req.body.Genre.director_id
-        },
-        Actors: [],
-        ImagePath: req.body.ImagePath,
-        Featured: req.body.Featured
-      })
-
-
-      .then(function(movie) {res.status(201).json(movie) })
-      .catch(function(error) {
-        console.error(error);
-        res.status(500).send("Error: " + error);
-      })
-    }
-  }).catch(function(error) {
-    console.error(error);
-    res.status(500).send("Error: " + error);
-  });
-});
-
-
-
-
-
-
 ///// USER RELATED
-
-
-// display all  data about a user
-// app.get("/users/:username",passport.authenticate('jwt', { session: false }),function(req, res) {   // 
-
-//   Users.findOne(Username: req.params.username).then(movies => res.json(movies));     
-  
-// });
-// app.get("/users/:usernameId",passport.authenticate('jwt', { session: false }),function(req, res) {   // 
-// if (req.headers && req.headers.authorization) {
-//       var authorization = req.headers.authorization.split(' ')[1],
-//           decoded;
-//       try {
-//           decoded = jwt.verify(authorization, secret.secretToken);
-//       } catch (e) {
-//           return res.status(401).send('unauthorized');
-//       }
-//       var userId = decoded.id;
-//       // Fetch the user by id 
-//       Users.findOne({_id: userId}).then(function(user){
-//           // Do something with the user
-//           return res.send(200);
-//       });
-//   }
-//   return res.send(500);
-
-
-//   // Users.find({Username:req.params.username}).populate('FavoriteFilms').then(movies => res.json(movies));
-//   // // .populate('Genre')
-// });
-
-
-// Display user info
-
-
-app.get("/user/:user_id",passport.authenticate('jwt', { session: false }), function(req, res) {
-  Users.find( {_id : req.params.user_id}).populate({
-    path: 'FavoriteFilms',
-    // Get friends of friends - populate the 'friends' array for every friend
-    populate: {path:'director', path:'genre' }
-  })
-  .then(users => res.json(users));
-
-});
-
 
 
 //Allow new users to register
@@ -276,7 +109,7 @@ app.post('/users', function(req, res) {
   Users.findOne({ Username : req.body.Username })
   .then(function(user) {
     if (user) {
-      return res.status(400).send(req.body.Username + "already exists");
+      return res.status(400).send(req.body.Username + " already exists");
     } else {
       Users
       .create({
@@ -298,45 +131,62 @@ app.post('/users', function(req, res) {
 });
 
 
+// Display user info
+
+
+app.get("/user/:user_id",passport.authenticate('jwt', { session: false }), function(req, res) {
+  Users.find( {_id : req.params.user_id}).populate({
+    path: 'FavoriteFilms',
+    // Get friends of friends - populate the 'friends' array for every friend
+    populate: {path:'director', path:'genre' }
+  })
+  .then(users => res.json(users));
+
+});
+
+
+
+
+
 
 // USER UPDATE
 //update   all
-// app.put("/users/:Username",passport.authenticate('jwt', { session: false }), function(req, res) {
-//   req.checkBody('Username', 'Username is required').notEmpty();
-//   req.checkBody('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric();
-//   req.checkBody('Password', 'Password is required').notEmpty();
-//   req.checkBody('Email', 'Email is required').notEmpty();
-//   req.checkBody('Email', 'Email does not appear to be valid').isEmail();
+app.put("/user/all/:user_id",passport.authenticate('jwt', { session: false }), function(req, res) {
+  req.checkBody('Username', 'Username is required').notEmpty();
+  req.checkBody('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric();
+  req.checkBody('Password', 'Password is required').notEmpty();
+  req.checkBody('Email', 'Email is required').notEmpty();
+  req.checkBody('Email', 'Email does not appear to be valid').isEmail();
 
-//   // check the validation object for errors
-//   var errors = req.validationErrors();
+  // check the validation object for errors
+  var errors = req.validationErrors();
 
-//   if (errors) {
-//     return res.status(422).json({ errors: errors });
-//   }
+  if (errors) {
+    return res.status(422).json({ errors: errors });
+  }
 
-//  var hashedPassword = Users.hashPassword(req.body.Password);
-//   Users.findOneAndUpdate({ Username : req.params.Username }, {
+ var hashedPassword = Users.hashPassword(req.body.Password);
+  Users.findOneAndUpdate({ _id : req.params.user_id }, {
 
-//     $set :
-//     {
-//       Username : req.body.Username,
-//       Password : hashedPassword,
-//       Email : req.body.Email,
-//       Birthdate : req.body.Birthdate
-//     }
-//   },
-//   { new : true },
-//   function(err, updatedUser) {
-//     if(err) {
-//       console.error(err);
-//       res.status(500).send("Error: " +err);
-//     } else {
-//       console.log("test");
-//       res.json(updatedUser)
-//     }
-//   })
-// });
+    $set :
+    {
+      Username : req.body.Username,
+      Password : hashedPassword,
+      Email : req.body.Email,
+      Birthdate : req.body.Birthdate
+    }
+  },
+  { new : true },
+  function(err, updatedUser) {
+    if(err) {
+      console.error(err);
+      res.status(500).send("Error: " +err);
+    } else {
+      console.log("test");
+      res.json(updatedUser)
+    }
+  })
+});
 
 
 
@@ -501,17 +351,53 @@ app.delete('/user/:_id',passport.authenticate('jwt', { session: false }), functi
 
 
 
+/// MOVIE RELATED
 
 
-// return a list of all users
-app.get("/users",passport.authenticate('jwt', { session: false }), function(req, res) {
-  Users.find().populate({
-    path: 'FavoriteFilms',
-    // Get friends of friends - populate the 'friends' array for every friend
-    populate: { path: 'genre', path:'director' }
-  }).then(users => res.json(users));
+// return a list of all Movies
+app.get("/movies",passport.authenticate('jwt', { session: false }),function(req, res) {   // 
 
+   Movies.find().populate('genre').populate('director').then(movies => res.json(movies));
+   // .populate('Genre')
 });
+
+
+//   Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user
+app.get("/movies/:movie_id", function (req,res) {   //,passport.authenticate('jwt'{ session: false }),
+  Movies.find( { "_id" : req.params.movie_id}).populate('genre').populate('director').exec ( function(err, movies) {
+    return res.end(JSON.stringify(movies))
+  } );
+});
+
+
+
+/// Get all the film from a specific genre
+app.get("/movies/genres/:genre",function (req,res) {
+  Movies.find( { "genre" : req.params.genre}).populate('genre').populate('director').exec ( function(err, movies) {
+    return res.end(JSON.stringify(movies));
+  } );
+});
+
+// get all the film from a director
+app.get("/movies/directors/:director",function (req,res) {   //,passport.authenticate('jwt', { session: false })
+  Movies.find( { "director" : req.params.director}).populate('genre').populate('director').exec ( function(err, movies) {
+    return res.end(JSON.stringify(movies));
+  } );
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -553,7 +439,55 @@ app.delete('/user/:user_id/movies/:MovieID',passport.authenticate('jwt', { sessi
 });
 
 
+//    For later...
+// //Allow user to add a film to the main list of films
+// app.post('/movies',passport.authenticate('jwt', { session: false }), function(req, res) {
+//   req.checkBody('Title', 'A title is required').notEmpty();
+//   req.checkBody('Description', 'A description is required').notEmpty();
+//   req.checkBody('Director:Name', 'Description contains non alphanumeric characters - not allowed.').isAlphanumeric();
+//  req.checkBody('Genre: name', 'Description contains non alphanumeric characters - not allowed.').isAlphanumeric();
 
+
+//   // check the validation object for errors
+//   var errors = req.validationErrors();
+
+//   if (errors) {
+//     return res.status(422).json({ errors: errors });
+//   }
+
+//   Movies.findOne({ Title : req.body.Title })
+//   .then(function(movie) {
+//     if (movie) {
+//       return res.status(400).send(req.body.Title + " already exists");
+//     } else {
+//       Movies.create({
+//         Title: req.body.Title,
+//         Description: req.body.Description,
+//         Genre: {
+//           Name: req.body.Genre.Name,
+//           genre_id: req.body.Genre.genre_id
+//         },
+//         Director: {
+//           Name: req.body.Director.Name,
+//           director_id: req.body.Genre.director_id
+//         },
+//         Actors: [],
+//         ImagePath: req.body.ImagePath,
+//         Featured: req.body.Featured
+//       })
+
+
+//       .then(function(movie) {res.status(201).json(movie) })
+//       .catch(function(error) {
+//         console.error(error);
+//         res.status(500).send("Error: " + error);
+//       })
+//     }
+//   }).catch(function(error) {
+//     console.error(error);
+//     res.status(500).send("Error: " + error);
+//   });
+// });
 
 
 

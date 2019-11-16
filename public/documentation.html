@@ -39,188 +39,206 @@ movies.
 
   </p>
 
+
+
   <table border="1" class="api" >
-       <tbody><tr class="column-1">
-         <th class=" row-request">Request</th>
-         <th class=" row-URL">URL</th>
-         <th class=" row-method">HTTP Method</th>
-         <th class=" row-format">Request body data format</th>
-         <th class="row-exemple">Exemple of request</th>
+       <tbody>
+         <tr class="column-1">
+         <th class="row-request">Request</th>
+         <th class="row-URL">URL</th>
+         <th class=" ow-method">HTTP Method</th>
+         <th class="row-format">Request body data format</th>
+         <th class="row-exemple">Exemple of body request</th>
          <th class=" row-response">Response body data  format</th>
           <th class=" row-auth">Login necessary?</th>
        </tr>
        <tr class="column-2 column">
-         <td row->root</td>
-         <td row->/</td>
-         <td row->GET</td>
-         <td row->none</td>
-         <td row-></td>
-         <td row->A text message saying: "Hello to My flix, the app to help you sort your favorite films..."</td>
-         <td row->no</td>
+         <td class="description" row->root</td>
+         <td  class="url" row->/</td>
+         <td class="requestType" row->GET</td>
+         <td class="bodyRequest" row->none</td>
+         <td class="exemple" row-></td>
+         <td class="response" row->A text message saying: "Hello to My flix, the app to help you sort your favorite films..."</td>
+         <td class="loggin" row->no</td>
        </tr>
        <tr class="column-3 column">
-         <td row->Return a list of ALL movies to the user</td>
-         <td row->/movies</td>
-         <td row->GET</td>
-         <td row->none</td>
-         <td row-></td>
-         <td row->A JSON object holding dataabout all the films</td>
-         <td row->no</td>
+         <td row- >User related</td>  
        </tr>
        <tr class="column-4 column">
-         <td row->Return data (description, genre, director, image URL, whether it’s featured or not) about a single movie by title to the user</td>
-         <td row->/movies/[title]</td>
-         <td row->GET</td>
-         <td row->none</td>
-         <td row->/movies/PI</td>
-         <td row->A JSON object holding all the data about the film</td>
-         <td row->no</td>
-       </tr>
-       <tr class="column-5 column">
-         <td row->Return data about a genre (description) by name/title (e.g., “Thriller”)</td>
-         <td row->/genres/[name]</td>
-         <td row->GET</td>
-         <td row->none</td>
-         <td row->/genres/thriller</td>
-         <td row->A Json object holding the data about the genre</td>
-         <td row->no</td>
-       </tr>
-       <tr class="column-6 column">
-         <td row->Allow user to add a film to the main list of films</td>
-         <td row->/movies/</td>
-         <td row->POST</td>
-         <td row->  {      "Title": "[name of the film]",
-        "Description": "[description]",
-        "Genre": {
-          "Name": "[genre]",
-            "genre_id": "[ObjectId of the genre]"
-        },
-        "Director": {
-            "Name": "[Name]",
-            "director_Id": "[object id of the director]"
-        },
-
-        "ImagePath": "[link to the picture]",
-        "Featured": "[true or false]"
-
-     }</td>
-         <td row->  {      "Title": "Anchorman 2: The Legend Continues",
-        "Description": "With the 1970s behind them, San Diego's top-rated newsman, Ron Burgundy, returns to take New York City's first twenty-four-hour news channel by storm.",
-        "Genre": {
-          "Name": "Comedy",
-            "genre_id": "5d49485e605ef85a13615aa6"
-        },
-        "Director": {
-            "Name": "Judd Apatow",
-            "director_Id": "5d494c2ffd4d8336d253c08f"
-        },
-
-        "ImagePath": "",
-        "Featured": "true"
-
-     }</td>
-         <td row->A JSON object holding data about the film that was added, including an ID:{
-    "Actors": [],
-    "_id": "5d5568f6d5003c01f67eb31c",
-    "Title": "Anchorman 2: The Legend Continues",
-    "Description": "With the 1970s behind them, San Diego's top-rated newsman, Ron Burgundy, returns to take New York City's first twenty-four-hour news channel by storm.",
-    "Genre": {
-        "Name": "Comedy",
-        "genre_id": "5d49485e605ef85a13615aa6"
-    },
-    "Director": {
-        "Name": "Judd Apatow"
-    },
-    "ImagePath": "",
-    "Featured": "true",
-    "__v": 0
-}</td>
-<td row->no</td>
-       </tr>
-       <tr class="column-7 column">
-         <td row->Return data about a director (bio, birth year, death year) by name</td>
-         <td row->/directors/[name]</td>
-         <td row->GET</td>
-         <td row->none</td>
-         <td row->/directors/steven%20krom</td>
-         <td row->A JSON object holding all the data about the director</td>
-         <td row->no</td>
-       </tr>
-       <tr class="column-8 column">
-         <td row->Allow new users to register</td>
-         <td row->/users</td>
-         <td row->POST</td>
-         <td row->{Username:"[username]", Password:"[password]",Email:"[email]", Birthdate:"[ddmmyyyy]"}exemple:
-{"Username":"John Rambo",
- "Password":"password",
- "Email":"yolo@gmail.com",
- "Birthdate":"11011983"
+        <td class="description" row->Allow new users to register</td>
+        <td class="url" row->/users</td>
+        <td class="requestType" row->POST</td>
+        <td  class="bodyRequest" row->{Username:"[username]", Password:"[password]",Email:"[email]", Birthdate:"[yyyy-mm-dd]"}
 }   </td>
-         <td row-></td>
-         <td row-> on success,a JSON object holding all the data the user entered, otherwise an error message</td>
-         <td row->yes</td>
+        <td class="exemple" row-> {
+          "Username":"test",
+          "Password":"password",
+          "Email":"test@test.com",
+          "Birthdate":"2001-01-25"    
+               
+        }</td>
+        <td class="response" row-> on success,a JSON object holding all the data the user entered, otherwise an error message</td>
+        <td class="loggin" row->no</td>
        </tr>
-       <tr class="column-9 column">
-         <td row->Allow users to update their user info (username, password, email, date of birth)</td>
-         <td row->//users/[Username]</td>
-         <td row->PUT</td>
-         <td row->{Username:"[username]", Password:"[password]",Email:"[email]", Birthdate:"[ddmmyyyy]"}exemple: {"Username":"John Rambo", "Password":"password", "Email":"yolo@gmail.com", "Birthdate":"11011983" }</td>
-         <td row->  {
 
- "Username" : "Pierre Letto",
-      "Password" : "password",
-      "Email" : "pierre@test.de",
-      "Birthdate" : "11011895"
+       <tr class="column-5 column">
+          <td class="description" row-> Return all user infos</td>
+          <td class="url" row->user/[userID]</td>
+          <td class="requestType" row->GET</td>
+          <td class="bodyRequest" row->none</td>
+          <td class="exemple" row->  none </td>
+          <td class="response" row->on success,a JSON object holding all the data of the user, otherwise an error message </td>
+         <td class="loggin" row->yes</td>
+        </tr>
 
-      }</td>
-         <td row-> Return a JSON object holding all the  new data </td>
-         <td row->yes</td>
-       </tr>
-       <tr class="column-10 column">
-         <td row->Allow users to add a movie to their list of favorites</td>
-         <td row->/[usersID]/favmovies/[film_id]</td>
-         <td row->POST</td>
-         <td row->none</td>
-         <td row-></td>
-         <td row->A text message saying: Film Id [film_ID] was added to the user [username]</td>
-        <td row->yes</td>
-       </tr>
-       <tr class="column-11 column">
-         <td row->Allow users to remove a movie from their list of favorites</td>
-         <td row->/[userID]/favmovies/[filmID]</td>
-         <td row->DELETE</td>
-         <td row->none</td>
-         <td row-></td>
-         <td row-> Return all the json data from the user updated</td>
-            <td row->yes</td>
-       </tr>
-       <tr class="column-12 column">
-         <td row->Allow existing users to deregister</td>
-         <td row->/users/[user ID to be deleted]</td>
-         <td row->DELETE</td>
-         <td row->user id to be deleted</td>
-         <td row-></td>
-         <td row->User [username] was deleted.</td>
-            <td row->yes</td>
-       </tr>
-       <tr class="column-13 column">
-         <td row->Allow user to add a film to the main list of films</td>
-         <td row->/movies</td>
-         <td row->POST</td>
-         <td row->{id:1,name:"PI",genre: "thriller", description: " story of the film ",year:"2000",feature: "TRUE",imageUrl: "www.google.com",director: "Raven Djaa"},</td>
-         <td row-></td>
-         <td row-></td>
-            <td row->no</td>
-       </tr>
-       <tr class="column-14 column">
-         <td row->Return all the users</td>
-         <td row->/users</td>
-         <td row->GET</td>
-         <td row->none</td>
-         <td row-></td>
-         <td row->A JSON object holding dataabout all the users</td>
-            <td row->yes</td>
-       </tr>
+        <tr class="column-6 column">
+            <td class="description" row-> Update all user infos</td>
+            <td class="url" row->/user/all/[userID]</td>
+            <td class="requestType" row->PUT</td>
+            <td class="bodyRequest" row->{Username:"[username]", Password:"[password]",Email:"[email]", Birthdate:"[yyyy-mm-dd]"}</td>
+            <td class="exemple" row-> {
+                "Username":"test",
+                "Password":"password",
+                "Email":"testo@test.com",
+                "Birthdate":"2010-01-25" }</td>
+            <td class="response" row->On success,a JSON object holding all the updated data of the user, otherwise an error message</td>
+           <td class="loggin" row->yes</td>
+          </tr>
+
+          <tr class="column-7 column">
+              <td class="description" row-> Update the user username</td>
+              <td class="url" row->/user/username/[userID]</td>
+              <td class="requestType" row->PUT</td>
+              <td class="bodyRequest" row->{Username:"[username]"}</td>
+              <td class="exemple" row-> {
+                  "Username":"test",
+                  }</td>
+              <td class="response" row->On success,a JSON object holding all the updated data of the user, otherwise an error message</td>
+             <td class="loggin" row->yes</td>
+            </tr>
+
+            <tr class="column-8 column">
+                <td class="description" row-> Update the user password</td>
+                <td class="url" row->/user/password/[userID]</td>
+                <td class="requestType" row->PUT</td>
+                <td class="bodyRequest" row->{ Password:"[password]"}</td>
+                <td class="exemple" row-> {
+                    
+                    "Password":"password",
+                    }</td>
+                <td class="response" row->On success,a JSON object holding all the updated data of the user, otherwise an error message</td>
+               <td class="loggin" row->yes</td>
+              </tr>
+              <tr class="column-9 column">
+                  <td class="description" row-> Update  user email address</td>
+                  <td class="url" row->/user/email/[userID]</td>
+                  <td class="requestType" row->PUT</td>
+                  <td class="bodyRequest" row->{Email:"[email]"}</td>
+                  <td class="exemple" row-> {
+                     
+                      "Email":"test@test.com"}</td>
+                  <td class="response" row->On success,a JSON object holding all the updated data of the user, otherwise an error message</td>
+                 <td class="loggin" row->yes</td>
+                </tr>
+
+                <tr class="column-10 column">
+                    <td class="description" row-> Update user birthdate</td>
+                    <td class="url" row->/user/birthdate/[userID]</td>
+                    <td class="requestType" row->PUT</td>
+                    <td class="bodyRequest" row-> {Birthdate:"[yyyy-mm-dd]"}</td>
+                    <td class="exemple" row-> {
+                       "Birthdate":"2010-01-25" }</td>
+                    <td class="response" row->On success,a JSON object holding all the updated data of the user, otherwise an error message</td>
+                   <td class="loggin" row->yes</td>
+                  </tr>
+                  <tr class="column-11 column">
+                      <td class="description" row-> Delete user</td>
+                      <td class="url" row->/user/[userID]</td>
+                      <td class="requestType" row->DELETE</td>
+                      <td class="bodyRequest" row-> none</td>
+                      <td class="exemple" row-> 
+                         none </td>
+                      <td class="response" row->On success " [userID] was deleted", otherwise an error message</td>
+                     <td class="loggin" row->yes</td>
+                    </tr>
+
+
+
+                    <tr class="column-12 column">
+                        <td row- >Movies related</td>  
+                      </tr>
+
+                      <tr class="column-13 column">
+                          <td class="description" row-> Return  a list of all movies in the database</td>
+                          <td class="url" row->/movies</td>
+                          <td class="requestType" row->GET</td>
+                          <td class="bodyRequest" row-> none</td>
+                          <td class="exemple" row-> 
+                             none </td>
+                          <td class="response" row->On success return a json object with all movies, otherwise an error message</td>
+                         <td class="loggin" row->yes</td>
+                        </tr>
+
+                        <tr class="column-14 column">
+                            <td class="description" row-> Return  info about a single movie</td>
+                            <td class="url" row->/movies/[movieID]</td>
+                            <td class="requestType" row->GET</td>
+                            <td class="bodyRequest" row-> none</td>
+                            <td class="exemple" row-> 
+                               none </td>
+                            <td class="response" row->On success return a json object data about the movie, otherwise an error message</td>
+                           <td class="loggin" row->yes</td>
+                          </tr>
+
+                          <tr class="column-14 column">
+                              <td class="description" row-> Return all film from a specific genre</td>
+                              <td class="url" row->/movies/genres/[genreID]</td>
+                              <td class="requestType" row->GET</td>
+                              <td class="bodyRequest" row-> none</td>
+                              <td class="exemple" row-> 
+                                 none </td>
+                              <td class="response" row->On success return a json object data containing all the films from  the specified genre, otherwise an error message</td>
+                             <td class="loggin" row->yes</td>
+                            </tr>
+                            <tr class="column-14 column">
+                                <td class="description" row-> Return all film from a specific director</td>
+                                <td class="url" row->/movies/directors/[directorID]</td>
+                                <td class="requestType" row->GET</td>
+                                <td class="bodyRequest" row-> none</td>
+                                <td class="exemple" row-> 
+                                   none </td>
+                                <td class="response" row->On success return a json object data containing all the films from the specified director, otherwise an error message</td>
+                               <td class="loggin" row->yes</td>
+                              </tr>
+                              <tr class="column-12 column">
+                                  <td row- >User favorite films related</td>  
+                                </tr>
+                              <tr class="column-14 column">
+                                  <td class="description" row-> Allow user to add a films to his favorites'</td>
+                                  <td class="url" row->/user/[userId]/movies/[movieID]</td>
+                                  <td class="requestType" row->POST</td>
+                                  <td class="bodyRequest" row-> none</td>
+                                  <td class="exemple" row-> 
+                                     none </td>
+                                  <td class="response" row->On success return a json object data containing the updated user data, otherwise an error message</td>
+                                 <td class="loggin" row->yes</td>
+                                </tr>
+                                <tr class="column-14 column">
+                                    <td class="description" row-> Allow user to remove a films  from his favorites'</td>
+                                    <td class="url" row->/user/[userId]/movies/[movieID]</td>
+                                    <td class="requestType" row->DELETE</td>
+                                    <td class="bodyRequest" row-> none</td>
+                                    <td class="exemple" row-> 
+                                       none </td>
+                                    <td class="response" row->On success return a json object data containing the updated user data, otherwise an error message</td>
+                                   <td class="loggin" row->yes</td>
+                                  </tr>
+  
+
+
+
+
+
      </tbody></table>
 
 
@@ -244,3 +262,20 @@ movies.
 
 
 </html>
+
+
+
+<!-- 
+
+  TEMPLATE
+<tr class="column-10 column">
+         <td class="description" row-></td>
+         <td class="url" row->/[usersID]/favmovies/[film_id]</td>
+         <td class="requestType" row->POST</td>
+         <td class="bodyRequest" row->none</td>
+         <td class="exemple" row-></td>
+         <td class="response" row->A text message saying: Film Id [film_ID] was added to the user [username]</td>
+        <td class="loggin" row->yes</td>
+       </tr>
+
+-->

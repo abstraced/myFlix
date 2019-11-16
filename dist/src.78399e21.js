@@ -53516,13 +53516,14 @@ function RegistrationView(props) {
     }
   })), _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicBirthdate"
-  }, _react.default.createElement(_Form.default.Label, null, "Birthdate", _react.default.createElement(_reactDatepicker.default, {
-    placeholder: "Enter new birthdate",
-    selected: birthdate,
+  }, _react.default.createElement(_Form.default.Control, {
+    type: "date",
+    placeholder: "Enter birthdate",
+    value: birthdate,
     onChange: function onChange(e) {
-      return setBirthdate(e);
+      return setBirthdate(e.target.value);
     }
-  }))), _react.default.createElement(_reactRouterDom.NavLink, {
+  })), _react.default.createElement(_reactRouterDom.NavLink, {
     to: "/"
   }, _react.default.createElement("button", {
     type: "button",
@@ -54951,9 +54952,13 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
 
-var _reactDatepicker = _interopRequireDefault(require("react-datepicker"));
+var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
 
-require("react-datepicker/dist/react-datepicker.css");
+var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
+
+var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
+
+var _reactRouterDom = require("react-router-dom");
 
 var _reactRedux = require("react-redux");
 
@@ -54987,8 +54992,6 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 function UpdateView(props) {
-  var _this = this;
-
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       username = _useState2[0],
@@ -55097,8 +55100,8 @@ function UpdateView(props) {
     });
   };
 
-  var deleteAccount = function deleteAccount(e) {
-    e.preventDefault();
+  var deleteAccountfromMongo = function deleteAccountfromMongo() {
+    // e.preventDefault();
     (0, _axios.default)({
       method: 'delete',
       url: "".concat(API_URL, "user/").concat(props.userId),
@@ -55106,82 +55109,85 @@ function UpdateView(props) {
         Authorization: "Bearer ".concat(accessToken)
       }
     }).then(function () {
-      _this.props.onDisconnect();
+      props.onDisconnect();
     }).catch(function (e) {
       console.log('no such user');
     });
   };
 
+  var onDeleteAccount = function onDeleteAccount() {
+    deleteAccountfromMongo();
+    props.onDisconnect();
+  };
+
   return _react.default.createElement("div", {
     className: "update-user-info"
-  }, _react.default.createElement("h1", null, "  Update user informations"), _react.default.createElement(_Form.default, null, _react.default.createElement(_Form.default.Group, {
-    controlId: "formBasicUsername"
-  }, _react.default.createElement(_Form.default.Control, {
+  }, _react.default.createElement("h3", null, "  Update user informations"), _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null, _react.default.createElement(_Form.default.Control, {
     type: "text",
     value: username,
     placeholder: "Enter new username",
     onChange: function onChange(e) {
       return setUsername(e.target.value);
     }
-  }), _react.default.createElement(_Button.default, {
+  })), _react.default.createElement(_Col.default, null, _react.default.createElement(_Button.default, {
     variant: "primary",
     type: "submit",
     onClick: function onClick(e) {
       handleSubmitUsername(e);
-    }
-  }, "Change username")), _react.default.createElement(_Form.default.Group, {
-    controlId: "formBasicPassword"
-  }, _react.default.createElement(_Form.default.Control, {
+    },
+    block: true
+  }, "Change username")), " "), _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null, _react.default.createElement(_Form.default.Control, {
     type: "password",
     placeholder: "Enter new password",
     value: password,
     onChange: function onChange(e) {
       return setPassword(e.target.value);
     }
-  }), _react.default.createElement(_Button.default, {
+  })), _react.default.createElement(_Col.default, null, _react.default.createElement(_Button.default, {
     variant: "primary",
     type: "submit",
     onClick: function onClick(e) {
       return handleSubmitPassword(e);
-    }
-  }, " Change password")), _react.default.createElement(_Form.default.Group, {
-    controlId: "formBasicEmail"
-  }, _react.default.createElement(_Form.default.Control, {
+    },
+    block: true
+  }, " Change password")), " "), _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null, _react.default.createElement(_Form.default.Control, {
     type: "text",
     placeholder: "Enter new email",
     value: email,
     onChange: function onChange(e) {
       return setEmail(e.target.value);
     }
-  }), _react.default.createElement(_Button.default, {
+  })), _react.default.createElement(_Col.default, null, _react.default.createElement(_Button.default, {
     variant: "primary",
     type: "submit",
     onClick: function onClick(e) {
       return handleSubmitEmail(e);
-    }
-  }, " Change Email")), _react.default.createElement(_Form.default.Group, {
-    controlId: "formBasicBirthdate"
-  }, _react.default.createElement(_Form.default.Control, {
+    },
+    block: true
+  }, " Change Email")), " "), _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null, _react.default.createElement(_Form.default.Control, {
     type: "date",
-    placeholder: "Enter birthdatze",
+    placeholder: "Enter birthdate",
     value: birthdate,
     onChange: function onChange(e) {
       return setBirthdate(e.target.value);
     }
-  }), _react.default.createElement(_Button.default, {
+  })), _react.default.createElement(_Col.default, null, _react.default.createElement(_Button.default, {
     variant: "primary",
     type: "submit",
     onClick: function onClick(e) {
       return handleSubmitBirthdate(e);
-    }
-  }, " Change birthdate")), _react.default.createElement(_Form.default.Label, null, " ", _react.default.createElement("h1", null, "Unsuscribe"), " "), _react.default.createElement(_Button.default, {
+    },
+    block: true
+  }, " Change birthdate")), " "), _react.default.createElement(_Row.default, null), _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null, "  ", _react.default.createElement(_reactRouterDom.NavLink, {
+    to: "/"
+  }, "   ", _react.default.createElement(_Button.default, {
     variant: "primary",
     type: "submit",
-    href: "/",
-    onClick: function onClick(e) {
-      return deleteAccount(e);
-    }
-  }, " Delete your account")));
+    onClick: function onClick() {
+      return onDeleteAccount();
+    },
+    block: true
+  }, " Delete your account "), " "), "  "))));
 }
 
 var _default = (0, _reactRedux.connect)(mapStateToProps, {
@@ -55189,7 +55195,7 @@ var _default = (0, _reactRedux.connect)(mapStateToProps, {
 })(UpdateView);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/Form.js","react-datepicker":"../node_modules/react-datepicker/dist/react-datepicker.min.js","react-datepicker/dist/react-datepicker.css":"../node_modules/react-datepicker/dist/react-datepicker.css","react-redux":"../node_modules/react-redux/es/index.js","../../../actions/actions":"actions/actions.js","react-bootstrap/Button":"../node_modules/react-bootstrap/Button.js","axios":"../node_modules/axios/index.js"}],"components/profile-view/profile-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/Form.js","react-bootstrap/Container":"../node_modules/react-bootstrap/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/Col.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"../node_modules/react-redux/es/index.js","../../../actions/actions":"actions/actions.js","react-bootstrap/Button":"../node_modules/react-bootstrap/Button.js","axios":"../node_modules/axios/index.js"}],"components/profile-view/profile-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -55202,7 +55208,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _reactRedux = require("react-redux");
 
@@ -55212,9 +55218,23 @@ var _infoView = require("./info-view/info-view");
 
 var _updateView = _interopRequireDefault(require("./update-view/update-view"));
 
+var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
+
 require("./profile-view.scss");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
@@ -55223,31 +55243,54 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 function ProfileView(props) {
-  var _this = this;
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      isEditing = _useState2[0],
+      setIsEditing = _useState2[1]; // Loading pattern
 
-  // Loading pattern
+
   if (props.user === undefined) {
     return _react.default.createElement("div", null, "  Loading....");
   } else {
-    return _react.default.createElement("div", {
-      className: "profile"
-    }, _react.default.createElement("div", null, _react.default.createElement(_infoView.InfoView, {
-      user: props.user
-    }), _react.default.createElement(_updateView.default, {
-      userId: props.user._id,
-      onDisconnect: function onDisconnect() {
-        return _this.onDisconnect();
-      }
-    })), _react.default.createElement("h1", null, "  ", props.user.Username, "  's favorite films "), _react.default.createElement(_favoriteFilm.FavoriteFilm, {
-      movies: props.user.FavoriteFilms
-    }));
+    if (isEditing === true) {
+      return _react.default.createElement("div", {
+        className: "profile"
+      }, _react.default.createElement(_infoView.InfoView, {
+        user: props.user
+      }), _react.default.createElement(_Button.default, {
+        onClick: function onClick(e) {
+          return setIsEditing(false);
+        }
+      }, " Finish updating Infos    "), _react.default.createElement(_updateView.default, {
+        userId: props.user._id,
+        onDisconnect: function onDisconnect() {
+          return props.onDisconnect();
+        }
+      }), _react.default.createElement(_Button.default, {
+        onClick: function onClick() {
+          return props.onDisconnect();
+        }
+      }, "  Disconnect"));
+    } else {
+      return _react.default.createElement("div", {
+        className: "profile"
+      }, _react.default.createElement("div", null, _react.default.createElement(_infoView.InfoView, {
+        user: props.user
+      }), _react.default.createElement(_Button.default, {
+        onClick: function onClick(e) {
+          return setIsEditing(true);
+        }
+      }, " Update Infos    ")), _react.default.createElement("h1", null, "  ", props.user.Username, "  's favorite films "), _react.default.createElement(_favoriteFilm.FavoriteFilm, {
+        movies: props.user.FavoriteFilms
+      }));
+    }
   }
 }
 
 var _default = (0, _reactRedux.connect)(mapStateToProps)(ProfileView);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","./favorite-film/favorite-film":"components/profile-view/favorite-film/favorite-film.jsx","./info-view/info-view":"components/profile-view/info-view/info-view.jsx","./update-view/update-view":"components/profile-view/update-view/update-view.jsx","./profile-view.scss":"components/profile-view/profile-view.scss"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","./favorite-film/favorite-film":"components/profile-view/favorite-film/favorite-film.jsx","./info-view/info-view":"components/profile-view/info-view/info-view.jsx","./update-view/update-view":"components/profile-view/update-view/update-view.jsx","react-bootstrap/Button":"../node_modules/react-bootstrap/Button.js","./profile-view.scss":"components/profile-view/profile-view.scss"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -55484,7 +55527,11 @@ function (_React$Component) {
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/my-profile",
         render: function render() {
-          return _react.default.createElement(_profileView.default, null);
+          return _react.default.createElement(_profileView.default, {
+            onDisconnect: function onDisconnect() {
+              return _this4.onDisconnect();
+            }
+          });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/movies/:movieId",
@@ -55712,7 +55759,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50699" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50521" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
