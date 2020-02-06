@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { Link } from "react-router-dom";
-import Button from "react-bootstrap/Button";
 
 
 import  MovieCard  from '../../movie-card/movie-card';
@@ -26,10 +24,7 @@ export function DirectorFilm(props) {
                     headers: { Authorization: `Bearer ${localStorage.token}` }
                 }
             )
-            // .then(function (response) {
-            //     console.log(response);
-            //   })
-          
+                     
             .then(res => setMovies(res.data))
             .catch(err => {
                 console.error(err);
@@ -48,8 +43,6 @@ export function DirectorFilm(props) {
        movie_id={movies[movie]._id}  /> );
     
 
-// var testparse = JSON.parse(movies);  
-//     console.log( testparse);
 
     return (
   <div className="list-films"> 
