@@ -8,6 +8,12 @@ import { Link } from 'react-router-dom';
 import ListGroup from "react-bootstrap/ListGroup";
 import { DirectorFilm } from "./director-film/director-film";
 
+
+
+
+
+
+
 export function DirectorView (props) {
 
 
