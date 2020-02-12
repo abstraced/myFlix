@@ -58,7 +58,8 @@ var auth = require('./auth')(app);
 
 
 ///
-const port =  process.env.PORT || 3000;
+const port =   3000;
+// process.env.PORT ||
 
 const Movies= Models.Movie;
 const Users = Models.User;
@@ -160,55 +161,113 @@ app.get("/movies/directors/:director",function (req,res) {   //,passport.authent
 
 
 
+//Allow user to add a film to the main list of films
 
-// //Allow user to add a film to the main list of films
-// app.post('/movies',passport.authenticate('jwt', { session: false }), function(req, res) {
-//   req.checkBody('Title', 'A title is required').notEmpty();
-//   req.checkBody('Description', 'A description is required').notEmpty();
+app.post('/movies',passport.authenticate('jwt', { session: false }), function(req, res) {
+  req.checkBody('Title', 'A title is required').notEmpty();
+  req.checkBody('Description', 'A description is required').notEmpty();
 //   req.checkBody('Director:Name', 'Description contains non alphanumeric characters - not allowed.').isAlphanumeric();
 //  req.checkBody('Genre: name', 'Description contains non alphanumeric characters - not allowed.').isAlphanumeric();
 
 
-//   // check the validation object for errors
-//   var errors = req.validationErrors();
+  // check the validation object for errors
+  var errors = req.validationErrors();
 
-//   if (errors) {
-//     return res.status(422).json({ errors: errors });
-//   }
+  var director_id;
+  var genre_id;
 
-//   Movies.findOne({ Title : req.body.Title })
-//   .then(function(movie) {
-//     if (movie) {
-//       return res.status(400).send(req.body.Title + " already exists");
-//     } else {
-//       Movies.create({
-//         Title: req.body.Title,
-//         Description: req.body.Description,
-//         Genre: {
-//           Name: req.body.Genre.Name,
-//           genre_id: req.body.Genre.genre_id
-//         },
-//         Director: {
-//           Name: req.body.Director.Name,
-//           director_id: req.body.Genre.director_id
-//         },
-//         Actors: [],
-//         ImagePath: req.body.ImagePath,
-//         Featured: req.body.Featured
-//       })
+  if (errors) {
+    return res.status(422).json({ errors: errors });
+  }
+  
+
+  
+  Directors.findOne({ Name : req.body.director })
+  .then(function(director) {
+    if (director) {
+      // console.log(movie);
+      director_id=  director._id;        
+    } else {    
+    Directors.create({
+    Name: req.body.director,
+    Bio:'',
+    Birth: null,
+    Death: null
+     })
+      // .then(function(movie) { return movie })
+      .then(function(director) {director_id= director._id })
+      .catch(function(error) {
+        console.error(error);
+        res.status(500).send("Error: " + error);
+      })
+    }
+  })
+  .then(function() {
+    Genres.findOne({ Name : req.body.genre })
+    .then(function(genre) {
+      if (genre) {
+
+        genre_id=  genre._id;    
+      } else {    
+      Genres.create({
+        Name: req.body.genre,
+        Description: "ouik"
+         })
+         .then(function(genre) {genre_id= genre._id })
+         .catch(function(error) {
+          console.error(error);
+          res.status(500).send("Error: " + error);
+        })
+        }
+    
+    })
+    .then(function() {
+      Movies.findOne({ Title : req.body.Title })
+      .then(function(movie) {
+        if (movie) {              
+          console.log(director_id);  
+        } else {    
+        console.log(director_id);  
+        Movies.create({
+          Title: req.body.Title,
+          Description: req.body.Description,
+          ImagePath: req.body.imagePath,
+          genre: String(genre_id),
+          director: String(director_id)
 
 
-//       .then(function(movie) {res.status(201).json(movie) })
-//       .catch(function(error) {
-//         console.error(error);
-//         res.status(500).send("Error: " + error);
-//       })
-//     }
-//   }).catch(function(error) {
-//     console.error(error);
-//     res.status(500).send("Error: " + error);
-//   });
-// });
+           })
+            .catch(function(error) {
+            console.error(error);
+            res.status(500).send("Error: " + error);
+          })
+          }
+      
+      })
+    })
+  
+
+
+
+
+    
+    res.end('over')
+
+
+  })
+
+
+ 
+  
+  
+  .catch(function(error) {
+    console.error(error);
+    res.status(500).send("Error: " + error);
+  });
+});
+
+
+
 
 
 
