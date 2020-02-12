@@ -437,6 +437,15 @@ app.delete('/user/:user_id/movies/:MovieID',passport.authenticate('jwt', { sessi
 });
 
 
+
+
+app.get("/movies/directors/:director",passport.authenticate('jwt', { session: false }),function (req,res) {   //
+  Movies.find( { "director" : req.params.director}).populate('genre').populate('director').exec ( function(err, movies) {
+    return res.end(JSON.stringify(movies));
+  } );
+});
+
+
 //Allow user to add a film to the main list of films
 
 app.post('/movies',passport.authenticate('jwt', { session: false }), function(req, res) {

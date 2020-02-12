@@ -41614,7 +41614,7 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var API_URL = 'http://myflixdb.herokuapp.com/';
+var API_URL = 'https://myflixdb.herokuapp.com/';
 
 function LoginView(props) {
   var _useState = (0, _react.useState)(''),
@@ -41791,7 +41791,7 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var API_URL = 'http://myflixdb.herokuapp.com/';
+var API_URL = 'https://myflixdb.herokuapp.com/';
 
 function DirectorFilm(props) {
   var _useState = (0, _react.useState)([]),
@@ -53444,7 +53444,7 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var API_URL = 'http://myflixdb.herokuapp.com/';
+var API_URL = 'https://myflixdb.herokuapp.com/';
 
 function RegistrationView(props) {
   /// SET state hook
@@ -54589,128 +54589,7 @@ function NavView(props) {
     to: "/register"
   }, "Sign up"))));
 }
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","bootstrap/dist/css/bootstrap.min.css":"../node_modules/bootstrap/dist/css/bootstrap.min.css","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap/Nav":"../node_modules/react-bootstrap/Nav.js","./nav-view.scss":"components/nav-view/nav-view.scss"}],"../node_modules/react-bootstrap/ListGroupItem.js":[function(require,module,exports) {
-"use strict";
-
-var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
-
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
-exports.__esModule = true;
-exports.default = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
-
-var _classnames = _interopRequireDefault(require("classnames"));
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _AbstractNavItem = _interopRequireDefault(require("./AbstractNavItem"));
-
-var _SelectableContext = require("./SelectableContext");
-
-var _ThemeProvider = require("./ThemeProvider");
-
-var defaultProps = {
-  variant: null,
-  active: false,
-  disabled: false
-};
-
-var ListGroupItem = _react.default.forwardRef(function (_ref, ref) {
-  var bsPrefix = _ref.bsPrefix,
-      active = _ref.active,
-      disabled = _ref.disabled,
-      className = _ref.className,
-      variant = _ref.variant,
-      action = _ref.action,
-      as = _ref.as,
-      eventKey = _ref.eventKey,
-      onClick = _ref.onClick,
-      props = (0, _objectWithoutPropertiesLoose2.default)(_ref, ["bsPrefix", "active", "disabled", "className", "variant", "action", "as", "eventKey", "onClick"]);
-  bsPrefix = (0, _ThemeProvider.useBootstrapPrefix)(bsPrefix, 'list-group-item');
-  var handleClick = (0, _react.useCallback)(function (event) {
-    if (disabled) {
-      event.preventDefault();
-      event.stopPropagation();
-      return;
-    }
-
-    if (onClick) onClick(event);
-  }, [disabled, onClick]);
-  return _react.default.createElement(_AbstractNavItem.default, (0, _extends2.default)({
-    ref: ref
-  }, props, {
-    eventKey: (0, _SelectableContext.makeEventKey)(eventKey, props.href) // eslint-disable-next-line
-    ,
-    as: as || (action ? props.href ? 'a' : 'button' : 'div'),
-    onClick: handleClick,
-    className: (0, _classnames.default)(className, bsPrefix, active && 'active', disabled && 'disabled', variant && bsPrefix + "-" + variant, action && bsPrefix + "-action")
-  }));
-});
-
-ListGroupItem.defaultProps = defaultProps;
-ListGroupItem.displayName = 'ListGroupItem';
-var _default = ListGroupItem;
-exports.default = _default;
-module.exports = exports["default"];
-},{"@babel/runtime/helpers/interopRequireWildcard":"../node_modules/@babel/runtime/helpers/interopRequireWildcard.js","@babel/runtime/helpers/interopRequireDefault":"../node_modules/@babel/runtime/helpers/interopRequireDefault.js","@babel/runtime/helpers/extends":"../node_modules/@babel/runtime/helpers/extends.js","@babel/runtime/helpers/objectWithoutPropertiesLoose":"../node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js","classnames":"../node_modules/classnames/index.js","react":"../node_modules/react/index.js","./AbstractNavItem":"../node_modules/react-bootstrap/AbstractNavItem.js","./SelectableContext":"../node_modules/react-bootstrap/SelectableContext.js","./ThemeProvider":"../node_modules/react-bootstrap/ThemeProvider.js"}],"../node_modules/react-bootstrap/ListGroup.js":[function(require,module,exports) {
-"use strict";
-
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
-exports.__esModule = true;
-exports.default = void 0;
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
-
-var _classnames = _interopRequireDefault(require("classnames"));
-
-var _react = _interopRequireDefault(require("react"));
-
-var _uncontrollable = require("uncontrollable");
-
-var _ThemeProvider = require("./ThemeProvider");
-
-var _AbstractNav = _interopRequireDefault(require("./AbstractNav"));
-
-var _ListGroupItem = _interopRequireDefault(require("./ListGroupItem"));
-
-var defaultProps = {
-  variant: null
-};
-
-var ListGroup = _react.default.forwardRef(function (props, ref) {
-  var _useUncontrolled = (0, _uncontrollable.useUncontrolled)(props, {
-    activeKey: 'onSelect'
-  }),
-      className = _useUncontrolled.className,
-      bsPrefix = _useUncontrolled.bsPrefix,
-      variant = _useUncontrolled.variant,
-      _useUncontrolled$as = _useUncontrolled.as,
-      as = _useUncontrolled$as === void 0 ? 'div' : _useUncontrolled$as,
-      controlledProps = (0, _objectWithoutPropertiesLoose2.default)(_useUncontrolled, ["className", "bsPrefix", "variant", "as"]);
-
-  bsPrefix = (0, _ThemeProvider.useBootstrapPrefix)(bsPrefix, 'list-group');
-  return _react.default.createElement(_AbstractNav.default, (0, _extends2.default)({
-    ref: ref
-  }, controlledProps, {
-    as: as,
-    className: (0, _classnames.default)(className, bsPrefix, variant && bsPrefix + "-" + variant)
-  }));
-});
-
-ListGroup.defaultProps = defaultProps;
-ListGroup.displayName = 'ListGroup';
-ListGroup.Item = _ListGroupItem.default;
-var _default = ListGroup;
-exports.default = _default;
-module.exports = exports["default"];
-},{"@babel/runtime/helpers/interopRequireDefault":"../node_modules/@babel/runtime/helpers/interopRequireDefault.js","@babel/runtime/helpers/extends":"../node_modules/@babel/runtime/helpers/extends.js","@babel/runtime/helpers/objectWithoutPropertiesLoose":"../node_modules/@babel/runtime/helpers/objectWithoutPropertiesLoose.js","classnames":"../node_modules/classnames/index.js","react":"../node_modules/react/index.js","uncontrollable":"../node_modules/uncontrollable/esm/index.js","./ThemeProvider":"../node_modules/react-bootstrap/ThemeProvider.js","./AbstractNav":"../node_modules/react-bootstrap/AbstractNav.js","./ListGroupItem":"../node_modules/react-bootstrap/ListGroupItem.js"}],"components/director-view/director-view.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","bootstrap/dist/css/bootstrap.min.css":"../node_modules/bootstrap/dist/css/bootstrap.min.css","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap/Nav":"../node_modules/react-bootstrap/Nav.js","./nav-view.scss":"components/nav-view/nav-view.scss"}],"components/director-view/director-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -54727,8 +54606,6 @@ var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 var _Card = _interopRequireDefault(require("react-bootstrap/Card"));
 
 var _reactRouterDom = require("react-router-dom");
-
-var _ListGroup = _interopRequireDefault(require("react-bootstrap/ListGroup"));
 
 var _directorFilm = require("./director-film/director-film");
 
@@ -54755,7 +54632,7 @@ DirectorView.propTypes = {
     Bio: _propTypes.default.string
   }).isRequired
 };
-},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/Button.js","react-bootstrap/Card":"../node_modules/react-bootstrap/Card.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap/ListGroup":"../node_modules/react-bootstrap/ListGroup.js","./director-film/director-film":"components/director-view/director-film/director-film.jsx"}],"components/genre-view/genre-film/genre-film.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/Button.js","react-bootstrap/Card":"../node_modules/react-bootstrap/Card.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./director-film/director-film":"components/director-view/director-film/director-film.jsx"}],"components/genre-view/genre-film/genre-film.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -54766,10 +54643,6 @@ exports.GenreFilm = GenreFilm;
 var _react = _interopRequireWildcard(require("react"));
 
 var _axios = _interopRequireDefault(require("axios"));
-
-var _reactRouterDom = require("react-router-dom");
-
-var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
 var _movieCard = _interopRequireDefault(require("../../movie-card/movie-card"));
 
@@ -54787,7 +54660,7 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var API_URL = 'http://myflixdb.herokuapp.com/';
+var API_URL = 'https://myflixdb.herokuapp.com/';
 
 function GenreFilm(props) {
   var _useState = (0, _react.useState)([]),
@@ -54826,7 +54699,7 @@ function GenreFilm(props) {
     className: "list-films"
   }, listFilms);
 }
-},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap/Button":"../node_modules/react-bootstrap/Button.js","../../movie-card/movie-card":"components/movie-card/movie-card.jsx"}],"components/genre-view/genre-view.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","axios":"../node_modules/axios/index.js","../../movie-card/movie-card":"components/movie-card/movie-card.jsx"}],"components/genre-view/genre-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -54905,20 +54778,7 @@ function FavoriteFilm(props) {
   return _react.default.createElement("div", {
     className: "list-films"
   }, listFilms);
-} // const listFilms=  Object.keys(props.movies).map((movie) =>{
-//     console.log( "test");
-//     console.log( movie); 
-//     return (
-//         <div> frfrfrf</div>
-// //     <div>
-// // <MovieCard 
-// // user='yes'
-// // remov={movies.remove}
-// // key={movies[movie]} 
-// // movie={movies[movie]} 
-// // favMovie={movies[movie]  }  /> 
-// // </div>
-// )
+}
 },{"react":"../node_modules/react/index.js","../../movie-card/movie-card":"components/movie-card/movie-card.jsx"}],"components/profile-view/info-view/info-view.jsx":[function(require,module,exports) {
 "use strict";
 
@@ -55325,7 +55185,7 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var API_URL = 'http://www.omdbapi.com/?apikey=93032218&t=';
-var Mongoose_URL = 'http://myflixdb.herokuapp.com/';
+var Mongoose_URL = 'https://myflixdb.herokuapp.com/';
 
 function AddFilm() {
   var _useState = (0, _react.useState)(''),
@@ -55341,26 +55201,16 @@ function AddFilm() {
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
 
-    _axios.default.get("".concat(API_URL).concat(search, "&plot=full")).then(function (response) {
+    _axios.default.get("".concat(API_URL).concat(search, "&plot=full")).then(function () {
       _axios.default.post("".concat(Mongoose_URL, "movies/"), {
         headers: {
-          Authorization: "Bearer ".concat(localStorage.token)
-        },
-        body: {
-          Title: "paoz6tri",
-          Description: " a description",
-          genre: "Crnhnime",
-          director: "Rohnhhzhzjuzuzuznjhj tghtpaul",
-          Actor: "oy",
-          ImagePath: "test",
-          Featured: "no"
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJGYXZvcml0ZUZpbG1zIjpbXSwiX2lkIjoiNWRjZjEzMTc4NDVkNGYwMDE3MWMwZjBlIiwiVXNlcm5hbWUiOiJQaWVycmUiLCJQYXNzd29yZCI6IiQyYiQxMCR3YkUycEpCTk5iSFAzeFR3T05IZXhla3FjOFp5LjBxZVRsc3JRL0o1Q3hiaTFzdnhGRWk1SyIsIkVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsIkJpcnRoZGF0ZSI6IjIwMDEtMDEtMjVUMDA6MDA6MDAuMDAwWiIsIl9fdiI6MCwiaWF0IjoxNTgxNTMxNDgxLCJleHAiOjE1ODIxMzYyODEsInN1YiI6IlBpZXJyZSJ9.qgAa-m01M7mx5wK73m0PNDXswlYITTqoGlER6cr20Rg'
         }
+      }).then(function (res) {
+        return console.log("that far");
+      }).catch(function (err) {
+        console.error(err);
       });
-
-      var data = response.data;
-      console.log(data);
-      setFilm(data);
-      console.log(film.Title);
     }).catch(function (e) {
       console.log('no such film');
     });
@@ -55857,7 +55707,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60969" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61884" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
