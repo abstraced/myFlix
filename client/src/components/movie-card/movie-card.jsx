@@ -19,38 +19,19 @@ const mapStateToProps = state => {
    };
 };
 
-
-
  class MovieCard extends React.Component {
+
 constructor(props) {
 super(props);
-
-
 
   }
 
   componentDidMount() {
-  
-   
-  }
-  
-
-  
-
-
-
-  render() {
-    const { movie } = this.props;
-
      
- 
-  
-  
-    
-   
+  }
 
-
-
+    render() {
+    const { movie } = this.props;
 
     return (
       <Card >

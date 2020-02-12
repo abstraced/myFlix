@@ -42,6 +42,9 @@ export function NavView(props) {
   <NavLink  to="/my-profile">My Profile </NavLink>
 </Nav.Item>
 <Nav.Item>
+  <NavLink  to="/add-film"> Add Film </NavLink>
+</Nav.Item>
+<Nav.Item>
   <NavLink to="/"    onClick={handleDisconnect}> Disconnect</NavLink>
 </Nav.Item>
 </Nav> )
