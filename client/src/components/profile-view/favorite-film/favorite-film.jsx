@@ -49,26 +49,3 @@ return (
 }
 
 
-
- 
-    // const listFilms=  Object.keys(props.movies).map((movie) =>{
-    //     console.log( "test");
-    //     console.log( movie); 
-        
-    //     return (
-
-    //         <div> frfrfrf</div>
-    
-   
-    // //     <div>
-    // // <MovieCard 
-    // // user='yes'
-    // // remov={movies.remove}
-    // // key={movies[movie]} 
-    // // movie={movies[movie]} 
-    // // favMovie={movies[movie]  }  /> 
-    // // </div>
-
-
-    // )
-    

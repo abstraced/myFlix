@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import  MovieCard  from '../../movie-card/movie-card';
 
 
-var API_URL = 'http://myflixdb.herokuapp.com/'
+var API_URL = 'https://myflixdb.herokuapp.com/'
 
 
 export function DirectorFilm(props) {
