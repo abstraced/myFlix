@@ -35,7 +35,7 @@ import { NavView } from '../nav-view/nav-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import  ProfileView  from '../profile-view/profile-view';
-
+import { AddFilm } from '../add-film/add-film';
 
 
 
@@ -205,7 +205,7 @@ export class MainView extends React.Component {
         <Route path="/register" render={() => <RegistrationView />} />
 
         <Route path="/my-profile" render={() => <ProfileView  onDisconnect={() => this.onDisconnect()} />} />
-
+        <Route path="/add-film" render={() => <AddFilm  />} />
         <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
        
              
