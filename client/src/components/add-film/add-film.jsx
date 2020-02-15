@@ -1,64 +1,119 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-var API_URL =  'http://www.omdbapi.com/?apikey=93032218&t=';
+import { connect } from 'react-redux';
+import { setMovies } from '../../actions/actions';
+
+
+var API_URL = 'http://www.omdbapi.com/?apikey=93032218&t=';
 var Mongoose_URL = 'https://myflixdb.herokuapp.com/'
 
 import axios from 'axios';
-import  MovieCard  from '../movie-card/movie-card';
+import MovieCard from '../movie-card/movie-card';
+
+const mapStateToProps = state => {
+
+    return { user: state.userInfos,
+            movies: state.movies
+     };
+  };
 
 
-export function AddFilm() {
-  
-  const [ search, setSearch ] = useState('');
-  const [ film, setFilm ] = useState('');
+ function AddFilm (props) {
 
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-     
-     axios.get(`${API_URL}${search}&plot=full`)
-    .then(() => {
+
+
+    const headers = {
+        Authorization: `Bearer ${localStorage.token}`
+    }
+
+    const [searchedFilm, setSearchedFilm] = useState('');
+    const [searchedYear,setSearchedYear]= useState('');
+    const [movie, setMovie] = useState('');
+   
+
+    var yearOut = () => {
+        var outYear;
        
-      axios
-      .post(
-        `${Mongoose_URL}movies/`,
-        {
-            headers: { Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJGYXZvcml0ZUZpbG1zIjpbXSwiX2lkIjoiNWRjZjEzMTc4NDVkNGYwMDE3MWMwZjBlIiwiVXNlcm5hbWUiOiJQaWVycmUiLCJQYXNzd29yZCI6IiQyYiQxMCR3YkUycEpCTk5iSFAzeFR3T05IZXhla3FjOFp5LjBxZVRsc3JRL0o1Q3hiaTFzdnhGRWk1SyIsIkVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsIkJpcnRoZGF0ZSI6IjIwMDEtMDEtMjVUMDA6MDA6MDAuMDAwWiIsIl9fdiI6MCwiaWF0IjoxNTgxNTMxNDgxLCJleHAiOjE1ODIxMzYyODEsInN1YiI6IlBpZXJyZSJ9.qgAa-m01M7mx5wK73m0PNDXswlYITTqoGlER6cr20Rg' }
+    if  (!searchedYear) {
+        outYear= '';
+    }
+    else {
+        outYear= `&y=${searchedYear}`;
+        
+    }
+    return outYear;
         }
-    )
-    .then(res => console.log("that far"))
-            .catch(err => {
-                console.error(err);
-            });
+    
+    
+  
+    
+    const handleSearch = (e) => {
+        e.preventDefault();
 
-      
-    })
-    .catch(e => {
-      console.log('no such film')
-    });
+        axios.get(`${API_URL}${searchedFilm}${yearOut()}`)
+            .then((res) => {
+               let movie= { 
+                    Title: res.data.Title,
+                Description: res.data.Plot,
+                genre: res.data.Genre,
+                director: res.data.Director,
+                Actor: res.data.Actors,
+                imagePath: res.data.Poster,
+                Featured: "no"    
+               };
+                axios({
+                    method: 'post',
+                    url: `${Mongoose_URL}movies/`,
+                    headers: headers,
+                    data: movie
+                })
+                    // .then(res => console.log(res))
+                    .catch(err => {
+                        console.error(err);
+                    });
+
+              
+            
+            })
+            .then((res) => {
+           
+
+            // console.log(res)
+               
+ 
+             })
+            
+            .catch(e => {
+                console.log('no such film')
+            });
 
 
     };
 
-
     return (
-      <Form>
-        <Form.Group controlId="formBasicUsername">
-          <Form.Label>Add film</Form.Label>
-          <Form.Control type="text" placeholder="Type the film you want to add" value={search} onChange={e => setSearch(e.target.value)} />
-        </Form.Group>
-  
-        
-        <Button variant="primary" type="submit" onClick={handleSubmit}>
-          Submit
+        <div>
+        <Form>
+            <Form.Group controlId="formBasicUsername">
+                <Form.Label>Add film</Form.Label>
+                <Form.Control type="text" placeholder="Type the film you want to add" value={searchedFilm} onChange={e => setSearchedFilm(e.target.value)} />
+                <Form.Control type="text" placeholder="Type the year the film was released" value={searchedYear} onChange={e => setSearchedYear(e.target.value)} />
+            </Form.Group>
+
+
+            <Button variant="primary" type="submit" onClick={handleSearch}>
+                Search
           </Button>
-         
-          
-      </Form>
+          </Form>
+          { movie? <MovieCard movie={movie} /> : <div> No film selected</div>}
+          </div>
     )
-  }
+}
 
 
-  // { film? <MovieCard movie={film} /> : <div> No film selected</div>}
+export default connect(mapStateToProps,{setMovies})(AddFilm);
+
+
+

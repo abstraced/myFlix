@@ -6,9 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 // REDUX
 import { connect } from 'react-redux';
-
 import { setUserInfos } from '../../actions/actions';
-
 import { setMovies } from '../../actions/actions';
 
 
@@ -35,7 +33,7 @@ import { NavView } from '../nav-view/nav-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import  ProfileView  from '../profile-view/profile-view';
-import { AddFilm } from '../add-film/add-film';
+import AddFilm  from '../add-film/add-film';
 
 
 

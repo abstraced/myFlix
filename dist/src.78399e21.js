@@ -55158,13 +55158,17 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AddFilm = AddFilm;
+exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
 var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
 
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
+
+var _reactRedux = require("react-redux");
+
+var _actions = require("../../actions/actions");
 
 var _axios = _interopRequireDefault(require("axios"));
 
@@ -55187,51 +55191,104 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var API_URL = 'http://www.omdbapi.com/?apikey=93032218&t=';
 var Mongoose_URL = 'https://myflixdb.herokuapp.com/';
 
-function AddFilm() {
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    user: state.userInfos,
+    movies: state.movies
+  };
+};
+
+function AddFilm(props) {
+  var headers = {
+    Authorization: "Bearer ".concat(localStorage.token)
+  };
+
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
-      search = _useState2[0],
-      setSearch = _useState2[1];
+      searchedFilm = _useState2[0],
+      setSearchedFilm = _useState2[1];
 
   var _useState3 = (0, _react.useState)(''),
       _useState4 = _slicedToArray(_useState3, 2),
-      film = _useState4[0],
-      setFilm = _useState4[1];
+      searchedYear = _useState4[0],
+      setSearchedYear = _useState4[1];
 
-  var handleSubmit = function handleSubmit(e) {
+  var _useState5 = (0, _react.useState)(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      movie = _useState6[0],
+      setMovie = _useState6[1];
+
+  var yearOut = function yearOut() {
+    var outYear;
+
+    if (!searchedYear) {
+      outYear = '';
+    } else {
+      outYear = "&y=".concat(searchedYear);
+    }
+
+    return outYear;
+  };
+
+  var handleSearch = function handleSearch(e) {
     e.preventDefault();
 
-    _axios.default.get("".concat(API_URL).concat(search, "&plot=full")).then(function () {
-      _axios.default.post("".concat(Mongoose_URL, "movies/"), {
-        headers: {
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJGYXZvcml0ZUZpbG1zIjpbXSwiX2lkIjoiNWRjZjEzMTc4NDVkNGYwMDE3MWMwZjBlIiwiVXNlcm5hbWUiOiJQaWVycmUiLCJQYXNzd29yZCI6IiQyYiQxMCR3YkUycEpCTk5iSFAzeFR3T05IZXhla3FjOFp5LjBxZVRsc3JRL0o1Q3hiaTFzdnhGRWk1SyIsIkVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsIkJpcnRoZGF0ZSI6IjIwMDEtMDEtMjVUMDA6MDA6MDAuMDAwWiIsIl9fdiI6MCwiaWF0IjoxNTgxNTMxNDgxLCJleHAiOjE1ODIxMzYyODEsInN1YiI6IlBpZXJyZSJ9.qgAa-m01M7mx5wK73m0PNDXswlYITTqoGlER6cr20Rg'
-        }
-      }).then(function (res) {
-        return console.log("that far");
-      }).catch(function (err) {
+    _axios.default.get("".concat(API_URL).concat(searchedFilm).concat(yearOut())).then(function (res) {
+      var movie = {
+        Title: res.data.Title,
+        Description: res.data.Plot,
+        genre: res.data.Genre,
+        director: res.data.Director,
+        Actor: res.data.Actors,
+        imagePath: res.data.Poster,
+        Featured: "no"
+      };
+      (0, _axios.default)({
+        method: 'post',
+        url: "".concat(Mongoose_URL, "movies/"),
+        headers: headers,
+        data: movie
+      }) // .then(res => console.log(res))
+      .catch(function (err) {
         console.error(err);
       });
+    }).then(function (res) {// console.log(res)
     }).catch(function (e) {
       console.log('no such film');
     });
   };
 
-  return _react.default.createElement(_Form.default, null, _react.default.createElement(_Form.default.Group, {
+  return _react.default.createElement("div", null, _react.default.createElement(_Form.default, null, _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicUsername"
   }, _react.default.createElement(_Form.default.Label, null, "Add film"), _react.default.createElement(_Form.default.Control, {
     type: "text",
     placeholder: "Type the film you want to add",
-    value: search,
+    value: searchedFilm,
     onChange: function onChange(e) {
-      return setSearch(e.target.value);
+      return setSearchedFilm(e.target.value);
+    }
+  }), _react.default.createElement(_Form.default.Control, {
+    type: "text",
+    placeholder: "Type the year the film was released",
+    value: searchedYear,
+    onChange: function onChange(e) {
+      return setSearchedYear(e.target.value);
     }
   })), _react.default.createElement(_Button.default, {
     variant: "primary",
     type: "submit",
-    onClick: handleSubmit
-  }, "Submit"));
-} // { film? <MovieCard movie={film} /> : <div> No film selected</div>}
-},{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/Button.js","axios":"../node_modules/axios/index.js","../movie-card/movie-card":"components/movie-card/movie-card.jsx"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
+    onClick: handleSearch
+  }, "Search")), movie ? _react.default.createElement(_movieCard.default, {
+    movie: movie
+  }) : _react.default.createElement("div", null, " No film selected"));
+}
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, {
+  setMovies: _actions.setMovies
+})(AddFilm);
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/Button.js","react-redux":"../node_modules/react-redux/es/index.js","../../actions/actions":"actions/actions.js","axios":"../node_modules/axios/index.js","../movie-card/movie-card":"components/movie-card/movie-card.jsx"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -55269,7 +55326,7 @@ var _genreView = require("../genre-view/genre-view");
 
 var _profileView = _interopRequireDefault(require("../profile-view/profile-view"));
 
-var _addFilm = require("../add-film/add-film");
+var _addFilm = _interopRequireDefault(require("../add-film/add-film"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55479,7 +55536,7 @@ function (_React$Component) {
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/add-film",
         render: function render() {
-          return _react.default.createElement(_addFilm.AddFilm, null);
+          return _react.default.createElement(_addFilm.default, null);
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
         path: "/movies/:movieId",
@@ -55707,7 +55764,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61884" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59420" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
