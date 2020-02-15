@@ -180,7 +180,8 @@ app.put("/user/all/:user_id",passport.authenticate('jwt', { session: false }), f
       console.error(err);
       res.status(500).send("Error: " +err);
     } else {
-        res.json(updatedUser)
+      console.log("test");
+      res.json(updatedUser)
     }
   })
 });
@@ -216,7 +217,8 @@ app.put("/user/username/:_id",passport.authenticate('jwt', { session: false }), 
       console.error(err);
       res.status(500).send("Error: " +err);
     } else {
-       res.json(updatedUser)
+      console.log("test");
+      res.json(updatedUser)
     }
   })
 });
@@ -253,7 +255,8 @@ app.put("/user/password/:_id",passport.authenticate('jwt', { session: false }), 
       console.error(err);
       res.status(500).send("Error: " +err);
     } else {
-        res.json(updatedUser)
+      console.log("test");
+      res.json(updatedUser)
     }
   })
 });
@@ -287,7 +290,7 @@ app.put("/user/email/:_id",passport.authenticate('jwt', { session: false }), fun
       console.error(err);
       res.status(500).send("Error: " +err);
     } else {
-      
+      console.log("test");
       res.json(updatedUser)
     }
   })
@@ -319,7 +322,7 @@ app.put("/user/birthdate/:_id",passport.authenticate('jwt', { session: false }),
       console.error(err);
       res.status(500).send("Error: " +err);
     } else {
-      
+      console.log("test");
       res.json(updatedUser)
     }
   })
@@ -467,7 +470,7 @@ app.post('/movies',passport.authenticate('jwt', { session: false }), function(re
   Directors.findOne({ Name : req.body.director })
   .then(function(director) {
     if (director) {
-      
+      // console.log(movie);
       director_id=  director._id;        
     } else {    
     Directors.create({
@@ -493,7 +496,7 @@ app.post('/movies',passport.authenticate('jwt', { session: false }), function(re
       } else {    
       Genres.create({
         Name: req.body.genre,
-        Description: ""
+        Description: "ouik"
          })
          .then(function(genre) {genre_id= genre._id })
          .catch(function(error) {
@@ -507,17 +510,19 @@ app.post('/movies',passport.authenticate('jwt', { session: false }), function(re
       Movies.findOne({ Title : req.body.Title })
       .then(function(movie) {
         if (movie) {              
-            
+          console.log(director_id);  
         } else {    
-        
+        console.log(director_id);  
         Movies.create({
           Title: req.body.Title,
           Description: req.body.Description,
           ImagePath: req.body.imagePath,
           genre: String(genre_id),
           director: String(director_id)
-          })
-          .catch(function(error) {
+
+
+           })
+            .catch(function(error) {
             console.error(error);
             res.status(500).send("Error: " + error);
           })
@@ -526,7 +531,7 @@ app.post('/movies',passport.authenticate('jwt', { session: false }), function(re
       })
     })
      
-    res.end('over test')
+    res.end('over')
   })  
   .catch(function(error) {
     console.error(error);
