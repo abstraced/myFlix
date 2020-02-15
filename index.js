@@ -517,8 +517,7 @@ app.post('/movies',passport.authenticate('jwt', { session: false }), function(re
           genre: String(genre_id),
           director: String(director_id)
           })
-          .then(function(movie) { console.log (movie._id)  })
-            .catch(function(error) {
+          .catch(function(error) {
             console.error(error);
             res.status(500).send("Error: " + error);
           })
@@ -527,7 +526,7 @@ app.post('/movies',passport.authenticate('jwt', { session: false }), function(re
       })
     })
      
-    res.end('over')
+    res.end('over test')
   })  
   .catch(function(error) {
     console.error(error);
