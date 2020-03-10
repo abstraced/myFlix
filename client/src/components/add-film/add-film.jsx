@@ -70,7 +70,7 @@ const mapStateToProps = state => {
                     headers: headers,
                     data: movie
                 })
-                    // .then(res => console.log(res))
+                    .then(res => {console.log(res)})
                     .catch(err => {
                         console.error(err);
                     });
@@ -78,13 +78,13 @@ const mapStateToProps = state => {
               
             
             })
-            .then((res) => {
+            // .then((res) => {
            
 
             // console.log(res)
                
  
-             })
+            //  })
             
             .catch(e => {
                 console.log('no such film')
